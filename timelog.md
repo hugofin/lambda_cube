@@ -9,7 +9,31 @@
 
 ### Monday 25th September 2023 
 
-* *4 hours* Read the project guidance notes
-* *0.5 hour* Created GitLab repository and cloned the cookie cutter for the projects
-* *1 hour* Modified dissertation template, compiled  
+* *0.5 hour* Created GitLab repository and cloned the template for the projects
+* *2.5 hour* Watched lectures about lambda calculus (a flock of functions)
 
+### Wednesday 27th September 2023 
+
+* *1 hour* Resarch on Software suitable for the project
+* *1 hour* Reading about lambda calculus (proofs and types)
+
+### Monday 2nd October 2023
+
+* *1 hour* Resarch on software
+
+### Tuesday 3rd October 2023
+
+* *2.5 hour* Installed and tried out reanimate library
+
+### Friday 6th October 2023
+
+* *2 hour* Reading about untyped lambda calculus
+
+### Monday 9th October 2023
+
+* *1 hour* Following the reanimate tutorial lessons
+* *1 hour* Preliminary design for the web interface
+
+### Tuesday 10th October 2023
+
+* *1 hour* Resarch on what to build the web interface in
