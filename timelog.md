@@ -37,3 +37,23 @@
 ### Tuesday 10th October 2023
 
 * *1 hour* Resarch on what to build the web interface in
+
+### Friday 23rd October 2023
+
+* *1 hour* Reading about the lambda calculus (unboxed)
+
+### Monday 23rd October 2023
+
+* *2 hour* Reading about the lambda calculus (unboxed)
+
+### Thursday 26th October 2023
+
+* *2 hour* Reading about the lambda calculus (unboxed)
+
+### Wednesday 1st October 2023
+
+* *2 hour* Looked for a replacement for reanimate
+
+### Wednesday 1st October 2023
+
+* *1 hour* Created elm template project
