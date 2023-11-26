@@ -36,26 +36,27 @@ main =
         }
 
 init : Flags -> (Model, Cmd Msg )
-init _ = ( {theta = 0, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))} , Cmd.none )
+init _ = ( {theta = 0, system = Home, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))} , Cmd.none )
 
 subscriptions : a -> Sub Msg
 subscriptions _ = onAnimationFrameDelta Tick
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case msg of 
-    Tick dt              -> ( { model | theta = model.theta + dt / 5000}, Cmd.none )
-    SystemClicked Home   -> ( { model | eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
-    SystemClicked Simple -> ( { model | eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
-    SystemClicked P      -> ( { model | eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
-    SystemClicked Two    -> ( { model | eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
-    SystemClicked W_     -> ( { model | eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), ( C_, False))}, Cmd.none )
-    SystemClicked W      -> ( { model | eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
-    SystemClicked PW_    -> ( { model | eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
-    SystemClicked P2     -> ( { model | eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
-    SystemClicked C      -> ( { model | eye = (vec3  0.8 1.15 0.3 ), target  = (vec3 1.0 1.00 0.0), gridOn =  True, arrows = ((  L, False), (H  , False), (  J, False))}, Cmd.none )
+    Tick dt              -> ( { model |  theta = model.theta + dt / 5000}, Cmd.none )
+    SystemClicked Home   -> ( { model | system =   Home, eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
+    SystemClicked Simple -> ( { model | system = Simple, eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
+    SystemClicked P      -> ( { model | system =      P, eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
+    SystemClicked Two    -> ( { model | system =    Two, eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
+    SystemClicked W_     -> ( { model | system =     W_, eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), ( C_, False))}, Cmd.none )
+    SystemClicked W      -> ( { model | system =      W, eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
+    SystemClicked PW_    -> ( { model | system =    PW_, eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
+    SystemClicked P2     -> ( { model | system =     P2, eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
+    SystemClicked C      -> ( { model | system =      C, eye = (vec3  0.8 1.15 0.3 ), target  = (vec3 1.0 1.00 0.0), gridOn =  True, arrows = ((  L, False), (H  , False), (  J, False))}, Cmd.none )
     
 type alias Model = 
     { theta   : Float
+    , system  : System
     , eye     : Vec3
     , target  : Vec3
     , gridOn  : Bool 
@@ -126,9 +127,7 @@ button_arrow : (Arrow, Bool) -> Html Msg
 button_arrow (arrow, forwards) = case arrow of 
     Hid ->
         button
-        [ style "position" "absolute", style "top" "0", style "left" "0"
-        , style  "opacity" "0", style "display" "flex", disabled True
-        ] [ text ""]
+        [ style  "opacity" "0" ] [ text ""]
 
     A -> 
         button [onClick (SystemClicked (if forwards then P else Simple))
@@ -137,7 +136,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "225px" else "440px") 
         , style "left"             (if forwards then "850px" else "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
-        , style "border-width"     (if forwards then "0px" else "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
         ] [ text ""]
 
@@ -148,7 +147,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px"    else   "580px") 
         , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -159,7 +158,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px"    else   "580px") 
         , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -170,7 +169,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then   "225px" else   "440px") 
         , style "left"             (if forwards then   "850px" else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
-        , style "border-width"     (if forwards then     "0px" else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
         ] [ text ""]
 
@@ -181,7 +180,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "0px"     else   "550px") 
         , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
         ] [ text ""]
 
@@ -192,7 +191,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "0px"     else   "550px") 
         , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
         ] [ text ""]
 
@@ -203,7 +202,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "0px"     else   "550px") 
         , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
         ] [ text ""]
 
@@ -214,7 +213,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "0px"     else   "550px") 
         , style "left" "488px"  
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
         ] [ text ""]
 
@@ -225,7 +224,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "225px"   else   "440px") 
         , style "left"             (if forwards then "850px"   else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
         ] [ text ""]
 
@@ -236,7 +235,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px" else "580px") 
         , style "left"             (if forwards then "25px" else "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border-width"     (if forwards then "0px" else "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -247,7 +246,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px"    else   "580px") 
         , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"     (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -258,13 +257,90 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "225px"   else   "440px") 
         , style "left"             (if forwards then "850px"   else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
-        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border"           (if forwards then "0px solid"     else     "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
         ] [ text ""]                    
 
 make_arrows : ((Arrow, Bool), (Arrow, Bool), (Arrow, Bool)) -> Html Msg
 make_arrows (one, two, three) = 
     div [] [button_arrow one, button_arrow two, button_arrow three]
+
+title_box : System -> Html Msg 
+title_box sys = case sys of
+    Simple -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#e0e0e0" , style "color"  "#ffffff"
+        , style "top"                "125px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "SIMPLY TYPED LAMBDA CALCULUS"]
+
+    P -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#ff302d" , style "color"  "#ffffff"
+        , style "top"                  "0px" , style "left"    "800px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "LAMBDA-P"]
+
+    Two -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#6bff56" , style "color"  "#ffffff"
+        , style "top"                "125px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "SYSTEM F"]         
+
+    W_ -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#74c0ff" , style "color"  "#ffffff"
+        , style "top"                "0px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "SYSTEM FW_"]
+
+    W -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#00ffab" , style "color"  "#ffffff"
+        , style "top"                  "0px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "SYSTEM FW"]
+
+    PW_ -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#c66cc7" , style "color"  "#ffffff"
+        , style "top"                "0px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "PW_"]
+
+    P2 -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#fff12e" , style "color"  "#ffffff"
+        , style "top"                  "0px" , style "left"    "300px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "P2"]
+
+    C -> 
+        button 
+        [ style "height"             "100px" , style "width"    "300px"
+        , style "background-color" "#3c3c3c" , style "color"  "#ffffff"
+        , style "top"                  "0px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "30px"
+        , style "border" "0px"
+        ] [ text "CALCULUS OF CONSTRUCTIONS"]
+
+    Home ->
+        button [style "opacity" "0"] [text ""]                       
 
 view : Model -> Html Msg
 view model =
@@ -310,7 +386,8 @@ view model =
             , button_trans W_     ("240px", "350px") model.gridOn
             , button_trans P      ("740px", "490px") model.gridOn
             , button_trans Simple ("300px", "580px") model.gridOn
-            , make_arrows  model.arrows 
+            , make_arrows  model.arrows
+            , title_box model.system
             ]
         ]]]
 
