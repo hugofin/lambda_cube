@@ -45,10 +45,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case msg of 
     Tick dt              -> ( { model | theta = model.theta + dt / 5000}, Cmd.none )
     SystemClicked Home   -> ( { model | eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
-    SystemClicked Simple -> ( { model | eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), (C_,  True))}, Cmd.none )
+    SystemClicked Simple -> ( { model | eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
     SystemClicked P      -> ( { model | eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
     SystemClicked Two    -> ( { model | eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
-    SystemClicked W_     -> ( { model | eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), (C_, False))}, Cmd.none )
+    SystemClicked W_     -> ( { model | eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), ( C_, False))}, Cmd.none )
     SystemClicked W      -> ( { model | eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
     SystemClicked PW_    -> ( { model | eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
     SystemClicked P2     -> ( { model | eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
@@ -134,7 +134,7 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then P else Simple))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "250px" else "425px") 
+        , style "top"              (if forwards then "225px" else "440px") 
         , style "left"             (if forwards then "850px" else "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
         , style "border-width"     (if forwards then "0px" else "5px")
@@ -145,8 +145,8 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then PW_ else P))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "75px"    else   "525px") 
-        , style "left"             (if forwards then "50px"    else   "900px")
+        , style "top"              (if forwards then "75px"    else   "580px") 
+        , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
@@ -156,8 +156,8 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then W_ else Simple))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "75px"    else   "525px") 
-        , style "left"             (if forwards then "50px"    else   "775px")
+        , style "top"              (if forwards then "75px"    else   "580px") 
+        , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
@@ -167,7 +167,7 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then PW_ else W_))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then   "200px" else   "425px") 
+        , style "top"              (if forwards then   "225px" else   "440px") 
         , style "left"             (if forwards then   "850px" else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
         , style "border-width"     (if forwards then     "0px" else     "5px")
@@ -179,7 +179,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "height"           "75px"  , style "width"              "25px"
         , style "display"          "flex"  , style "position"       "absolute"
         , style "top"              (if forwards then "0px"     else   "550px") 
-        , style "left" "500px"
+        , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
@@ -190,7 +190,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "height"           "75px"  , style "width"              "25px"
         , style "display"          "flex"  , style "position"       "absolute"
         , style "top"              (if forwards then "0px"     else   "550px") 
-        , style "left" "500px"
+        , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
@@ -201,7 +201,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "height"           "75px"  , style "width"              "25px"
         , style "display"          "flex"  , style "position"       "absolute"
         , style "top"              (if forwards then "0px"     else   "550px") 
-        , style "left" "475px"
+        , style "left" "488px"
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
@@ -212,7 +212,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "height"           "75px"  , style "width"              "25px"
         , style "display"          "flex"  , style "position"       "absolute"
         , style "top"              (if forwards then "0px"     else   "550px") 
-        , style "left" "475px"
+        , style "left" "488px"  
         , style "background-color" (if forwards then "#6bff56" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
@@ -222,7 +222,7 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then P2 else Two))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "250px"   else   "425px") 
+        , style "top"              (if forwards then "225px"   else   "440px") 
         , style "left"             (if forwards then "850px"   else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
@@ -233,8 +233,8 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then C else P2))
         , style "height"           "25px"  , style "width"            "75px"
         , style "display"          "flex"  , style "position"         "absolute"
-        , style "top"              (if forwards then "75px" else "525px") 
-        , style "left"             (if forwards then "50px" else "900px")
+        , style "top"              (if forwards then "75px" else "580px") 
+        , style "left"             (if forwards then "25px" else "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
         , style "border-width"     (if forwards then "0px" else "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
@@ -244,8 +244,8 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then W else Two))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "75px"    else   "525px") 
-        , style "left"             (if forwards then "50px"    else   "775px")
+        , style "top"              (if forwards then "75px"    else   "580px") 
+        , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
@@ -255,7 +255,7 @@ button_arrow (arrow, forwards) = case arrow of
         button [onClick (SystemClicked (if forwards then C else W))
         , style "height"           "25px"  , style "width"              "75px"
         , style "display"          "flex"  , style "position"       "absolute"
-        , style "top"              (if forwards then "200px"   else   "425px") 
+        , style "top"              (if forwards then "225px"   else   "440px") 
         , style "left"             (if forwards then "850px"   else    "50px")
         , style "background-color" (if forwards then "#ff302d" else "#ffffff")
         , style "border-width"     (if forwards then "0px"     else     "5px")
