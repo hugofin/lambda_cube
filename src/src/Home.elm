@@ -3,9 +3,9 @@ module Home exposing (main)
 {-
    Bored? Rotate a cube in your mind :3
 
-    7 ----- L ----- 8               1 = .
-    | K             | J             2 = >
-    |   5 ----- I ----- 6           3 = <
+    7 ----- L ----- 8
+    | K             | J
+    |   5 ----- I ----- 6
     G   |           |   |
     |   |           H   |
     |   E           |   F
@@ -23,8 +23,7 @@ import Math.Matrix4 as Mat4 exposing (Mat4)
 import Math.Vector3 as Vec3 exposing (Vec3, vec3)
 import WebGL                exposing (Mesh, Shader)
 import Html.Events          exposing (onClick)
-import Browser.Dom exposing (Element)
-import Html.Attributes exposing (attribute)
+import Html.Attributes      exposing (disabled)
 
 
 main : Program Flags Model Msg
@@ -37,7 +36,7 @@ main =
         }
 
 init : Flags -> (Model, Cmd Msg )
-init _ = ( {theta = 0, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), gridOn = "diabeld", arrows = (Hid, Hid, Hid)} , Cmd.none )
+init _ = ( {theta = 0, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))} , Cmd.none )
 
 subscriptions : a -> Sub Msg
 subscriptions _ = onAnimationFrameDelta Tick
@@ -45,22 +44,22 @@ subscriptions _ = onAnimationFrameDelta Tick
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case msg of 
     Tick dt              -> ( { model | theta = model.theta + dt / 5000}, Cmd.none )
-    SystemClicked Home   -> ( { model | eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = "dosabled", arrows = (Hid, Hid, Hid)}, Cmd.none )
-    SystemClicked Simple -> ( { model | eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn = "disabled", arrows = (Add, Add, Add)}, Cmd.none )
-    SystemClicked P      -> ( { model | eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn = "disabled", arrows = (Sub, Add, Add)}, Cmd.none )
-    SystemClicked Two    -> ( { model | eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn = "disabled", arrows = (Add, Sub, Add)}, Cmd.none )
-    SystemClicked W_     -> ( { model | eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn = "disabled", arrows = (Add, Add, Sub)}, Cmd.none )
-    SystemClicked W      -> ( { model | eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn = "disabled", arrows = (Add, Sub, Sub)}, Cmd.none )
-    SystemClicked PW_    -> ( { model | eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn = "disabled", arrows = (Sub, Add, Sub)}, Cmd.none )
-    SystemClicked P2     -> ( { model | eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn = "disabled", arrows = (Sub, Sub, Add)}, Cmd.none )
-    SystemClicked C      -> ( { model | eye = (vec3  0.8 1.15 0.3 ), target  = (vec3 1.0 1.00 0.0), gridOn = "disabled", arrows = (Sub, Sub, Sub)}, Cmd.none )
+    SystemClicked Home   -> ( { model | eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
+    SystemClicked Simple -> ( { model | eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), (C_,  True))}, Cmd.none )
+    SystemClicked P      -> ( { model | eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
+    SystemClicked Two    -> ( { model | eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
+    SystemClicked W_     -> ( { model | eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), (C_, False))}, Cmd.none )
+    SystemClicked W      -> ( { model | eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
+    SystemClicked PW_    -> ( { model | eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
+    SystemClicked P2     -> ( { model | eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
+    SystemClicked C      -> ( { model | eye = (vec3  0.8 1.15 0.3 ), target  = (vec3 1.0 1.00 0.0), gridOn =  True, arrows = ((  L, False), (H  , False), (  J, False))}, Cmd.none )
     
 type alias Model = 
     { theta   : Float
     , eye     : Vec3
     , target  : Vec3
-    , gridOn  : String 
-    , arrows  : (Arrow, Arrow, Arrow)}
+    , gridOn  : Bool 
+    , arrows  : ((Arrow, Bool), (Arrow, Bool), (Arrow, Bool))}
 
 type Msg = Tick Float | SystemClicked System
 
@@ -75,8 +74,21 @@ type System =
     | P2
     | C
 
-type Arrow = Hid | Add | Sub
-    
+type Arrow = 
+    Hid 
+    | A
+    | B
+    | C_
+    | D
+    | E
+    | F
+    | G
+    | H
+    | I
+    | J
+    | K
+    | L
+
 type alias Flags = Value
 
 button_side : System -> String -> String -> Html Msg
@@ -90,23 +102,169 @@ button_side sys col msg = button
     , style "border" "0px"
     , style "border-top-right-radius"  "20px"
     , style "border-bottom-right-radius"  "20px"
+    , style "cursor" "pointer"
     ] [ text msg ]
 
-button_trans : System -> String -> String -> String -> Html Msg
-button_trans sys x y enabled = button 
+button_trans : System -> (String, String) -> Bool -> Html Msg
+button_trans sys (x, y) enabled = button 
     [ onClick (SystemClicked sys)
-    , style "height" "75px"
-    , style "width" "75px"
+    , style "height"           "75px"
+    , style "width"            "75px"
     , style "background-color" "#ff0000"
-    , style "color" "#ffffff"
-    , style "border" "0px"
-    , style "position" "absolute"
-    , style "top" y
-    , style "left" x
-    , style "opacity" "0"
-    , style "display" "flex"
-    , attribute enabled ""
+    , style "color"            "#ffffff"
+    , style "border"           "0px"
+    , style "position"         "absolute"
+    , style "top"              y
+    , style "left"             x
+    , style "opacity"          "0"
+    , style "display"          "flex"
+    , disabled                 enabled
+    , style "cursor"           (if enabled then "default" else "pointer")
     ] [ text "" ]
+
+button_arrow : (Arrow, Bool) -> Html Msg
+button_arrow (arrow, forwards) = case arrow of 
+    Hid ->
+        button
+        [ style "position" "absolute", style "top" "0", style "left" "0"
+        , style  "opacity" "0", style "display" "flex", disabled True
+        ] [ text ""]
+
+    A -> 
+        button [onClick (SystemClicked (if forwards then P else Simple))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "250px" else "425px") 
+        , style "left"             (if forwards then "850px" else "50px")
+        , style "background-color" (if forwards then "#ff302d" else "#ffffff")
+        , style "border-width"     (if forwards then "0px" else "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
+        ] [ text ""]
+
+    B -> 
+        button [onClick (SystemClicked (if forwards then PW_ else P))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "75px"    else   "525px") 
+        , style "left"             (if forwards then "50px"    else   "900px")
+        , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
+        ] [ text ""]
+
+    C_ -> 
+        button [onClick (SystemClicked (if forwards then W_ else Simple))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "75px"    else   "525px") 
+        , style "left"             (if forwards then "50px"    else   "775px")
+        , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
+        ] [ text ""]
+
+    D -> 
+        button [onClick (SystemClicked (if forwards then PW_ else W_))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then   "200px" else   "425px") 
+        , style "left"             (if forwards then   "850px" else    "50px")
+        , style "background-color" (if forwards then "#ff302d" else "#ffffff")
+        , style "border-width"     (if forwards then     "0px" else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
+        ] [ text ""]
+
+    E -> 
+        button [onClick (SystemClicked (if forwards then Two else Simple))
+        , style "height"           "75px"  , style "width"              "25px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "0px"     else   "550px") 
+        , style "left" "500px"
+        , style "background-color" (if forwards then "#6bff56" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
+        ] [ text ""]
+
+    F -> 
+        button [onClick (SystemClicked (if forwards then P2 else P))
+        , style "height"           "75px"  , style "width"              "25px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "0px"     else   "550px") 
+        , style "left" "500px"
+        , style "background-color" (if forwards then "#6bff56" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
+        ] [ text ""]
+
+    G -> 
+        button [onClick (SystemClicked (if forwards then W else W_))
+        , style "height"           "75px"  , style "width"              "25px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "0px"     else   "550px") 
+        , style "left" "475px"
+        , style "background-color" (if forwards then "#6bff56" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
+        ] [ text ""]
+
+    H -> 
+        button [onClick (SystemClicked (if forwards then C else PW_))
+        , style "height"           "75px"  , style "width"              "25px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "0px"     else   "550px") 
+        , style "left" "475px"
+        , style "background-color" (if forwards then "#6bff56" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#6bff56")
+        ] [ text ""]
+
+    I -> 
+        button [onClick (SystemClicked (if forwards then P2 else Two))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "250px"   else   "425px") 
+        , style "left"             (if forwards then "850px"   else    "50px")
+        , style "background-color" (if forwards then "#ff302d" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
+        ] [ text ""]
+
+    J -> 
+        button [onClick (SystemClicked (if forwards then C else P2))
+        , style "height"           "25px"  , style "width"            "75px"
+        , style "display"          "flex"  , style "position"         "absolute"
+        , style "top"              (if forwards then "75px" else "525px") 
+        , style "left"             (if forwards then "50px" else "900px")
+        , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
+        , style "border-width"     (if forwards then "0px" else "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
+        ] [ text ""]
+
+    K -> 
+        button [onClick (SystemClicked (if forwards then W else Two))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "75px"    else   "525px") 
+        , style "left"             (if forwards then "50px"    else   "775px")
+        , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
+        ] [ text ""]
+
+    L -> 
+        button [onClick (SystemClicked (if forwards then C else W))
+        , style "height"           "25px"  , style "width"              "75px"
+        , style "display"          "flex"  , style "position"       "absolute"
+        , style "top"              (if forwards then "200px"   else   "425px") 
+        , style "left"             (if forwards then "850px"   else    "50px")
+        , style "background-color" (if forwards then "#ff302d" else "#ffffff")
+        , style "border-width"     (if forwards then "0px"     else     "5px")
+        , style "border-color"     (if forwards then "#ffffff" else "#ff302d")
+        ] [ text ""]                    
+
+make_arrows : ((Arrow, Bool), (Arrow, Bool), (Arrow, Bool)) -> Html Msg
+make_arrows (one, two, three) = 
+    div [] [button_arrow one, button_arrow two, button_arrow three]
 
 view : Model -> Html Msg
 view model =
@@ -144,14 +302,15 @@ view model =
             (uniforms model)
         ]]
         , div [style "display" "flex", style "flex-direction" "row", style "position" "absolute"] 
-            [ button_trans C      "600px"  "-5px" model.gridOn
-            , button_trans W      "220px"  "20px" model.gridOn
-            , button_trans P2     "780px"  "80px" model.gridOn
-            , button_trans Two    "290px" "125px" model.gridOn
-            , button_trans PW_    "580px" "320px" model.gridOn
-            , button_trans W_     "240px" "350px" model.gridOn
-            , button_trans P      "740px" "490px" model.gridOn
-            , button_trans Simple "300px" "580px" model.gridOn
+            [ button_trans C      ("600px",  "-5px") model.gridOn
+            , button_trans W      ("220px",  "20px") model.gridOn
+            , button_trans P2     ("780px",  "80px") model.gridOn
+            , button_trans Two    ("290px", "125px") model.gridOn
+            , button_trans PW_    ("580px", "320px") model.gridOn
+            , button_trans W_     ("240px", "350px") model.gridOn
+            , button_trans P      ("740px", "490px") model.gridOn
+            , button_trans Simple ("300px", "580px") model.gridOn
+            , make_arrows  model.arrows 
             ]
         ]]]
 
@@ -165,7 +324,7 @@ type alias Uniforms =
 
 uniforms : Model -> Uniforms
 uniforms {theta, eye, target} =
-    { rotation    = Mat4.makeRotate (0.05 * sin theta) (vec3 1 1 1)
+    { rotation    = Mat4.makeRotate (0.00 * sin theta) (vec3 1 1 1)
     , perspective = Mat4.makePerspective 45 1 0.01 10
     , camera      = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade       = 1
