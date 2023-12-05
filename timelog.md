@@ -50,10 +50,31 @@
 
 * *2 hour* Reading about the lambda calculus (unboxed)
 
-### Wednesday 1st October 2023
+### Wednesday 1st November 2023
 
 * *2 hour* Looked for a replacement for reanimate
 
-### Wednesday 1st October 2023
+### Friday 3rd November 2023
 
 * *1 hour* Created elm template project
+
+### Saturday 4th November 2023
+
+* *2 hour* Built out the template for the project
+* *1 hour* Reading about shaders (the book of shaders)
+
+### Friday 10th November 2023
+
+* *4 hour* Made the vector representation of the cube and points
+
+### Saturday 11th November 2023
+
+* *2 hour* Made the cube navigable by the side tabs
+
+### Monday 20th November 2023
+
+* *4 hour* Added clickable nodes to zoom in
+
+### Friday 25th November 2023
+
+* *2 hour* Added labels to some of the nodes

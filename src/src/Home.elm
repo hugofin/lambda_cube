@@ -147,7 +147,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px"    else   "580px") 
         , style "left"             (if forwards then "25px"    else   "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border"     (if forwards then "0px solid"     else     "5px solid")
+        , style "border"         (if forwards then "0px solid" else "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -235,7 +235,7 @@ button_arrow (arrow, forwards) = case arrow of
         , style "top"              (if forwards then "75px" else "580px") 
         , style "left"             (if forwards then "25px" else "900px")
         , style "background-color" (if forwards then "#74c0ff" else "#ffffff")
-        , style "border"     (if forwards then "0px solid"     else     "5px solid")
+        , style "border"     (if forwards then "0px solid"     else "5px solid")
         , style "border-color"     (if forwards then "#ffffff" else "#74c0ff")
         ] [ text ""]
 
@@ -268,85 +268,163 @@ make_arrows (one, two, three) =
 title_box : System -> Html Msg 
 title_box sys = case sys of
     Simple -> 
-        button 
-        [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#e0e0e0" , style "color"  "#ffffff"
+        div 
+        [ style "height"             "50px" , style "width"    "400px"
+        , style "color" "#e0e0e0", style "background-color" "transparent"
         , style "top"                "125px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SIMPLY TYPED LAMBDA CALCULUS"]
 
     P -> 
-        button 
-        [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#ff302d" , style "color"  "#ffffff"
+        div 
+        [ style "height"             "50px" , style "width"    "300px"
+        
+        , style "color" "#ff302d", style "background-color" "transparent"
         , style "top"                  "0px" , style "left"    "800px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "LAMBDA-P"]
 
     Two -> 
-        button 
-        [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#6bff56" , style "color"  "#ffffff"
+        div 
+        [ style "height"             "50px" , style "width"    "300px"
+        , style "background-color" "transparent" , style "color"  "#6bff56"
         , style "top"                "125px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SYSTEM F"]         
 
     W_ -> 
-        button 
+        div 
         [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#74c0ff" , style "color"  "#ffffff"
+        , style "background-color" "transparent" , style "color"  "#74c0ff"
         , style "top"                "0px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SYSTEM FW_"]
 
     W -> 
-        button 
+        div 
         [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#00ffab" , style "color"  "#ffffff"
+        , style "background-color" "transparent" , style "color"  "#00ffab"
         , style "top"                  "0px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SYSTEM FW"]
 
     PW_ -> 
-        button 
+        div 
         [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#c66cc7" , style "color"  "#ffffff"
+        , style "background-color" "transparent" , style "color"  "#c66cc7"
         , style "top"                "0px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "PW_"]
 
     P2 -> 
-        button 
+        div 
         [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#fff12e" , style "color"  "#ffffff"
-        , style "top"                  "0px" , style "left"    "300px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
-        ] [ text "P2"]
+        , style "background-color" "transparent" , style "color"  "#fff12e"
+        , style "top"                  "0px" , style "left"    "200px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
+        ] [ text "SYSTEM P2"]
 
     C -> 
-        button 
+        div 
         [ style "height"             "100px" , style "width"    "300px"
-        , style "background-color" "#3c3c3c" , style "color"  "#ffffff"
+        , style "background-color" "transparent" , style "color"  "#3c3c3c"
         , style "top"                  "0px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "30px"
-        , style "border" "0px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "CALCULUS OF CONSTRUCTIONS"]
 
     Home ->
-        button [style "opacity" "0"] [text ""]                       
+        div [style "opacity" "0"] [text ""]                       
+
+rules_box : System -> Html Msg 
+rules_box sys = case sys of
+    Simple -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                "240px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "The Simple type system will only allow terms to be defined using other terms"]
+
+    P -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                  "75px" , style "left" "650px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "In the λP system, also named ΛΠ, types that are allowed to depend on terms."]
+
+    Two -> 
+        div
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                "210px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "In system F, terms can depend on types.  This type is denoted with Λ.  Terms that begin with Λ are polymorphic"]         
+
+    W_ -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                "75px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "System F ω _ is a construction introduced to supply types that depend on other types, and is therefore a type constructor"]
+
+    W -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                  "75px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types"]
+
+    PW_ -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                  "75px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "as this system is a combination of types can bind both terms and types"]
+
+    P2 -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                  "-40px" , style "left"    "500px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "in the system P2, terms can bind types or types can bind terms"]
+
+    C -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                  "-20px" , style "left"    "230px"
+        , style "position"        "absolute" , style "font-size" "15px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types."]
+
+    Home ->
+        button [style "opacity" "0"] [text ""] 
 
 view : Model -> Html Msg
 view model =
     div
         [ style "font-family" "TASA Orbiter Deck", style "display" "flex", style "flex-direction" "column" ]
-        [ div [ style "margin" "50px", style "font-size" "50px", style "align-self" "center" ]
+        [ div [ style "margin" "50px", style "font-size" "40px", style "align-self" "Left" ]
         [ text "Barendregt's Lambda Cube" ]
         , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
@@ -387,7 +465,8 @@ view model =
             , button_trans P      ("740px", "490px") model.gridOn
             , button_trans Simple ("300px", "580px") model.gridOn
             , make_arrows  model.arrows
-            , title_box model.system
+            , title_box    model.system
+            , rules_box    model.system
             ]
         ]]]
 
