@@ -45,6 +45,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case msg of 
     Tick dt              -> ( { model |  theta = model.theta + dt / 5000}, Cmd.none )
     SystemClicked Home   -> ( { model | system =   Home, eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
+    SystemClicked None   -> ( { model | system =   None, eye = (vec3 -3.0 3.00 3.0 ), target  = (vec3 4.0 4.00 4.0), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
     SystemClicked Simple -> ( { model | system = Simple, eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
     SystemClicked P      -> ( { model | system =      P, eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
     SystemClicked Two    -> ( { model | system =    Two, eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
@@ -66,6 +67,7 @@ type Msg = Tick Float | SystemClicked System
 
 type System = 
     Home 
+    | None
     | Simple
     | P
     | Two
@@ -267,11 +269,20 @@ make_arrows (one, two, three) =
 
 title_box : System -> Html Msg 
 title_box sys = case sys of
+    None -> 
+        div 
+        [ style "height"             "50px" , style "width"    "400px"
+        , style "color" "#c5e8b7", style "background-color" "transparent"
+        , style "top"                "300px" , style "left"    "550px"
+        , style "position"        "absolute" , style "font-size" "40px"
+        , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
+        ] [ text "UNTYPED LAMBDA CALCULUS"]
+    
     Simple -> 
         div 
         [ style "height"             "50px" , style "width"    "400px"
         , style "color" "#e0e0e0", style "background-color" "transparent"
-        , style "top"                "125px" , style "left"    "-125px"
+        , style "top"                "175px" , style "left"    "-125px"
         , style "position"        "absolute" , style "font-size" "40px"
         , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SIMPLY TYPED LAMBDA CALCULUS"]
@@ -279,7 +290,6 @@ title_box sys = case sys of
     P -> 
         div 
         [ style "height"             "50px" , style "width"    "300px"
-        
         , style "color" "#ff302d", style "background-color" "transparent"
         , style "top"                  "0px" , style "left"    "800px"
         , style "position"        "absolute" , style "font-size" "40px"
@@ -290,7 +300,7 @@ title_box sys = case sys of
         div 
         [ style "height"             "50px" , style "width"    "300px"
         , style "background-color" "transparent" , style "color"  "#6bff56"
-        , style "top"                "125px" , style "left"    "-125px"
+        , style "top"                "175px" , style "left"    "-125px"
         , style "position"        "absolute" , style "font-size" "40px"
         , style "border" "0px", style "font-weight" "bold", style "vertical-align" "middle"
         ] [ text "SYSTEM F"]         
@@ -345,12 +355,21 @@ title_box sys = case sys of
 
 rules_box : System -> Html Msg 
 rules_box sys = case sys of
+    None -> 
+        div 
+        [ style "height"             "100px" , style "width"    "500px"
+        , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
+        , style "top"                "500px" , style "left"    "425px"
+        , style "position"        "absolute" , style "font-size" "20px"
+        , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
+        ] [ text "Untyped lambda calculus has only terms, and no types"]
+
     Simple -> 
         div 
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
-        , style "top"                "240px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "top"                "275px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "The Simple type system will only allow terms to be defined using other terms"]
 
@@ -359,7 +378,7 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                  "75px" , style "left" "650px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "In the λP system, also named ΛΠ, types that are allowed to depend on terms."]
 
@@ -367,8 +386,8 @@ rules_box sys = case sys of
         div
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
-        , style "top"                "210px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "top"                "250px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "In system F, terms can depend on types.  This type is denoted with Λ.  Terms that begin with Λ are polymorphic"]         
 
@@ -377,7 +396,7 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                "75px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "System F ω _ is a construction introduced to supply types that depend on other types, and is therefore a type constructor"]
 
@@ -386,7 +405,7 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                  "75px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types"]
 
@@ -395,7 +414,7 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                  "75px" , style "left"    "-125px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "as this system is a combination of types can bind both terms and types"]
 
@@ -404,7 +423,7 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                  "-40px" , style "left"    "500px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "in the system P2, terms can bind types or types can bind terms"]
 
@@ -413,12 +432,107 @@ rules_box sys = case sys of
         [ style "height"             "100px" , style "width"    "500px"
         , style "background-color" "#0f0f0f" , style "color"  "#ffffff"
         , style "top"                  "-20px" , style "left"    "230px"
-        , style "position"        "absolute" , style "font-size" "15px"
+        , style "position"        "absolute" , style "font-size" "20px"
         , style "border" "0px" , style "text-align" "left" , style "padding" "10px"
         ] [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types."]
 
     Home ->
         button [style "opacity" "0"] [text ""] 
+
+background_box : System -> Html Msg 
+background_box sys = case sys of
+    None -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "50px" , style "left"    "25px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left" 
+        , style "padding" "10px", style "border-color" "#c5e8b7"
+        ] [ text "a"]
+    
+    Simple -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "425px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left" 
+        , style "padding" "10px", style "border-color" "#e0e0e0"
+        ] [ text "blah"]
+
+    P -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "225px" , style "left"    "650px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left" 
+        , style "padding" "10px", style "border-color" "#ff302d"
+        ] [ text "a"]
+
+    Two -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "400px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left"
+        , style "padding" "10px", style "border-color" "#6bff56"
+        ] [ text "a"]
+
+    W_ -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "225px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left"
+        , style "padding" "10px", style "border-color" "#74c0ff"
+        ] [ text "a"]
+
+    W -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "225px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left" 
+        , style "padding" "10px", style "border-color" "#00ffab"
+        ] [ text "a"]
+
+    PW_ -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "0px" , style "left"    "625px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left"
+        , style "padding" "10px", style "border-color" "#c66cc7"
+        ] [ text "a"]
+
+    P2 -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "150px" , style "left"    "625px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left"
+        , style "padding" "10px", style "border-color" "#fff12e"
+        ] [ text "a"]
+
+    C -> 
+        div 
+        [ style "height"             "190px" , style "width"    "490px"
+        , style "background-color" "#ffffff" , style "color"  "#0f0f0f"
+        , style "top"                "125px" , style "left"    "-125px"
+        , style "position"        "absolute" , style "font-size" "20px" 
+        , style "border" "5px solid" , style "text-align" "left" 
+        , style "padding" "10px", style "border-color" "#3c3c3c"
+        ] [ text "a"]
+
+    Home ->
+        button [style "opacity" "0"] [text ""]
 
 view : Model -> Html Msg
 view model =
@@ -429,6 +543,7 @@ view model =
         , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
                 [ button_side Home   "#3c3c3c" "home"
+                , button_side None   "#c5e8b7" "untyped"
                 , button_side Simple "#e0e0e0" "λ→"
                 , button_side P      "#ff302d" "P"
                 , button_side Two    "#6bff56" "2"
@@ -464,9 +579,10 @@ view model =
             , button_trans W_     ("240px", "350px") model.gridOn
             , button_trans P      ("740px", "490px") model.gridOn
             , button_trans Simple ("300px", "580px") model.gridOn
-            , make_arrows  model.arrows
-            , title_box    model.system
-            , rules_box    model.system
+            , make_arrows    model.arrows
+            , title_box      model.system
+            , rules_box      model.system
+            , background_box model.system
             ]
         ]]]
 
@@ -529,17 +645,19 @@ pointsMesh : Mesh Vertex
 pointsMesh =
     -- coordinates are [ left, up, towards ]
     let
-        one = vec3 0 0 1
-        two = vec3 1 0 1
+        zero  = vec3 4 4 4 
+        one   = vec3 0 0 1
+        two   = vec3 1 0 1
         three = vec3 0 0 0
-        four = vec3 1 0 0
-        five = vec3 0 1 1
-        six = vec3 1 1 1
+        four  = vec3 1 0 0
+        five  = vec3 0 1 1
+        six   = vec3 1 1 1
         seven = vec3 0 1 0
         eight = vec3 1 1 0
 
     in
-    [ (point (vec3 238 238 238) one   )
+    [ (point (vec3 197 232 183) zero  )
+    , (point (vec3 238 238 238) one   )
     , (point (vec3 255  48  45) two   ) 
     , (point (vec3 166 192 255) three ) 
     , (point (vec3 198 108 199) four  )
