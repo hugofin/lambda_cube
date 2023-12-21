@@ -3,8 +3,8 @@
 \usepackage{times}
     \usepackage{fullpage}
     
-    \title{ {{cookiecutter.project_title}}
-    \author{ {{cookiecutter.student_name}} - {{cookiecutter.student_id}} }
+    \title{ 3D Animation of Barendregt's Lambda Cube}
+    \author{ Hugo Findlay - 2554911f }
 
     \begin{document}
     \maketitle
@@ -18,51 +18,87 @@
 
 \subsubsection{Motivation}\label{motivation}
 
-\emph{{[}Clearly motivate the purpose of your project; why someone would
-care about what you are doing{]}}
+The Lambda cube is a fascinating visualisation of how a combination of 
+three different type systems can be added on to the simply typed lambda calculus.
+Despite being such an interesting concept, there is a relative lack of 
+available learning resources online.  The motivation of this project is to 
+create a website that uses a 3D animated cube to teach you more about how
+the type systems interact at each node.
 
 \subsubsection{Aims}\label{aims}
 
-\emph{{[}Clearly state what the project is intended to do. This should
-be something which is measurable; it should be possible to tell if you
-succeeded{]}}
+The aim of this project is to create a website that is a more effective 
+introduction into the lambda cube than what currently exists on the 
+internet now.  This will be achieved by using the interactive medium
+to its fullest extent, letting the site's user explore the cube at their
+own pace, in whichever order they see fit, as well as using the 3D space to
+help show how the spatial relations of each calculus.
 
 \subsection{Progress}\label{progress}
 
-\emph{{[}Briefly state your progress so far, as a bulleted list{]}}
+\begin{itemize}
+    \tightlist
+    \item Learned the fundamentals of the Elm programming language, as well as
+    the GLSL and MathML languages and the plugins used to integrate them with Elm
+    \item Created an animated, navigable rendition of A cube
+    \item Designed and programmed the web interface to host the animation and 
+    information about each node
+    \item Reading about the untyped lambda calculus, as well as on several of the
+    type systems so that I will be able to write the explanation at each node.
+
+\end{itemize}
 
 \subsection{Problems and risks}\label{problems-and-risks}
 
 \subsubsection{Problems}\label{problems}
 
-\emph{{[}What problems have you had so far, that have held up the
-project?{]}}
+\begin{itemize}
+    \tightlist
+\item I had a small setback when I initally started to create the animations
+using an animation library for haskell, but I realised that this was a bad 
+way to go about the probem, so switched to using elm + GLSL.
+\item There is also sometimes a realtive lack of information available about
+specific calculi in the cube, simply because there has been less research into
+their use.  This can sometimes make reading about them a difficult process.
+
+\end{itemize}
 
 \subsubsection{Risks}\label{risks}
 
-\emph{{[}What problems do you foresee in the future and how will you
-mitigate them?{]}}
+\begin{itemize}
+    \tightlist
+\item A potential risk I could have with testing the efficacy of the website is
+finding a suitable trial group, as they should be familiar with the concepts, but not
+have any in depth knowledge about lambda calculus \textbf{Mitigation}: I have been reaching 
+out to people who I know took the programming languages course in their third year to ask if 
+they would be available for the trial
+\item It would be difficult to gather quantitative data proving that the website is
+an improvement relative to the currently available learning resources
 
-\subsection{Plan}\label{plan}
+\end{itemize}
 
-\emph{{[}Time plan, in roughly weekly to monthly blocks, up until
-submission week{]}}
+\section{Plan}\label{plan}
 
+\begin{itemize}
+    \tightlist
+    \item
+      Week 1-3: Have a finished first version of the website
+    \item
+      Week 4: Run the user trials and gather feedback
+    \item
+      Week 5-7: implement the feedback provided by the trials group, deliver the first draft of the writeup to my supervisor
+    \item
+      Week 8-10: implement my supervisor's writeup feedback
+    \end{itemize}
+    
     
 \subsection{Ethics and data}\label{ethics}
-\emph{Specify what ethical approval you need to do your evaluation and how you are approaching it. This is mandatory. 
-Specify what data you expect to collect in your evaluation. Explain how this data will help you evaluate your project.
-}
-
+\emph
 Options for ethics:
-\item This project does not involve human subjects or data. No approval required.
-\item I have verified that the ethics checklist will apply to any evaluation I need to do. I will sign and complete the checklist.
-\item I have sought ethical guidance from the School's ethics convener and I will:
-\begin{itemize}
-    \item Proceed under specific instructions from the Ethics convener (e.g. modified checklist).
-    \item Apply for College Ethics Board approval.
-    \item Other procedure (give details)
-\end{itemize}    
+
+This project will involve tests with human users.  These will be user studies
+using standard hardware, and require no personally identifiable information to be captured.
+I have verified that the ethics checklist will apply to any evaluation I need to do. I will sign and complete the checklist.
 
 
 \end{document}
