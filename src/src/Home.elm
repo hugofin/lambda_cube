@@ -20,7 +20,7 @@ import Html                 exposing (Html, button, div, text, sup, sub, u, br, 
 import Html.Attributes      exposing (height, style, width)
 import Json.Decode          exposing (Value)
 import Math.Matrix4 as Mat4 exposing (Mat4)
-import Math.Vector3 as Vec3 exposing (Vec3, vec3)
+import Math.Vector3 as Vec3 exposing (Vec3, vec3, getX, getY, getZ)
 import WebGL                exposing (Mesh, Shader)
 import Html.Events          exposing (onClick)
 import Html.Attributes      exposing (disabled)
@@ -720,12 +720,12 @@ type alias Uniforms =
 
 uniforms : Model -> Uniforms
 uniforms {theta, eye, target} =
-    { rotation    = Mat4.makeRotate (1 * sin theta) (vec3 1 1 1)
+    { rotation    = Mat4.makeRotate (0 * sin theta) (vec3 1 1 1)
     , perspective = Mat4.makePerspective 45 1 0.01 10
     , camera      = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade       = 1
     }
-
+ 
 
 
 -- Mesh
@@ -844,3 +844,15 @@ fragmentShader =
         }
 
     |]
+
+
+vec3lerp : Vec3 -> Vec3 -> Vec3
+vec3lerp from to =
+  let
+    newX = lerp (getX from) (getX to)
+    newY = lerp (getY from) (getY to)
+    newZ = lerp (getZ from) (getZ to)
+  in (vec3 newX newY newZ)
+
+lerp : Float -> Float -> Float
+lerp from to = let t = 0.5 in from + t * (to - from)
