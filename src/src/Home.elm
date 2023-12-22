@@ -36,30 +36,32 @@ main =
         }
 
 init : Flags -> (Model, Cmd Msg )
-init _ = ( {theta = 0, system = Home, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))} , Cmd.none )
+init _ = ( {theta = 0, system = Home, eye = (vec3 -0.3 1.6 3 ), target  = (vec3 0.5 0.35 0.5), eye_n = (vec3 -0.3 1.6 3 ), target_n  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))} , Cmd.none )
 
 subscriptions : a -> Sub Msg
 subscriptions _ = onAnimationFrameDelta Tick
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case msg of
-    Tick dt              -> ( { model |  theta = model.theta + dt / 5000}, Cmd.none )
-    SystemClicked Home   -> ( { model | system =   Home, eye = (vec3 -0.3 1.60 3.0 ), target  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
-    SystemClicked None   -> ( { model | system =   None, eye = (vec3 -3.0 3.00 3.0 ), target  = (vec3 4.0 4.00 4.0), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
-    SystemClicked Simple -> ( { model | system = Simple, eye = (vec3 -0.2 0.15 1.3 ), target  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
-    SystemClicked P      -> ( { model | system =      P, eye = (vec3  0.8 0.15 1.3 ), target  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
-    SystemClicked Two    -> ( { model | system =    Two, eye = (vec3 -0.2 1.15 1.3 ), target  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
-    SystemClicked W_     -> ( { model | system =     W_, eye = (vec3 -0.2 0.15 0.3 ), target  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), ( C_, False))}, Cmd.none )
-    SystemClicked W      -> ( { model | system =      W, eye = (vec3 -0.2 1.15 0.3 ), target  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
-    SystemClicked PW_    -> ( { model | system =    PW_, eye = (vec3  0.8 0.15 0.3 ), target  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
-    SystemClicked P2     -> ( { model | system =     P2, eye = (vec3  0.8 1.15 1.3 ), target  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
-    SystemClicked C      -> ( { model | system =      C, eye = (vec3  0.8 1.15 0.3 ), target  = (vec3 1.0 1.00 0.0), gridOn =  True, arrows = ((  L, False), (H  , False), (  J, False))}, Cmd.none )
+    Tick dt              -> ( { model |  theta = model.theta + dt / 5000, eye = vec3lerp model.eye model.eye_n, target = vec3lerp model.target model.target_n}, Cmd.none )
+    SystemClicked Home   -> ( { model | system =   Home, eye_n = (vec3 -0.3 1.60 3.0 ), target_n  = (vec3 0.5 0.35 0.5), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
+    SystemClicked None   -> ( { model | system =   None, eye_n = (vec3 -3.0 3.00 3.0 ), target_n  = (vec3 4.0 4.00 4.0), gridOn = False, arrows = ((Hid, False), (Hid, False), (Hid, False))}, Cmd.none )
+    SystemClicked Simple -> ( { model | system = Simple, eye_n = (vec3 -0.2 0.15 1.3 ), target_n  = (vec3 0.0 0.00 1.0), gridOn =  True, arrows = ((  A,  True), (E  ,  True), ( C_,  True))}, Cmd.none )
+    SystemClicked P      -> ( { model | system =      P, eye_n = (vec3  0.8 0.15 1.3 ), target_n  = (vec3 1.0 0.00 1.0), gridOn =  True, arrows = ((  A, False), (F  ,  True), (  B,  True))}, Cmd.none )
+    SystemClicked Two    -> ( { model | system =    Two, eye_n = (vec3 -0.2 1.15 1.3 ), target_n  = (vec3 0.0 1.00 1.0), gridOn =  True, arrows = ((  I,  True), (E  , False), (  K,  True))}, Cmd.none )
+    SystemClicked W_     -> ( { model | system =     W_, eye_n = (vec3 -0.2 0.15 0.3 ), target_n  = (vec3 0.0 0.00 0.0), gridOn =  True, arrows = ((  D,  True), (G  ,  True), ( C_, False))}, Cmd.none )
+    SystemClicked W      -> ( { model | system =      W, eye_n = (vec3 -0.2 1.15 0.3 ), target_n  = (vec3 0.0 1.00 0.0), gridOn =  True, arrows = ((  L,  True), (G  , False), (  K, False))}, Cmd.none )
+    SystemClicked PW_    -> ( { model | system =    PW_, eye_n = (vec3  0.8 0.15 0.3 ), target_n  = (vec3 1.0 0.00 0.0), gridOn =  True, arrows = ((  D, False), (H  ,  True), (  B, False))}, Cmd.none )
+    SystemClicked P2     -> ( { model | system =     P2, eye_n = (vec3  0.8 1.15 1.3 ), target_n  = (vec3 1.0 1.00 1.0), gridOn =  True, arrows = ((  I, False), (F  , False), (  J,  True))}, Cmd.none )
+    SystemClicked C      -> ( { model | system =      C, eye_n = (vec3  0.8 1.15 0.3 ), target_n  = (vec3 1.0 1.00 0.0), gridOn =  True, arrows = ((  L, False), (H  , False), (  J, False))}, Cmd.none )
 
 type alias Model =
     { theta   : Float
     , system  : System
     , eye     : Vec3
     , target  : Vec3
+    , eye_n   : Vec3
+    , target_n  : Vec3
     , gridOn  : Bool
     , arrows  : ((Arrow, Bool), (Arrow, Bool), (Arrow, Bool))}
 
@@ -855,4 +857,4 @@ vec3lerp from to =
   in (vec3 newX newY newZ)
 
 lerp : Float -> Float -> Float
-lerp from to = let t = 0.5 in from + t * (to - from)
+lerp from to = let t = 0.15 in from + t * (to - from)
