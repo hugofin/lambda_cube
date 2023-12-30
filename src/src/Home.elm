@@ -39,7 +39,13 @@ main =
 
 init : Flags -> ( Model, Cmd Msg )
 init _ =
-    ( { theta = 0, system = Home, eye = vec3 -0.3 1.6 3, target = vec3 0.5 0.35 0.5, eye_n = vec3 -0.3 1.6 3, target_n = vec3 0.5 0.35 0.5, gridOn = False }, Cmd.none )
+    ( { theta = 0
+      , system = Home
+      , eye = vec3 -0.3 1.6 3
+      , target = vec3 0.5 0.35 0.5
+      }
+    , Cmd.none
+    )
 
 
 subscriptions : a -> Sub Msg
@@ -51,37 +57,53 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Tick dt ->
-            ( { model | theta = model.theta + dt / 5000, eye = vec3lerp model.eye model.eye_n, target = vec3lerp model.target model.target_n }, Cmd.none )
+            let
+                { eye_n, target_n } =
+                    f model.system
+            in
+            ( { model
+                | theta = model.theta + dt / 5000
+                , eye = vec3lerp model.eye eye_n
+                , target = vec3lerp model.target target_n
+              }
+            , Cmd.none
+            )
 
-        SystemClicked Home ->
-            ( { model | system = Home, eye_n = vec3 -0.3 1.6 3.0, target_n = vec3 0.5 0.35 0.5, gridOn = False }, Cmd.none )
+        SystemClicked sys ->
+            ( { model | system = sys }, Cmd.none )
 
-        SystemClicked None ->
-            ( { model | system = None, eye_n = vec3 -3.0 3.0 3.0, target_n = vec3 4.0 4.0 4.0, gridOn = False }, Cmd.none )
 
-        SystemClicked Simple ->
-            ( { model | system = Simple, eye_n = vec3 -0.2 0.15 1.3, target_n = vec3 0.0 0.0 1.0, gridOn = True }, Cmd.none )
+f system =
+    case system of
+        Home ->
+            { eye_n = vec3 -0.3 1.6 3.0, target_n = vec3 0.5 0.35 0.5 }
 
-        SystemClicked P ->
-            ( { model | system = P, eye_n = vec3 0.8 0.15 1.3, target_n = vec3 1.0 0.0 1.0, gridOn = True }, Cmd.none )
+        None ->
+            { eye_n = vec3 -3.0 3.0 3.0, target_n = vec3 4.0 4.0 4.0 }
 
-        SystemClicked Two ->
-            ( { model | system = Two, eye_n = vec3 -0.2 1.15 1.3, target_n = vec3 0.0 1.0 1.0, gridOn = True }, Cmd.none )
+        Simple ->
+            { eye_n = vec3 -0.2 0.15 1.3, target_n = vec3 0.0 0.0 1.0 }
 
-        SystemClicked W_ ->
-            ( { model | system = W_, eye_n = vec3 -0.2 0.15 0.3, target_n = vec3 0.0 0.0 0.0, gridOn = True }, Cmd.none )
+        P ->
+            { eye_n = vec3 0.8 0.15 1.3, target_n = vec3 1.0 0.0 1.0 }
 
-        SystemClicked W ->
-            ( { model | system = W, eye_n = vec3 -0.2 1.15 0.3, target_n = vec3 0.0 1.0 0.0, gridOn = True }, Cmd.none )
+        Two ->
+            { eye_n = vec3 -0.2 1.15 1.3, target_n = vec3 0.0 1.0 1.0 }
 
-        SystemClicked PW_ ->
-            ( { model | system = PW_, eye_n = vec3 0.8 0.15 0.3, target_n = vec3 1.0 0.0 0.0, gridOn = True }, Cmd.none )
+        W_ ->
+            { eye_n = vec3 -0.2 0.15 0.3, target_n = vec3 0.0 0.0 0.0 }
 
-        SystemClicked P2 ->
-            ( { model | system = P2, eye_n = vec3 0.8 1.15 1.3, target_n = vec3 1.0 1.0 1.0, gridOn = True }, Cmd.none )
+        W ->
+            { eye_n = vec3 -0.2 1.15 0.3, target_n = vec3 0.0 1.0 0.0 }
 
-        SystemClicked C ->
-            ( { model | system = C, eye_n = vec3 0.8 1.15 0.3, target_n = vec3 1.0 1.0 0.0, gridOn = True }, Cmd.none )
+        PW_ ->
+            { eye_n = vec3 0.8 0.15 0.3, target_n = vec3 1.0 0.0 0.0 }
+
+        P2 ->
+            { eye_n = vec3 0.8 1.15 1.3, target_n = vec3 1.0 1.0 1.0 }
+
+        C ->
+            { eye_n = vec3 0.8 1.15 0.3, target_n = vec3 1.0 1.0 0.0 }
 
 
 type alias Model =
@@ -89,9 +111,6 @@ type alias Model =
     , system : System
     , eye : Vec3
     , target : Vec3
-    , eye_n : Vec3
-    , target_n : Vec3
-    , gridOn : Bool
     }
 
 
@@ -121,8 +140,12 @@ button_side sys col msg =
         [ text msg ]
 
 
-button_trans : System -> ( String, String ) -> Bool -> Html Msg
-button_trans sys ( x, y ) enabled =
+button_trans : System -> ( String, String ) -> Html Msg
+button_trans sys ( x, y ) =
+    let
+        enabled =
+            sys == None || sys == Home
+    in
     button
         [ onClick (SystemClicked sys)
         , style "height" "75px"
@@ -984,14 +1007,14 @@ view model =
                     [ Cube.view { theta = model.theta, eye = model.eye, target = model.target }
                     ]
                 , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ]
-                    [ button_trans C ( "600px", "-5px" ) model.gridOn
-                    , button_trans W ( "220px", "20px" ) model.gridOn
-                    , button_trans P2 ( "780px", "80px" ) model.gridOn
-                    , button_trans Two ( "290px", "125px" ) model.gridOn
-                    , button_trans PW_ ( "580px", "320px" ) model.gridOn
-                    , button_trans W_ ( "240px", "350px" ) model.gridOn
-                    , button_trans P ( "740px", "490px" ) model.gridOn
-                    , button_trans Simple ( "300px", "580px" ) model.gridOn
+                    [ button_trans C ( "600px", "-5px" )
+                    , button_trans W ( "220px", "20px" )
+                    , button_trans P2 ( "780px", "80px" )
+                    , button_trans Two ( "290px", "125px" )
+                    , button_trans PW_ ( "580px", "320px" )
+                    , button_trans W_ ( "240px", "350px" )
+                    , button_trans P ( "740px", "490px" )
+                    , button_trans Simple ( "300px", "580px" )
                     , Arrows.view SystemClicked model.system
                     , title_box model.system
                     , rules_box model.system
