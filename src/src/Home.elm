@@ -17,15 +17,16 @@ module Home exposing (main)
 import Arrows
 import Browser
 import Browser.Events exposing (onAnimationFrameDelta)
+import Color exposing (..)
 import Cube
 import Html exposing (Html, b, br, button, div, sub, sup, text, u)
 import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, getX, getY, getZ, vec3)
-import MathML.UntypedTerms
 import System exposing (System(..))
-import Color exposing (..)
+import TermsBox
+
 
 main : Program Flags Model Msg
 main =
@@ -39,10 +40,14 @@ main =
 
 init : Flags -> ( Model, Cmd Msg )
 init _ =
+    let
+        { eye_n, target_n } =
+            f Nothing
+    in
     ( { theta = 0
-      , system = Home
-      , eye = vec3 -0.3 1.6 3
-      , target = vec3 0.5 0.35 0.5
+      , system = Nothing
+      , eye = eye_n
+      , target = target_n
       }
     , Cmd.none
     )
@@ -75,56 +80,61 @@ update msg model =
 
 f system =
     case system of
-        Home ->
+        Nothing ->
             { eye_n = vec3 -0.3 1.6 3.0, target_n = vec3 0.5 0.35 0.5 }
 
-        None ->
-            { eye_n = vec3 -3.0 3.0 3.0, target_n = vec3 4.0 4.0 4.0 }
+        Just s ->
+            case s of
+                None ->
+                    { eye_n = vec3 -3.0 3.0 3.0, target_n = vec3 4.0 4.0 4.0 }
 
-        Simple ->
-            { eye_n = vec3 -0.2 0.15 1.3, target_n = vec3 0.0 0.0 1.0 }
+                Simple ->
+                    { eye_n = vec3 -0.2 0.15 1.3, target_n = vec3 0.0 0.0 1.0 }
 
-        P ->
-            { eye_n = vec3 0.8 0.15 1.3, target_n = vec3 1.0 0.0 1.0 }
+                P ->
+                    { eye_n = vec3 0.8 0.15 1.3, target_n = vec3 1.0 0.0 1.0 }
 
-        Two ->
-            { eye_n = vec3 -0.2 1.15 1.3, target_n = vec3 0.0 1.0 1.0 }
+                Two ->
+                    { eye_n = vec3 -0.2 1.15 1.3, target_n = vec3 0.0 1.0 1.0 }
 
-        W_ ->
-            { eye_n = vec3 -0.2 0.15 0.3, target_n = vec3 0.0 0.0 0.0 }
+                W_ ->
+                    { eye_n = vec3 -0.2 0.15 0.3, target_n = vec3 0.0 0.0 0.0 }
 
-        W ->
-            { eye_n = vec3 -0.2 1.15 0.3, target_n = vec3 0.0 1.0 0.0 }
+                W ->
+                    { eye_n = vec3 -0.2 1.15 0.3, target_n = vec3 0.0 1.0 0.0 }
 
-        PW_ ->
-            { eye_n = vec3 0.8 0.15 0.3, target_n = vec3 1.0 0.0 0.0 }
+                PW_ ->
+                    { eye_n = vec3 0.8 0.15 0.3, target_n = vec3 1.0 0.0 0.0 }
 
-        P2 ->
-            { eye_n = vec3 0.8 1.15 1.3, target_n = vec3 1.0 1.0 1.0 }
+                P2 ->
+                    { eye_n = vec3 0.8 1.15 1.3, target_n = vec3 1.0 1.0 1.0 }
 
-        C ->
-            { eye_n = vec3 0.8 1.15 0.3, target_n = vec3 1.0 1.0 0.0 }
+                C ->
+                    { eye_n = vec3 0.8 1.15 0.3, target_n = vec3 1.0 1.0 0.0 }
 
 
 type alias Model =
     { theta : Float
-    , system : System
+    , system : Maybe System
     , eye : Vec3
     , target : Vec3
     }
 
-
 type Msg
     = Tick Float
-    | SystemClicked System
+    | SystemClicked (Maybe System)
 
 
 type alias Flags =
     Value
 
 
-button_side : System -> String -> String -> Html Msg
-button_side sys col msg =
+button_side : Maybe System  -> Html Msg
+button_side sys =
+    let
+      msg = Maybe.withDefault "home" (Maybe.map System.toString sys)
+      col = Maybe.withDefault steel (Maybe.map System.color sys)
+    in
     button
         [ onClick (SystemClicked sys)
         , style "height" "55px"
@@ -140,14 +150,11 @@ button_side sys col msg =
         [ text msg ]
 
 
-button_trans : System -> ( String, String ) -> Html Msg
-button_trans sys ( x, y ) =
-    let
-        enabled =
-            sys == None || sys == Home
-    in
+button_trans : Bool -> System -> ( String, String ) -> Html Msg
+button_trans isGrid sys ( x, y ) =
+    
     button
-        [ onClick (SystemClicked sys)
+        [ onClick (SystemClicked (Just sys))
         , style "height" "75px"
         , style "width" "75px"
         , style "background-color" "#ff0000"
@@ -158,9 +165,9 @@ button_trans sys ( x, y ) =
         , style "left" x
         , style "opacity" "0"
         , style "display" "flex"
-        , disabled enabled
+        , disabled isGrid
         , style "cursor"
-            (if enabled then
+            (if isGrid then
                 "default"
 
              else
@@ -317,9 +324,6 @@ title_box sys =
                 ]
                 [ text "CALCULUS OF CONSTRUCTIONS" ]
 
-        Home ->
-            div [ style "opacity" "0" ] [ text "" ]
-
 
 rules_box : System -> Html Msg
 rules_box sys =
@@ -471,370 +475,6 @@ rules_box sys =
                 ]
                 [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
 
-        Home ->
-            button [ style "opacity" "0" ] [ text "" ]
-
-terms_box : System -> Html Msg
-terms_box sys =
-    case sys of
-        None ->
-            div
-                [ style "height" "190px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "50px"
-                , style "left" "425px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" leaf
-                ]
-                [ MathML.UntypedTerms.view ]
-
-        Simple ->
-            div
-                [ style "height" "270px"
-                , style "width" "600px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "375px"
-                , style "left" "425px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" mauve
-                ]
-                [ b [] [ text "Pre-typed Terms:" ]
-                , br [] []
-                , text "Variable - if α ∈ V, then α ∈ Λ"
-                , sup [] [ text "→" ]
-                , br [] []
-                , text "Application - if M,N ∈ Λ"
-                , sup [] [ text "→" ]
-                , text "then (MN) ∈Λ"
-                , sup [] [ text "→" ]
-                , br [] []
-                , text "Abstraction - if x ∈ 𝕍, σ in 𝕋, and M ∈ Λ"
-                , sup [] [ text "→" ]
-                , text ", then (λ  x : σ . M). ∈ Λ"
-                , sup [] [ text "→" ]
-                , br [] []
-                , b [] [ text "Derivation Rules:" ]
-                , br [] []
-                , text "variable - Γ ⊢ x : σ  if x : σ ∈ Γ"
-                , br [] []
-                , text "application - "
-                , u [] [ text "Γ ⊢ M : σ → τ ⠀⠀ Γ ⊢ N : σ" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : τ"
-                , br [] []
-                , text "abstraction - "
-                , u [] [ text "⠀⠀Γ,x : σ ⊢ M : τ⠀⠀" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : σ . M:σ→τ"
-                ]
-
-        P ->
-            div
-                [ style "height" "375px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "225px"
-                , style "left" "650px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" red
-                ]
-                [ b [] [ text "Derivation Rules:" ]
-                , br [] []
-                , text "sort - 0 ⊢ * : ☐"
-                , br [] []
-                , text "variable"
-                , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-                , br [] []
-                , text "weak - "
-                , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-                , br [] []
-                , text "formation - "
-                , u [] [ text "Γ ⊢ A : * ⠀⠀ Γ,x : A ⊢ B : s" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ Πx : A. B : s"
-                , br [] []
-                , text "appliaction - "
-                , u [] [ text "Γ ⊢ M : Πx :A . B ⠀⠀ Γ ⊢ N : A" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B[x:= N]"
-                , br [] []
-                , text "abstraction - "
-                , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ Πx :A . B : s" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):Πx:A . B"
-                , br [] []
-                , text "conversion - "
-                , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-                , text "⠀⠀if B ="
-                , sub [] [ text "β" ]
-                , text "B'"
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
-                ]
-
-        Two ->
-            div
-                [ style "height" "490px"
-                , style "width" "600px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "300px"
-                , style "left" "575px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" green
-                ]
-                [ b [] [ text "Pre-typed Terms:" ]
-                , br [] []
-                , text "Variable - if α ∈ V, then α ∈ Λ"
-                , sub [] [ text "2" ]
-                , br [] []
-                , text "Application A - if M,N ∈ Λ"
-                , sub [] [ text "2" ]
-                , text ", then (MN) ∈Λ"
-                , sup [] [ text "2" ]
-                , br [] []
-                , text "Application B - if M ∈ Λ"
-                , sub [] [ text "2" ]
-                , text "and σ ∈𝕋, then (Mσ) ∈Λ"
-                , sup [] [ text "2" ]
-                , br [] []
-                , text "Abstraction A - if x ∈ V, σ in 𝕋"
-                , sub [] [ text "2" ]
-                , text " and M ∈ Λ"
-                , sub [] [ text "2" ]
-                , text ", then (λ  x : σ . M). ∈ Λ"
-                , sub [] [ text "2" ]
-                , br [] []
-                , text "Abstraction B - if σ ∈ 𝕍 and M in Λ"
-                , sub [] [ text "2" ]
-                , text ", then (λ  σ : * . M). ∈ Λ"
-                , sub [] [ text "2" ]
-                , br [] []
-                , b [] [ text "Derivation Rules:" ]
-                , br [] []
-                , text "variable - Γ ⊢ x : σ  if Γ is λ2 context, and x : σ ∈ Γ"
-                , br [] []
-                , text "formation - Γ ⊢ B : *  if Γ is λ2 context, B ∈ 𝕋2, and every free type variable in B is in Γ"
-                , br [] []
-                , text "application 1 - "
-                , u [] [ text "Γ ⊢ M : σ → τ ⠀⠀ Γ ⊢ N : σ" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : τ"
-                , br [] []
-                , text "application 2 - "
-                , u [] [ text "Γ ⊢ M : (Πα : * .A ) ⠀⠀ Γ ⊢ B : *" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MB : A[α := B]"
-                , br [] []
-                , text "abstraction 1 - "
-                , u [] [ text "⠀⠀Γ,x : σ ⊢ M : τ⠀⠀" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : σ . M:σ→τ"
-                , br [] []
-                , text "abstraction 2 - "
-                , u [] [ text "⠀⠀Γ,α : * ⊢ M : A⠀⠀" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ (λ  α : * . M):(Πα : * .A )"
-                ]
-
-        W_ ->
-            div
-                [ style "height" "460px"
-                , style "width" "550px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "210px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" sky
-                ]
-                [ text "The set of kinds (𝕂) is as follows:"
-                , br [] []
-                , text "Type Kind  - * ∈ 𝕂 "
-                , br [] []
-                , text "Abstraction Kind  - (* → *)  ∈ 𝕂 "
-                , br [] []
-                , b [] [ text "Derivation Rules:" ]
-                , br [] []
-                , text "sort - 0 ⊢ * : ☐"
-                , br [] []
-                , text "variable"
-                , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-                , br [] []
-                , text "weak - "
-                , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-                , br [] []
-                , text "formation - "
-                , u [] [ text "Γ ⊢ A : s ⠀⠀ Γ ⊢ B : s" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A → B : s"
-                , br [] []
-                , text "appliaction - "
-                , u [] [ text "Γ ⊢ M : A → B ⠀⠀ Γ ⊢ N : A" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-                , br [] []
-                , text "abstraction - "
-                , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ A → B : s" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):A → B"
-                , br [] []
-                , text "conversion - "
-                , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-                , text "⠀⠀if B ="
-                , sub [] [ text "β" ]
-                , text "B'"
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
-                ]
-
-        W ->
-            div
-                [ style "height" "190px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "525px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" teal
-                ]
-                [ text "" ]
-
-        PW_ ->
-            div
-                [ style "height" "190px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "0px"
-                , style "left" "625px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" purple
-                ]
-                [ text "" ]
-
-        P2 ->
-            div
-                [ style "height" "190px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "150px"
-                , style "left" "625px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" yellow
-                ]
-                [ text "" ]
-
-        C ->
-            div
-                [ style "height" "400px"
-                , style "width" "490px"
-                , style "background-color" white
-                , style "color" black
-                , style "top" "-15px"
-                , style "left" "775px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "5px solid"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                , style "border-color" steel
-                ]
-                [ b [] [ text "Derivation Rules:" ]
-                , br [] []
-                , text "sort - 0 ⊢ * : ☐"
-                , br [] []
-                , text "variable"
-                , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-                , br [] []
-                , br [] []
-                , text "weak - "
-                , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-                , text "⠀⠀if x ∉Γ "
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-                , br [] []
-                , text "formation - "
-                , u [] [ text "Γ ⊢ A : s", sub [] [ text "1" ], text " ⠀⠀ Γ,x : A ⊢ B : s" ]
-                , sub [] [ text "2" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ Πx : A. B : s"
-                , sub [] [ text "2" ]
-                , br [] []
-                , text "appliaction - "
-                , u [] [ text "Γ ⊢ M : Πx :A . B ⠀⠀ Γ ⊢ N : A" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B[x:= N]"
-                , br [] []
-                , text "abstraction - "
-                , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ Πx :A . B : s" ]
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):Πx:A . B"
-                , br [] []
-                , text "conversion - "
-                , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-                , text "⠀⠀if B ="
-                , sub [] [ text "β" ]
-                , text "B'"
-                , br [] []
-                , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
-                ]
-
-        Home ->
-            button [ style "opacity" "0" ] [ text "" ]
 
 
 syntax_box : System -> Html Msg
@@ -978,8 +618,6 @@ syntax_box sys =
                 ]
                 [ text "" ]
 
-        Home ->
-            button [ style "opacity" "0" ] [ text "" ]
 
 
 view : Model -> Html Msg
@@ -990,36 +628,47 @@ view model =
             [ text "Barendregt's Lambda Cube" ]
         , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
-                [ button_side Home steel "home"
-                , button_side None leaf "untyped"
-                , button_side Simple mauve "λ→"
-                , button_side P red "P"
-                , button_side Two green "2"
-                , button_side W_ sky "ω_"
-                , button_side W teal "ω"
-                , button_side PW_ purple "Pω_"
-                , button_side P2 yellow "P2"
-                , button_side C steel "C"
+                [ button_side (Nothing)
+                , button_side (Just None)
+                , button_side (Just Simple)
+                , button_side (Just P)
+                , button_side (Just Two)
+                , button_side (Just W_)
+                , button_side (Just W)
+                , button_side (Just PW_)
+                , button_side (Just P2)
+                , button_side (Just C)
                 ]
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
                     [ Cube.view { theta = model.theta, eye = model.eye, target = model.target }
                     ]
-                , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ]
-                    [ button_trans C ( "600px", "-5px" )
-                    , button_trans W ( "220px", "20px" )
-                    , button_trans P2 ( "780px", "80px" )
-                    , button_trans Two ( "290px", "125px" )
-                    , button_trans PW_ ( "580px", "320px" )
-                    , button_trans W_ ( "240px", "350px" )
-                    , button_trans P ( "740px", "490px" )
-                    , button_trans Simple ( "300px", "580px" )
-                    , Arrows.view SystemClicked model.system
-                    , title_box model.system
-                    , rules_box model.system
-                    , terms_box model.system
-                    , syntax_box model.system
-                    ]
+                , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
+                    let
+                        isGrid = isJust model.system
+                        trans_buttons = [ button_trans isGrid C ( "600px", "-5px" )
+                                        , button_trans isGrid W ( "220px", "20px" )
+                                        , button_trans isGrid P2 ( "780px", "80px" )
+                                        , button_trans isGrid Two ( "290px", "125px" )
+                                        , button_trans isGrid PW_ ( "580px", "320px" )
+                                        , button_trans isGrid W_ ( "240px", "350px" )
+                                        , button_trans isGrid P ( "740px", "490px" )
+                                        , button_trans isGrid Simple ( "300px", "580px" )
+                                        , Arrows.view (SystemClicked << Just) model.system
+                                        ]
+                        overlays =
+                            case model.system of
+                                Just sys ->
+                                    [ title_box sys
+                                    , rules_box sys
+                                    , TermsBox.view sys
+                                    , syntax_box sys
+                                    ]
+                                Nothing -> []
+                    in
+                      trans_buttons ++ overlays
+                    
+                   
                 ]
             ]
         ]
@@ -1039,6 +688,11 @@ vec3lerp from to =
     in
     vec3 newX newY newZ
 
+isJust x =
+  case x of
+      
+      Just _ -> True
+      Nothing -> False
 
 lerp : Float -> Float -> Float
 lerp from to =

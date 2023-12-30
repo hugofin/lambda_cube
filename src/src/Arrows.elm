@@ -1,672 +1,86 @@
 module Arrows exposing (view)
 
+import Color exposing (..)
 import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
+import Property exposing (Property(..))
 import System exposing (System(..))
-import Color exposing (..)
+import Utils exposing (px)
 
-type Arrow
-    = Hid
-    | A
-    | B
-    | C_
-    | D
-    | E
-    | F
-    | G
-    | H
-    | I
-    | J
-    | K
-    | L
 
-
-button_arrow : (System -> msg) -> ( Arrow, Bool ) -> Html msg
-button_arrow systemClicked ( arrow, forwards ) =
-    case arrow of
-        Hid ->
-            button
-                [ style "opacity" "0" ]
-                [ text "" ]
-
-        A ->
-            button
-                [ onClick ( systemClicked (
-                    (if forwards then
-                            P
-
-                         else
-                            Simple
-                        )))
-
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "225px"
-
-                     else
-                        "440px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "850px"
-
-                     else
-                        "50px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        red
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        red
-                    )
-                ]
-                [ text "" ]
-
-        B ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            PW_
-
-                         else
-                            P
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "75px"
-
-                     else
-                        "580px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "25px"
-
-                     else
-                        "900px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        sky
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        sky
-                    )
-                ]
-                [ text "" ]
-
-        C_ ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            W_
-
-                         else
-                            Simple
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "75px"
-
-                     else
-                        "580px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "25px"
-
-                     else
-                        "900px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        sky
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        sky
-                    )
-                ]
-                [ text "" ]
-
-        D ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            PW_
-
-                         else
-                            W_
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "225px"
-
-                     else
-                        "440px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "850px"
-
-                     else
-                        "50px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        red
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        red
-                    )
-                ]
-                [ text "" ]
-
-        E ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            Two
-
-                         else
-                            Simple
-                        )
-                    )
-                , style "height" "75px"
-                , style "width" "25px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "0px"
-
-                     else
-                        "550px"
-                    )
-                , style "left" "488px"
-                , style "background-color"
-                    (if forwards then
-                        green
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        green
-                    )
-                ]
-                [ text "" ]
-
-        F ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            P2
-
-                         else
-                            P
-                        )
-                    )
-                , style "height" "75px"
-                , style "width" "25px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "0px"
-
-                     else
-                        "550px"
-                    )
-                , style "left" "488px"
-                , style "background-color"
-                    (if forwards then
-                        green
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        green
-                    )
-                ]
-                [ text "" ]
-
-        G ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            W
-
-                         else
-                            W_
-                        )
-                    )
-                , style "height" "75px"
-                , style "width" "25px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "0px"
-
-                     else
-                        "550px"
-                    )
-                , style "left" "488px"
-                , style "background-color"
-                    (if forwards then
-                        green
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        green
-                    )
-                ]
-                [ text "" ]
-
-        H ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            C
-
-                         else
-                            PW_
-                        )
-                    )
-                , style "height" "75px"
-                , style "width" "25px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "0px"
-
-                     else
-                        "550px"
-                    )
-                , style "left" "488px"
-                , style "background-color"
-                    (if forwards then
-                        green
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        green
-                    )
-                ]
-                [ text "" ]
-
-        I ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            P2
-
-                         else
-                            Two
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "225px"
-
-                     else
-                        "440px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "850px"
-
-                     else
-                        "50px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        red
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        red
-                    )
-                ]
-                [ text "" ]
-
-        J ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            C
-
-                         else
-                            P2
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "75px"
-
-                     else
-                        "580px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "25px"
-
-                     else
-                        "900px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        sky
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        sky
-                    )
-                ]
-                [ text "" ]
-
-        K ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            W
-
-                         else
-                            Two
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "75px"
-
-                     else
-                        "580px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "25px"
-
-                     else
-                        "900px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        sky
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        sky
-                    )
-                ]
-                [ text "" ]
-
-        L ->
-            button
-                [ onClick
-                    (systemClicked
-                        (if forwards then
-                            C
-
-                         else
-                            W
-                        )
-                    )
-                , style "height" "25px"
-                , style "width" "75px"
-                , style "display" "flex"
-                , style "position" "absolute"
-                , style "top"
-                    (if forwards then
-                        "225px"
-
-                     else
-                        "440px"
-                    )
-                , style "left"
-                    (if forwards then
-                        "850px"
-
-                     else
-                        "50px"
-                    )
-                , style "background-color"
-                    (if forwards then
-                        red
-
-                     else
-                        white
-                    )
-                , style "border"
-                    (if forwards then
-                        "0px solid"
-
-                     else
-                        "5px solid"
-                    )
-                , style "border-color"
-                    (if forwards then
-                        white
-
-                     else
-                        red
-                    )
-                ]
-                [ text "" ]
-
-
-view :  (System -> msg) -> System -> Html msg
-view systemClicked system  =
-  let (one, two, three) = f system in
-  div [] [ button_arrow systemClicked one, button_arrow systemClicked two, button_arrow systemClicked three ]
-
-
-f system =
+view : (System -> msg) -> Maybe System -> Html msg
+view systemClicked system =
     case system of
+        Nothing ->
+            div [] []
 
-         Home -> ( ( Hid, False ), ( Hid, False ), ( Hid, False ) ) 
+        Just None ->
+            div [] []
 
-         None -> ( ( Hid, False ), ( Hid, False ), ( Hid, False ) ) 
+        Just sys ->
+            div [] <|
+                List.map (button_arrow systemClicked sys)
+                    [ DependentTypes, Polymorphism, TypeOperators ]
 
-         Simple -> ( ( A, True ), ( E, True ), ( C_, True ) ) 
 
-         P -> ( ( A, False ), ( F, True ), ( B, True ) ) 
+button_arrow : (System -> msg) -> System -> Property -> Html msg
+button_arrow systemClicked system property =
+    let
+        newSystem =
+            System.toggleProperty property system
 
-         Two -> ( ( I, True ), ( E, False ), ( K, True ) ) 
+        adding =
+            System.hasProperty property newSystem
 
-         W_ -> ( ( D, True ), ( G, True ), ( C_, False ) ) 
+        col =
+            Property.color property
 
-         W -> ( ( L, True ), ( G, False ), ( K, False ) ) 
+        ( height, width ) =
+            case property of
+                Polymorphism ->
+                    ( 75, 25 )
 
-         PW_ -> ( ( D, False ), ( H, True ), ( B, False ) ) 
+                _ ->
+                    ( 25, 75 )
 
-         P2 -> ( ( I, False ), ( F, False ), ( J, True ) ) 
+        ( y, x ) =
+            case ( property, adding ) of
+                ( DependentTypes, False ) ->
+                    ( 440, 50 )
 
-         C -> ( ( L, False ), ( H, False ), ( J, False ) ) 
+                ( DependentTypes, True ) ->
+                    ( 225, 850 )
+
+                ( Polymorphism, False ) ->
+                    ( 550, 488 )
+
+                ( Polymorphism, True ) ->
+                    ( 0, 488 )
+
+                ( TypeOperators, False ) ->
+                    ( 580, 900 )
+
+                ( TypeOperators, True ) ->
+                    ( 75, 25 )
+    in
+    button
+        [ onClick (systemClicked newSystem)
+        , style "height" (px height)
+        , style "width" (px width)
+        , style "display" "flex"
+        , style "position" "absolute"
+        , style "top" (px y)
+        , style "left" (px x)
+        , style "background-color"
+            (if adding then
+                col
+
+             else
+                white
+            )
+        , style "border-style" "solid"
+        , style "border-width" "5px"
+        , style "border-color" col
+        ]
+        [ text "" ]
