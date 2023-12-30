@@ -25,7 +25,7 @@ import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, getX, getY, getZ, vec3)
 import MathML.UntypedTerms
 import System exposing (System(..))
-
+import Color exposing (..)
 
 main : Program Flags Model Msg
 main =
@@ -130,7 +130,7 @@ button_side sys col msg =
         , style "height" "55px"
         , style "width" "150px"
         , style "background-color" col
-        , style "color" "#ffffff"
+        , style "color" white
         , style "font-size" "30px"
         , style "border" "0px"
         , style "border-top-right-radius" "20px"
@@ -151,7 +151,7 @@ button_trans sys ( x, y ) =
         , style "height" "75px"
         , style "width" "75px"
         , style "background-color" "#ff0000"
-        , style "color" "#ffffff"
+        , style "color" white
         , style "border" "0px"
         , style "position" "absolute"
         , style "top" y
@@ -177,7 +177,7 @@ title_box sys =
             div
                 [ style "height" "50px"
                 , style "width" "400px"
-                , style "color" "#c5e8b7"
+                , style "color" leaf
                 , style "background-color" "transparent"
                 , style "top" "50px"
                 , style "left" "-125px"
@@ -193,7 +193,7 @@ title_box sys =
             div
                 [ style "height" "50px"
                 , style "width" "400px"
-                , style "color" "#c0c0c0"
+                , style "color" mauve
                 , style "background-color" "transparent"
                 , style "top" "175px"
                 , style "left" "-125px"
@@ -209,7 +209,7 @@ title_box sys =
             div
                 [ style "height" "50px"
                 , style "width" "300px"
-                , style "color" "#ff302d"
+                , style "color" red
                 , style "background-color" "transparent"
                 , style "top" "0px"
                 , style "left" "800px"
@@ -226,7 +226,7 @@ title_box sys =
                 [ style "height" "50px"
                 , style "width" "500px"
                 , style "background-color" "transparent"
-                , style "color" "#6bff56"
+                , style "color" green
                 , style "top" "150px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -242,7 +242,7 @@ title_box sys =
                 [ style "height" "100px"
                 , style "width" "300px"
                 , style "background-color" "transparent"
-                , style "color" "#74c0ff"
+                , style "color" sky
                 , style "top" "0px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -258,7 +258,7 @@ title_box sys =
                 [ style "height" "100px"
                 , style "width" "700px"
                 , style "background-color" "transparent"
-                , style "color" "#00ffab"
+                , style "color" teal
                 , style "top" "0px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -274,7 +274,7 @@ title_box sys =
                 [ style "height" "100px"
                 , style "width" "300px"
                 , style "background-color" "transparent"
-                , style "color" "#c66cc7"
+                , style "color" purple
                 , style "top" "0px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -290,7 +290,7 @@ title_box sys =
                 [ style "height" "100px"
                 , style "width" "300px"
                 , style "background-color" "transparent"
-                , style "color" "#fff12e"
+                , style "color" yellow
                 , style "top" "0px"
                 , style "left" "200px"
                 , style "position" "absolute"
@@ -306,7 +306,7 @@ title_box sys =
                 [ style "height" "100px"
                 , style "width" "300px"
                 , style "background-color" "transparent"
-                , style "color" "#3c3c3c"
+                , style "color" steel
                 , style "top" "0px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -328,8 +328,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "200px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -344,8 +344,8 @@ rules_box sys =
             div
                 [ style "height" "130px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "300px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -360,8 +360,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "75px"
                 , style "left" "650px"
                 , style "position" "absolute"
@@ -376,8 +376,8 @@ rules_box sys =
             div
                 [ style "height" "150px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "325px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -392,8 +392,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "75px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -411,8 +411,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "110px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -427,8 +427,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "75px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -443,8 +443,8 @@ rules_box sys =
             div
                 [ style "height" "100px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "-40px"
                 , style "left" "500px"
                 , style "position" "absolute"
@@ -459,8 +459,8 @@ rules_box sys =
             div
                 [ style "height" "125px"
                 , style "width" "500px"
-                , style "background-color" "#0f0f0f"
-                , style "color" "#ffffff"
+                , style "background-color" black
+                , style "color" white
                 , style "top" "-20px"
                 , style "left" "230px"
                 , style "position" "absolute"
@@ -474,7 +474,6 @@ rules_box sys =
         Home ->
             button [ style "opacity" "0" ] [ text "" ]
 
-
 terms_box : System -> Html Msg
 terms_box sys =
     case sys of
@@ -482,8 +481,8 @@ terms_box sys =
             div
                 [ style "height" "190px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "50px"
                 , style "left" "425px"
                 , style "position" "absolute"
@@ -491,7 +490,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#c5e8b7"
+                , style "border-color" leaf
                 ]
                 [ MathML.UntypedTerms.view ]
 
@@ -499,8 +498,8 @@ terms_box sys =
             div
                 [ style "height" "270px"
                 , style "width" "600px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "375px"
                 , style "left" "425px"
                 , style "position" "absolute"
@@ -508,7 +507,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#c0c0c0"
+                , style "border-color" mauve
                 ]
                 [ b [] [ text "Pre-typed Terms:" ]
                 , br [] []
@@ -544,8 +543,8 @@ terms_box sys =
             div
                 [ style "height" "375px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "225px"
                 , style "left" "650px"
                 , style "position" "absolute"
@@ -553,7 +552,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#ff302d"
+                , style "border-color" red
                 ]
                 [ b [] [ text "Derivation Rules:" ]
                 , br [] []
@@ -599,8 +598,8 @@ terms_box sys =
             div
                 [ style "height" "490px"
                 , style "width" "600px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "300px"
                 , style "left" "575px"
                 , style "position" "absolute"
@@ -608,7 +607,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#6bff56"
+                , style "border-color" green
                 ]
                 [ b [] [ text "Pre-typed Terms:" ]
                 , br [] []
@@ -668,8 +667,8 @@ terms_box sys =
             div
                 [ style "height" "460px"
                 , style "width" "550px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "210px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -677,7 +676,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#74c0ff"
+                , style "border-color" sky
                 ]
                 [ text "The set of kinds (𝕂) is as follows:"
                 , br [] []
@@ -729,8 +728,8 @@ terms_box sys =
             div
                 [ style "height" "190px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "525px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -738,7 +737,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#00ffab"
+                , style "border-color" teal
                 ]
                 [ text "" ]
 
@@ -746,8 +745,8 @@ terms_box sys =
             div
                 [ style "height" "190px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "0px"
                 , style "left" "625px"
                 , style "position" "absolute"
@@ -755,7 +754,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#c66cc7"
+                , style "border-color" purple
                 ]
                 [ text "" ]
 
@@ -763,8 +762,8 @@ terms_box sys =
             div
                 [ style "height" "190px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "150px"
                 , style "left" "625px"
                 , style "position" "absolute"
@@ -772,7 +771,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#fff12e"
+                , style "border-color" yellow
                 ]
                 [ text "" ]
 
@@ -780,8 +779,8 @@ terms_box sys =
             div
                 [ style "height" "400px"
                 , style "width" "490px"
-                , style "background-color" "#ffffff"
-                , style "color" "#0f0f0f"
+                , style "background-color" white
+                , style "color" black
                 , style "top" "-15px"
                 , style "left" "775px"
                 , style "position" "absolute"
@@ -789,7 +788,7 @@ terms_box sys =
                 , style "border" "5px solid"
                 , style "text-align" "left"
                 , style "padding" "10px"
-                , style "border-color" "#3c3c3c"
+                , style "border-color" steel
                 ]
                 [ b [] [ text "Derivation Rules:" ]
                 , br [] []
@@ -845,8 +844,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#c5e8b7"
-                , style "color" "#ffffff"
+                , style "background-color" leaf
+                , style "color" white
                 , style "top" "350px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -860,8 +859,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#c0c0c0"
-                , style "color" "#ffffff"
+                , style "background-color" mauve
+                , style "color" white
                 , style "top" "500px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -875,8 +874,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#ff302d"
-                , style "color" "#ffffff"
+                , style "background-color" red
+                , style "color" white
                 , style "top" "500px"
                 , style "left" "50px"
                 , style "position" "absolute"
@@ -890,8 +889,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#6bff56"
-                , style "color" "#ffffff"
+                , style "background-color" green
+                , style "color" white
                 , style "top" "525px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -905,8 +904,8 @@ syntax_box sys =
             div
                 [ style "height" "175px"
                 , style "width" "500px"
-                , style "background-color" "#74c0ff"
-                , style "color" "#ffffff"
+                , style "background-color" sky
+                , style "color" white
                 , style "top" "-50px"
                 , style "left" "525px"
                 , style "position" "absolute"
@@ -923,8 +922,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#00ffab"
-                , style "color" "#ffffff"
+                , style "background-color" teal
+                , style "color" white
                 , style "top" "250px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -938,8 +937,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#c66cc7"
-                , style "color" "#ffffff"
+                , style "background-color" purple
+                , style "color" white
                 , style "top" "250px"
                 , style "left" "625px"
                 , style "position" "absolute"
@@ -953,8 +952,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#fff12e"
-                , style "color" "#ffffff"
+                , style "background-color" yellow
+                , style "color" white
                 , style "top" "400px"
                 , style "left" "625px"
                 , style "position" "absolute"
@@ -968,8 +967,8 @@ syntax_box sys =
             div
                 [ style "height" "200px"
                 , style "width" "500px"
-                , style "background-color" "#3c3c3c"
-                , style "color" "#ffffff"
+                , style "background-color" steel
+                , style "color" white
                 , style "top" "150px"
                 , style "left" "-125px"
                 , style "position" "absolute"
@@ -991,16 +990,16 @@ view model =
             [ text "Barendregt's Lambda Cube" ]
         , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
-                [ button_side Home "#3c3c3c" "home"
-                , button_side None "#c5e8b7" "untyped"
-                , button_side Simple "#c0c0c0" "λ→"
-                , button_side P "#ff302d" "P"
-                , button_side Two "#6bff56" "2"
-                , button_side W_ "#74c0ff" "ω_"
-                , button_side W "#00ffab" "ω"
-                , button_side PW_ "#c66cc7" "Pω_"
-                , button_side P2 "#fff12e" "P2"
-                , button_side C "#3c3c3c" "C"
+                [ button_side Home steel "home"
+                , button_side None leaf "untyped"
+                , button_side Simple mauve "λ→"
+                , button_side P red "P"
+                , button_side Two green "2"
+                , button_side W_ sky "ω_"
+                , button_side W teal "ω"
+                , button_side PW_ purple "Pω_"
+                , button_side P2 yellow "P2"
+                , button_side C steel "C"
                 ]
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]

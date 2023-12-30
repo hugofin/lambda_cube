@@ -4,6 +4,7 @@ import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import System exposing (System(..))
+import Color exposing (..)
 
 type Arrow
     = Hid
@@ -59,10 +60,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#ff302d"
+                        red
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -73,10 +74,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#ff302d"
+                        red
                     )
                 ]
                 [ text "" ]
@@ -112,10 +113,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#74c0ff"
+                        sky
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -126,10 +127,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#74c0ff"
+                        sky
                     )
                 ]
                 [ text "" ]
@@ -165,10 +166,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#74c0ff"
+                        sky
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -179,10 +180,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#74c0ff"
+                        sky
                     )
                 ]
                 [ text "" ]
@@ -218,10 +219,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#ff302d"
+                        red
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -232,10 +233,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#ff302d"
+                        red
                     )
                 ]
                 [ text "" ]
@@ -265,10 +266,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                 , style "left" "488px"
                 , style "background-color"
                     (if forwards then
-                        "#6bff56"
+                        green
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -279,10 +280,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#6bff56"
+                        green
                     )
                 ]
                 [ text "" ]
@@ -312,10 +313,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                 , style "left" "488px"
                 , style "background-color"
                     (if forwards then
-                        "#6bff56"
+                        green
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -326,10 +327,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#6bff56"
+                        green
                     )
                 ]
                 [ text "" ]
@@ -359,10 +360,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                 , style "left" "488px"
                 , style "background-color"
                     (if forwards then
-                        "#6bff56"
+                        green
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -373,10 +374,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#6bff56"
+                        green
                     )
                 ]
                 [ text "" ]
@@ -406,10 +407,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                 , style "left" "488px"
                 , style "background-color"
                     (if forwards then
-                        "#6bff56"
+                        green
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -420,10 +421,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#6bff56"
+                        green
                     )
                 ]
                 [ text "" ]
@@ -459,10 +460,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#ff302d"
+                        red
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -473,10 +474,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#ff302d"
+                        red
                     )
                 ]
                 [ text "" ]
@@ -512,10 +513,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#74c0ff"
+                        sky
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -526,10 +527,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#74c0ff"
+                        sky
                     )
                 ]
                 [ text "" ]
@@ -565,10 +566,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#74c0ff"
+                        sky
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -579,10 +580,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#74c0ff"
+                        sky
                     )
                 ]
                 [ text "" ]
@@ -618,10 +619,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "background-color"
                     (if forwards then
-                        "#ff302d"
+                        red
 
                      else
-                        "#ffffff"
+                        white
                     )
                 , style "border"
                     (if forwards then
@@ -632,10 +633,10 @@ button_arrow systemClicked ( arrow, forwards ) =
                     )
                 , style "border-color"
                     (if forwards then
-                        "#ffffff"
+                        white
 
                      else
-                        "#ff302d"
+                        red
                     )
                 ]
                 [ text "" ]
