@@ -23,7 +23,7 @@ import Html exposing (Html, b, br, button, div, sub, sup, text, u)
 import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
-import Math.Vector3 exposing (Vec3, getX, getY, getZ, vec3)
+import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
 import System exposing (System(..))
 import TermsBox
 
@@ -40,14 +40,11 @@ main =
 
 init : Flags -> ( Model, Cmd Msg )
 init _ =
-    let
-        { eye_n, target_n } =
-            f Nothing
-    in
+    let {target, eye} = targetAndEyeFromSystem Home in
     ( { theta = 0
-      , system = Nothing
-      , eye = eye_n
-      , target = target_n
+      , system = Home
+      , target = target
+      , eye = eye
       }
     , Cmd.none
     )
@@ -62,14 +59,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Tick dt ->
-            let
-                { eye_n, target_n } =
-                    f model.system
-            in
+            let {target, eye} = targetAndEyeFromSystem model.system in
             ( { model
                 | theta = model.theta + dt / 5000
-                , eye = vec3lerp model.eye eye_n
-                , target = vec3lerp model.target target_n
+                , target = vec3lerp model.target target
+                , eye = vec3lerp model.eye eye
               }
             , Cmd.none
             )
@@ -78,62 +72,64 @@ update msg model =
             ( { model | system = sys }, Cmd.none )
 
 
-f system =
-    case system of
-        Nothing ->
-            { eye_n = vec3 -0.3 1.6 3.0, target_n = vec3 0.5 0.35 0.5 }
+targetAndEyeFromSystem system =
+    let target =  case system of
+            Home ->
+                vec3 0.5 0.35 0.5
 
-        Just s ->
-            case s of
-                None ->
-                    { eye_n = vec3 -3.0 3.0 3.0, target_n = vec3 4.0 4.0 4.0 }
+            None ->
+                vec3 4.0 4.0 4.0
 
-                Simple ->
-                    { eye_n = vec3 -0.2 0.15 1.3, target_n = vec3 0.0 0.0 1.0 }
+            Simple ->
+                vec3 0.0 0.0 1.0
 
-                P ->
-                    { eye_n = vec3 0.8 0.15 1.3, target_n = vec3 1.0 0.0 1.0 }
+            P ->
+                vec3 1.0 0.0 1.0
 
-                Two ->
-                    { eye_n = vec3 -0.2 1.15 1.3, target_n = vec3 0.0 1.0 1.0 }
+            Two ->
+                vec3 0.0 1.0 1.0
 
-                W_ ->
-                    { eye_n = vec3 -0.2 0.15 0.3, target_n = vec3 0.0 0.0 0.0 }
+            W_ ->
+                vec3 0.0 0.0 0.0
 
-                W ->
-                    { eye_n = vec3 -0.2 1.15 0.3, target_n = vec3 0.0 1.0 0.0 }
+            W ->
+                vec3 0.0 1.0 0.0
 
-                PW_ ->
-                    { eye_n = vec3 0.8 0.15 0.3, target_n = vec3 1.0 0.0 0.0 }
+            PW_ ->
+                vec3 1.0 0.0 0.0
 
-                P2 ->
-                    { eye_n = vec3 0.8 1.15 1.3, target_n = vec3 1.0 1.0 1.0 }
+            P2 ->
+                vec3 1.0 1.0 1.0
 
-                C ->
-                    { eye_n = vec3 0.8 1.15 0.3, target_n = vec3 1.0 1.0 0.0 }
-
+            C ->
+                vec3 1.0 1.0 0.0
+    in { target = target, eye = if system == Home then vec3 -0.3 1.6 3.0 else add target (vec3 -0.2 0.15 0.3)}
 
 type alias Model =
     { theta : Float
-    , system : Maybe System
-    , eye : Vec3
+    , system : System
     , target : Vec3
+    , eye : Vec3
     }
+
 
 type Msg
     = Tick Float
-    | SystemClicked (Maybe System)
+    | SystemClicked System
 
 
 type alias Flags =
     Value
 
 
-button_side : Maybe System  -> Html Msg
+button_side : System -> Html Msg
 button_side sys =
     let
-      msg = Maybe.withDefault "home" (Maybe.map System.toString sys)
-      col = Maybe.withDefault steel (Maybe.map System.color sys)
+        msg =
+            System.toString sys
+
+        col =
+            System.color sys
     in
     button
         [ onClick (SystemClicked sys)
@@ -151,10 +147,9 @@ button_side sys =
 
 
 button_trans : Bool -> System -> ( String, String ) -> Html Msg
-button_trans isGrid sys ( x, y ) =
-    
+button_trans off sys ( x, y ) =
     button
-        [ onClick (SystemClicked (Just sys))
+        [ onClick (SystemClicked sys)
         , style "height" "75px"
         , style "width" "75px"
         , style "background-color" "#ff0000"
@@ -165,9 +160,9 @@ button_trans isGrid sys ( x, y ) =
         , style "left" x
         , style "opacity" "0"
         , style "display" "flex"
-        , disabled isGrid
+        , disabled off
         , style "cursor"
-            (if isGrid then
+            (if off then
                 "default"
 
              else
@@ -180,6 +175,9 @@ button_trans isGrid sys ( x, y ) =
 title_box : System -> Html Msg
 title_box sys =
     case sys of
+        Home ->
+            div [] []
+
         None ->
             div
                 [ style "height" "50px"
@@ -328,6 +326,9 @@ title_box sys =
 rules_box : System -> Html Msg
 rules_box sys =
     case sys of
+        Home ->
+            div [] []
+
         None ->
             div
                 [ style "height" "100px"
@@ -476,10 +477,12 @@ rules_box sys =
                 [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
 
 
-
 syntax_box : System -> Html Msg
 syntax_box sys =
     case sys of
+        Home ->
+            div [] []
+
         None ->
             div
                 [ style "height" "200px"
@@ -619,7 +622,6 @@ syntax_box sys =
                 [ text "" ]
 
 
-
 view : Model -> Html Msg
 view model =
     div
@@ -628,50 +630,60 @@ view model =
             [ text "Barendregt's Lambda Cube" ]
         , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
-                [ button_side (Nothing)
-                , button_side (Just None)
-                , button_side (Just Simple)
-                , button_side (Just P)
-                , button_side (Just Two)
-                , button_side (Just W_)
-                , button_side (Just W)
-                , button_side (Just PW_)
-                , button_side (Just P2)
-                , button_side (Just C)
+                [ button_side Home
+                , button_side None
+                , button_side Simple
+                , button_side P
+                , button_side Two
+                , button_side W_
+                , button_side W
+                , button_side PW_
+                , button_side P2
+                , button_side C
                 ]
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
-                    [ Cube.view { theta = model.theta, eye = model.eye, target = model.target }
+                    [ Cube.view
+                        { theta = model.theta
+                        , eye = model.eye
+                        , target = model.target
+                        }
                     ]
                 , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
                     let
-                        isGrid = isJust model.system
-                        trans_buttons = [ button_trans isGrid C ( "600px", "-5px" )
-                                        , button_trans isGrid W ( "220px", "20px" )
-                                        , button_trans isGrid P2 ( "780px", "80px" )
-                                        , button_trans isGrid Two ( "290px", "125px" )
-                                        , button_trans isGrid PW_ ( "580px", "320px" )
-                                        , button_trans isGrid W_ ( "240px", "350px" )
-                                        , button_trans isGrid P ( "740px", "490px" )
-                                        , button_trans isGrid Simple ( "300px", "580px" )
-                                        , Arrows.view (SystemClicked << Just) model.system
-                                        ]
+                        isGrid =
+                            model.system /= Home
+
+                        trans_buttons =
+                            [ button_trans isGrid C ( "600px", "-5px" )
+                            , button_trans isGrid W ( "220px", "20px" )
+                            , button_trans isGrid P2 ( "780px", "80px" )
+                            , button_trans isGrid Two ( "290px", "125px" )
+                            , button_trans isGrid PW_ ( "580px", "320px" )
+                            , button_trans isGrid W_ ( "240px", "350px" )
+                            , button_trans isGrid P ( "740px", "490px" )
+                            , button_trans isGrid Simple ( "300px", "580px" )
+                            , Arrows.view SystemClicked model.system
+                            ]
+
                         overlays =
                             case model.system of
-                                Just sys ->
+                                Home ->
+                                    []
+
+                                sys ->
                                     [ title_box sys
                                     , rules_box sys
                                     , TermsBox.view sys
                                     , syntax_box sys
                                     ]
-                                Nothing -> []
                     in
-                      trans_buttons ++ overlays
-                    
-                   
+                    trans_buttons ++ overlays
                 ]
             ]
         ]
+
+
 
 
 vec3lerp : Vec3 -> Vec3 -> Vec3
@@ -688,11 +700,6 @@ vec3lerp from to =
     in
     vec3 newX newY newZ
 
-isJust x =
-  case x of
-      
-      Just _ -> True
-      Nothing -> False
 
 lerp : Float -> Float -> Float
 lerp from to =

@@ -9,16 +9,16 @@ import System exposing (System(..))
 import Utils exposing (px)
 
 
-view : (System -> msg) -> Maybe System -> Html msg
+view : (System -> msg) -> System -> Html msg
 view systemClicked system =
     case system of
-        Nothing ->
+        Home ->
             div [] []
 
-        Just None ->
+        None ->
             div [] []
 
-        Just sys ->
+        sys ->
             div [] <|
                 List.map (button_arrow systemClicked sys)
                     [ DependentTypes, Polymorphism, TypeOperators ]

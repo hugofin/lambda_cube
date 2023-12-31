@@ -29,7 +29,9 @@ view sys =
                 (terms sys)
 
 terms sys = 
-    case sys of
+   case sys of
+        Home -> [] 
+
         None ->
                 [ MathML.UntypedTerms.view ]
 
@@ -265,6 +267,12 @@ terms sys =
 position : System -> {x : Int, y : Int, height: Int, width: Int}
 position sys =
     case sys of
+        Home ->{ height = 0
+                , width = 0
+                , y = 0
+                , x = 0
+                
+                }
         None ->
             
                 { height = 190
@@ -319,7 +327,7 @@ position sys =
                 { height = 190
                 , width = 490
                 , y = 525
-                , x = 125
+                , x = -125
                 
                 }
                

@@ -5,7 +5,8 @@ import Color exposing (..)
 import Property exposing (..)
 
 type System
-    = None
+    = Home
+    | None
     | Simple
     | P
     | Two
@@ -27,6 +28,7 @@ color sys =
         PW_ -> purple
         P2 -> yellow
         C -> steel
+        Home -> steel
 
 toString sys =
   case sys of 
@@ -39,11 +41,13 @@ toString sys =
     PW_ -> "Pω_"
     P2 -> "P2"
     C -> "C"
+    Home -> "home"
 
 toggleProperty : Property -> System -> System
 toggleProperty property system = 
   case (system, property) of
     (None, _) -> None
+    (Home, _) -> Home
     (Simple, DependentTypes) -> P
     (Simple, Polymorphism) -> Two
     (Simple, TypeOperators) -> W_
@@ -73,6 +77,7 @@ hasProperty : Property -> System -> Bool
 hasProperty property system = 
   case (system, property) of
     (None, _) -> False
+    (Home, _) -> False
     (Simple, DependentTypes) -> False
     (Simple, Polymorphism) -> False
     (Simple, TypeOperators) -> False
