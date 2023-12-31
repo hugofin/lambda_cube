@@ -1,10 +1,11 @@
 module Cube exposing (view)
 
+import Html exposing (Html)
+import Html.Attributes exposing (height, style, width)
 import Math.Matrix4 as Mat4 exposing (Mat4)
 import Math.Vector3 as Vec3 exposing (Vec3, vec3)
 import WebGL exposing (Mesh, Shader)
-import Html exposing (Html)
-import Html.Attributes exposing (height, style, width)
+
 
 type alias Uniforms =
     { rotation : Mat4
@@ -13,30 +14,33 @@ type alias Uniforms =
     , shade : Float
     }
 
+
 view : { theta : Float, eye : Vec3, target : Vec3 } -> Html msg
+view model =
+    WebGL.toHtml
+        [ width 2400, height 1600, style "display" "block", style "width" "1200px", style "height" "800px" ]
+        [ WebGL.entity
+            vertexShader
+            fragmentShader
+            linesMesh
+            (uniforms model)
+        , WebGL.entity
+            vertexShader
+            fragmentShader
+            pointsMesh
+            (uniforms model)
+        ]
 
-view model = WebGL.toHtml
-                        [ width 2000, height 2000, style "display" "block", style "width" "1000px", style "height" "1000px" ]
-                        [ WebGL.entity
-                            vertexShader
-                            fragmentShader
-                            linesMesh
-                            (uniforms model)
-                        , WebGL.entity
-                            vertexShader
-                            fragmentShader
-                            pointsMesh
-                            (uniforms model)
-                        ]
 
-
-uniforms :  { theta: Float, eye : Vec3, target : Vec3}  -> Uniforms
+uniforms : { theta : Float, eye : Vec3, target : Vec3 } -> Uniforms
 uniforms { theta, eye, target } =
     { rotation = Mat4.makeRotate (0 * sin theta) (vec3 1 1 1)
-    , perspective = Mat4.makePerspective 45 1 0.01 10
+    , perspective = Mat4.makePerspective 45 1.5 0.01 10
     , camera = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade = 1
     }
+
+
 
 -- Mesh
 
@@ -96,7 +100,7 @@ pointsMesh =
     -- coordinates are [ left, up, towards ]
     let
         zero =
-            vec3 4 4 4
+            vec3 -2 0.5 0.5
 
         one =
             vec3 0 0 1
@@ -170,7 +174,7 @@ vertexShader =
 
         void main () {
             gl_Position = perspective *  camera * rotation * vec4(position, 1.0);
-            gl_PointSize = 15.0;
+            gl_PointSize = 20.0;
             vcolor = color;
         }
 
@@ -189,6 +193,3 @@ fragmentShader =
         }
 
     |]
-
-
-

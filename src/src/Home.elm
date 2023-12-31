@@ -26,6 +26,7 @@ import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
 import System exposing (System(..))
 import TermsBox
+import Title
 
 
 main : Program Flags Model Msg
@@ -40,7 +41,10 @@ main =
 
 init : Flags -> ( Model, Cmd Msg )
 init _ =
-    let {target, eye} = targetAndEyeFromSystem Home in
+    let
+        { target, eye } =
+            targetAndEyeFromSystem Home
+    in
     ( { theta = 0
       , system = Home
       , target = target
@@ -59,7 +63,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Tick dt ->
-            let {target, eye} = targetAndEyeFromSystem model.system in
+            let
+                { target, eye } =
+                    targetAndEyeFromSystem model.system
+            in
             ( { model
                 | theta = model.theta + dt / 5000
                 , target = vec3lerp model.target target
@@ -72,38 +79,50 @@ update msg model =
             ( { model | system = sys }, Cmd.none )
 
 
+targetAndEyeFromSystem : System -> { target : Vec3, eye : Vec3 }
 targetAndEyeFromSystem system =
-    let target =  case system of
-            Home ->
-                vec3 0.5 0.35 0.5
+    let
+        target =
+            case system of
+                Home ->
+                    vec3 0.5 0.35 0.5
 
-            None ->
-                vec3 4.0 4.0 4.0
+                None ->
+                    vec3 -2 0.5 0.5
 
-            Simple ->
-                vec3 0.0 0.0 1.0
+                Simple ->
+                    vec3 0.0 0.0 1.0
 
-            P ->
-                vec3 1.0 0.0 1.0
+                P ->
+                    vec3 1.0 0.0 1.0
 
-            Two ->
-                vec3 0.0 1.0 1.0
+                Two ->
+                    vec3 0.0 1.0 1.0
 
-            W_ ->
-                vec3 0.0 0.0 0.0
+                W_ ->
+                    vec3 0.0 0.0 0.0
 
-            W ->
-                vec3 0.0 1.0 0.0
+                W ->
+                    vec3 0.0 1.0 0.0
 
-            PW_ ->
-                vec3 1.0 0.0 0.0
+                PW_ ->
+                    vec3 1.0 0.0 0.0
 
-            P2 ->
-                vec3 1.0 1.0 1.0
+                P2 ->
+                    vec3 1.0 1.0 1.0
 
-            C ->
-                vec3 1.0 1.0 0.0
-    in { target = target, eye = if system == Home then vec3 -0.3 1.6 3.0 else add target (vec3 -0.2 0.15 0.3)}
+                C ->
+                    vec3 1.0 1.0 0.0
+    in
+    { target = target
+    , eye =
+        if system == Home then
+            vec3 -0.3 1.6 3.0
+
+        else
+            add target (vec3 -0.2 0.15 0.3)
+    }
+
 
 type alias Model =
     { theta : Float
@@ -170,157 +189,6 @@ button_trans off sys ( x, y ) =
             )
         ]
         [ text "" ]
-
-
-title_box : System -> Html Msg
-title_box sys =
-    case sys of
-        Home ->
-            div [] []
-
-        None ->
-            div
-                [ style "height" "50px"
-                , style "width" "400px"
-                , style "color" leaf
-                , style "background-color" "transparent"
-                , style "top" "50px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "UNTYPED LAMBDA CALCULUS" ]
-
-        Simple ->
-            div
-                [ style "height" "50px"
-                , style "width" "400px"
-                , style "color" mauve
-                , style "background-color" "transparent"
-                , style "top" "175px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "SIMPLY TYPED LAMBDA CALCULUS" ]
-
-        P ->
-            div
-                [ style "height" "50px"
-                , style "width" "300px"
-                , style "color" red
-                , style "background-color" "transparent"
-                , style "top" "0px"
-                , style "left" "800px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "LAMBDA-P" ]
-
-        Two ->
-            div
-                [ style "height" "50px"
-                , style "width" "500px"
-                , style "background-color" "transparent"
-                , style "color" green
-                , style "top" "150px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "SYSTEM F, or ", br [] [], text " THE POLYMORPHIC LAMBDA CALCULUS" ]
-
-        W_ ->
-            div
-                [ style "height" "100px"
-                , style "width" "300px"
-                , style "background-color" "transparent"
-                , style "color" sky
-                , style "top" "0px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "SYSTEM F", u [] [ text "ω" ] ]
-
-        W ->
-            div
-                [ style "height" "100px"
-                , style "width" "700px"
-                , style "background-color" "transparent"
-                , style "color" teal
-                , style "top" "0px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "THE HIGHER ORDER POLYMORPHIC LAMBDA CALCULUS" ]
-
-        PW_ ->
-            div
-                [ style "height" "100px"
-                , style "width" "300px"
-                , style "background-color" "transparent"
-                , style "color" purple
-                , style "top" "0px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "P", u [] [ text "ω" ] ]
-
-        P2 ->
-            div
-                [ style "height" "100px"
-                , style "width" "300px"
-                , style "background-color" "transparent"
-                , style "color" yellow
-                , style "top" "0px"
-                , style "left" "200px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "SYSTEM P2" ]
-
-        C ->
-            div
-                [ style "height" "100px"
-                , style "width" "300px"
-                , style "background-color" "transparent"
-                , style "color" steel
-                , style "top" "0px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "40px"
-                , style "border" "0px"
-                , style "font-weight" "bold"
-                , style "vertical-align" "middle"
-                ]
-                [ text "CALCULUS OF CONSTRUCTIONS" ]
 
 
 rules_box : System -> Html Msg
@@ -626,9 +494,9 @@ view : Model -> Html Msg
 view model =
     div
         [ style "font-family" "IBM Plex Sans", style "display" "flex", style "flex-direction" "column" ]
-        [ div [ style "margin" "50px", style "font-size" "40px", style "align-self" "Left", style "font-weight" "bold" ]
-            [ text "Barendregt's Lambda Cube" ]
-        , div [ style "display" "flex", style "flex-direction" "row", style "column-gap" "200px" ]
+        [ div []
+            [ Title.view model.system ]
+        , div [ style "display" "flex", style "flex-direction" "row" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
                 [ button_side Home
                 , button_side None
@@ -672,18 +540,17 @@ view model =
                                     []
 
                                 sys ->
-                                    [ title_box sys
-                                    , rules_box sys
+                                    [ rules_box sys
                                     , TermsBox.view sys
                                     , syntax_box sys
                                     ]
                     in
-                    trans_buttons ++ overlays
+                    trans_buttons
+
+                --++ overlays
                 ]
             ]
         ]
-
-
 
 
 vec3lerp : Vec3 -> Vec3 -> Vec3

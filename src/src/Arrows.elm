@@ -5,6 +5,8 @@ import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Property exposing (Property(..))
+import Svg exposing (..)
+import Svg.Attributes exposing (..)
 import System exposing (System(..))
 import Utils exposing (px)
 
@@ -20,12 +22,12 @@ view systemClicked system =
 
         sys ->
             div [] <|
-                List.map (button_arrow systemClicked sys)
+                List.map (svg_arrow systemClicked sys)
                     [ DependentTypes, Polymorphism, TypeOperators ]
 
 
-button_arrow : (System -> msg) -> System -> Property -> Html msg
-button_arrow systemClicked system property =
+svg_arrow : (System -> msg) -> System -> Property -> Html msg
+svg_arrow systemClicked system property =
     let
         newSystem =
             System.toggleProperty property system
@@ -36,51 +38,32 @@ button_arrow systemClicked system property =
         col =
             Property.color property
 
-        ( height, width ) =
-            case property of
-                Polymorphism ->
-                    ( 75, 25 )
-
-                _ ->
-                    ( 25, 75 )
-
-        ( y, x ) =
+        ( top, left, turn ) =
             case ( property, adding ) of
                 ( DependentTypes, False ) ->
-                    ( 440, 50 )
+                    ( 340, 50, "rotate(164 10 38) translate(-53 20)" )
 
                 ( DependentTypes, True ) ->
-                    ( 225, 850 )
+                    ( 98, 1000, "rotate(-18 10 38) translate(0 40)" )
 
                 ( Polymorphism, False ) ->
-                    ( 550, 488 )
+                    ( 550, 562, "rotate(90 10 38) translate(-25 0)" )
 
                 ( Polymorphism, True ) ->
-                    ( 0, 488 )
+                    ( -80, 562, "rotate(270 10 38) translate(-30 56)" )
 
                 ( TypeOperators, False ) ->
-                    ( 580, 900 )
+                    ( 535, 1100, "rotate(30 10 38) translate(0 0)" )
 
                 ( TypeOperators, True ) ->
-                    ( 75, 25 )
+                    ( 4, 205, "rotate(211 10 38) translate(-55 40)" )
     in
-    button
-        [ onClick (systemClicked newSystem)
-        , style "height" (px height)
-        , style "width" (px width)
-        , style "display" "flex"
-        , style "position" "absolute"
-        , style "top" (px y)
-        , style "left" (px x)
-        , style "background-color"
-            (if adding then
-                col
-
-             else
-                white
-            )
-        , style "border-style" "solid"
-        , style "border-width" "5px"
-        , style "border-color" col
+    svg
+        [ onClick (systemClicked newSystem), width "80", height "80", viewBox " 0  0 80 80", Html.Attributes.style "position" "absolute", Html.Attributes.style "top" (px top), Html.Attributes.style "left" (px left) ]
+        [ Svg.polygon
+            [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
+            , Svg.Attributes.style ("fill:" ++ col)
+            , Svg.Attributes.transform turn
+            ]
+            []
         ]
-        [ text "" ]
