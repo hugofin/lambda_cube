@@ -1,3 +1,6 @@
 module Utils exposing (..)
 
-px n = String.fromInt n ++ "px"
+
+px : Int -> String
+px n =
+    String.fromInt n ++ "px"

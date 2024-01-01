@@ -17,6 +17,7 @@ type System
     | C
 
 
+color : System -> String
 color sys =
     case sys of
         None ->
@@ -50,6 +51,7 @@ color sys =
             steel
 
 
+toString : System -> String
 toString sys =
     case sys of
         None ->

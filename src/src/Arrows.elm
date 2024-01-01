@@ -1,8 +1,8 @@
 module Arrows exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (style)
+import Html exposing (Html, div)
+import Html.Attributes
 import Html.Events exposing (onClick)
 import Property exposing (Property(..))
 import Svg exposing (..)
@@ -59,7 +59,14 @@ svg_arrow systemClicked system property =
                     ( 4, 205, "rotate(211 10 38) translate(-55 40)" )
     in
     svg
-        [ onClick (systemClicked newSystem), width "80", height "80", viewBox " 0  0 80 80", Html.Attributes.style "position" "absolute", Html.Attributes.style "top" (px top), Html.Attributes.style "left" (px left) ]
+        [ onClick (systemClicked newSystem)
+        , width "80"
+        , height "80"
+        , viewBox " 0  0 80 80"
+        , Html.Attributes.style "position" "absolute"
+        , Html.Attributes.style "top" (px top)
+        , Html.Attributes.style "left" (px left)
+        ]
         [ Svg.polygon
             [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
             , Svg.Attributes.style ("fill:" ++ col)

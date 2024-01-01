@@ -1,7 +1,7 @@
 module Title exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, br, div, text, u)
+import Html exposing (Html, div, text, u)
 import Html.Attributes exposing (style)
 import System exposing (System(..))
 
