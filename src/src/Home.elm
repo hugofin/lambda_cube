@@ -85,7 +85,7 @@ targetAndEyeFromSystem system =
         target =
             case system of
                 Home ->
-                    vec3 0.5 0.35 0.5
+                    vec3 0.5 0.6 0.5
 
                 None ->
                     vec3 -2 0.5 0.5
@@ -117,7 +117,7 @@ targetAndEyeFromSystem system =
     { target = target
     , eye =
         if system == Home then
-            vec3 -0.3 1.6 3.0
+            vec3 -0.255 1.36 2.55
 
         else
             add target (vec3 -0.2 0.15 0.3)
@@ -172,12 +172,12 @@ button_trans off sys ( x, y ) =
         , style "height" "75px"
         , style "width" "75px"
         , style "background-color" "#ff0000"
-        , style "color" white
+        , style "color" red
         , style "border" "0px"
         , style "position" "absolute"
         , style "top" y
         , style "left" x
-        , style "opacity" "0"
+        , style "opacity" "0%"
         , style "display" "flex"
         , disabled off
         , style "cursor"
@@ -523,14 +523,14 @@ view model =
                             model.system /= Home
 
                         trans_buttons =
-                            [ button_trans isGrid C ( "600px", "-5px" )
-                            , button_trans isGrid W ( "220px", "20px" )
-                            , button_trans isGrid P2 ( "780px", "80px" )
-                            , button_trans isGrid Two ( "290px", "125px" )
-                            , button_trans isGrid PW_ ( "580px", "320px" )
-                            , button_trans isGrid W_ ( "240px", "350px" )
-                            , button_trans isGrid P ( "740px", "490px" )
-                            , button_trans isGrid Simple ( "300px", "580px" )
+                            [ button_trans isGrid C ( "665px", "5px" )
+                            , button_trans isGrid W ( "310px", "23px" )
+                            , button_trans isGrid P2 ( "890px", "65px" )
+                            , button_trans isGrid Two ( "380px", "110px" )
+                            , button_trans isGrid PW_ ( "655px", "320px" )
+                            , button_trans isGrid W_ ( "340px", "375px" )
+                            , button_trans isGrid P ( "840px", "500px" )
+                            , button_trans isGrid Simple ( "410px", "600px" )
                             , Arrows.view SystemClicked model.system
                             ]
 
@@ -545,9 +545,7 @@ view model =
                                     , syntax_box sys
                                     ]
                     in
-                    trans_buttons
-
-                --++ overlays
+                    trans_buttons ++ overlays
                 ]
             ]
         ]

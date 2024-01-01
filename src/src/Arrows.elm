@@ -41,10 +41,10 @@ svg_arrow systemClicked system property =
         ( top, left, turn ) =
             case ( property, adding ) of
                 ( DependentTypes, False ) ->
-                    ( 340, 50, "rotate(164 10 38) translate(-53 20)" )
+                    ( 340, 50, "rotate(166 10 38) translate(-53 20)" )
 
                 ( DependentTypes, True ) ->
-                    ( 98, 1000, "rotate(-18 10 38) translate(0 40)" )
+                    ( 95, 1000, "rotate(-15 10 38) translate(0 40)" )
 
                 ( Polymorphism, False ) ->
                     ( 550, 562, "rotate(90 10 38) translate(-25 0)" )

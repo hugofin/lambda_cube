@@ -77,4 +77,57 @@
 
 ### Friday 25th November 2023
 
-* *2 hour* Added labels to some of the nodes
+* *2 hour* Redid camera system and angles
+
+### Saturday 26th November 2023
+
+* *6 hour* Added clickable arrows to transfer between nodes
+
+### Tuesday 29th November 2023
+
+* *1 hour* Writing infomation at node in plaintext
+* *1 hour* Resarch on how best to display equations
+* *2 hour* Learning MathML
+
+### Saturday 2nd November 2023
+
+* *2 hour* Learning MathML
+
+### Tuesday 5th December 2023
+
+* *1 hour* Integrated the untyped calculus node
+* *2 hour* Code refactoring
+* *2 hour* Added the textboxes to contain informatuin
+
+### Sunday 10th December 2023
+
+* *3 hour* Added plaintext to the textboxes
+
+### Monday 11th December 2023
+
+* *2 hour* Added plaintext to the textboxes
+* *3 hour* Learning MathML
+
+### Tuesday 12th December 2023
+
+* *2 hour* Added plaintext to the textboxes
+
+### Tuesday 18th December 2023
+
+* *2 hour* Added Lerp between camera nodes
+
+### Tuesday 18th December 2023
+
+* *2 hour* Added Lerp between camera nodes
+
+### Friday 29th December 2023
+
+* *6 hour* Made a translator between LaTeX and elm
+
+### Saturday 30th December 2023
+
+* *6 hour* Refactoring code
+
+### Saturday 30th December 2023
+
+* *6 hour* Refactoring code, visual improvements
