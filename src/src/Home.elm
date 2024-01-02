@@ -19,11 +19,12 @@ import Browser
 import Browser.Events exposing (onAnimationFrameDelta)
 import Color exposing (..)
 import Cube
-import Html exposing (Html, b, br, button, div, sub, sup, text, u)
+import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import RulesBox
 import SyntaxBox
 import System exposing (System(..))
 import TermsBox
@@ -192,160 +193,6 @@ button_trans off sys ( x, y ) =
         [ text "" ]
 
 
-rules_box : System -> Html Msg
-rules_box sys =
-    case sys of
-        Home ->
-            div [] []
-
-        None ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "200px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "Untyped lambda calculus is a system of computation which only has terms." ]
-
-        Simple ->
-            div
-                [ style "height" "130px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "300px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
-
-        P ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "75px"
-                , style "left" "650px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types" ]
-
-        Two ->
-            div
-                [ style "height" "150px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "325px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "In system F, terms can depend on types.", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", sub [] [ text "2" ], br [] [], text "arrow type - if σ,τ ∈ 𝕋", sub [] [ text "2" ], text ", then (σ→τ) ∈ 𝕋", sub [] [ text "2" ], br [] [], text "Π type - if α ∈ 𝕍 and σ ∈ 𝕋", sub [] [ text "2" ], text ", then (Πα : *. σ) ∈ 𝕋", sub [] [ text "2" ] ]
-
-        W_ ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "75px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "in system F"
-                , u [] [ text "ω" ]
-                , text " (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use."
-                ]
-
-        W ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "110px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types" ]
-
-        PW_ ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "75px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "as this system is a combination of types can bind both terms and types.  whats the point of having the kind system if there isnt any arrow types anymore" ]
-
-        P2 ->
-            div
-                [ style "height" "100px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "-40px"
-                , style "left" "500px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "in the system P2, terms can bind types or types can bind terms.  Presumably this lets you have polymorphic generalised types" ]
-
-        C ->
-            div
-                [ style "height" "125px"
-                , style "width" "500px"
-                , style "background-color" black
-                , style "color" white
-                , style "top" "-20px"
-                , style "left" "230px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "border" "0px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
-
-
 view : Model -> Html Msg
 view model =
     div
@@ -396,7 +243,7 @@ view model =
                                     []
 
                                 sys ->
-                                    [ rules_box sys
+                                    [ RulesBox.view sys
                                     , TermsBox.view sys
                                     , SyntaxBox.view sys
                                     ]
@@ -424,8 +271,4 @@ vec3lerp from to =
 
 lerp : Float -> Float -> Float
 lerp from to =
-    let
-        t =
-            0.15
-    in
-    from + t * (to - from)
+    from + 0.15 * (to - from)

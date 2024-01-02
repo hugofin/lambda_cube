@@ -19,8 +19,8 @@ view sys =
     div
         [ style "height" (px height)
         , style "width" (px width)
-        , style "background-color" leaf
-        , style "color" color
+        , style "background-color" color
+        , style "color" white
         , style "top" (px y)
         , style "left" (px x)
         , style "position" "absolute"
@@ -79,64 +79,64 @@ position sys =
             }
 
         None ->
-            { height = 190
-            , width = 490
-            , y = 50
-            , x = 425
+            { height = 200
+            , width = 500
+            , y = 350
+            , x = 25
             }
 
         Simple ->
             { height = 270
-            , width = 600
-            , y = 375
-            , x = 425
+            , width = 500
+            , y = 500
+            , x = 25
             }
 
         P ->
-            { height = 375
-            , width = 490
-            , y = 225
-            , x = 650
+            { height = 200
+            , width = 500
+            , y = 500
+            , x = 175
             }
 
         Two ->
-            { height = 490
-            , width = 600
+            { height = 200
+            , width = 500
             , y = 300
             , x = 575
             }
 
         W_ ->
-            { height = 460
-            , width = 550
-            , y = 210
-            , x = -125
+            { height = 175
+            , width = 500
+            , y = -50
+            , x = 650
             }
 
         W ->
-            { height = 190
-            , width = 490
-            , y = 525
-            , x = -125
+            { height = 200
+            , width = 500
+            , y = 250
+            , x = 25
             }
 
         PW_ ->
-            { height = 190
-            , width = 490
-            , y = 0
-            , x = 625
+            { height = 200
+            , width = 500
+            , y = 250
+            , x = 750
             }
 
         P2 ->
             { height = 190
             , width = 490
-            , y = 150
-            , x = 625
+            , y = 400
+            , x = 750
             }
 
         C ->
             { height = 400
             , width = 490
-            , y = 15
-            , x = 775
+            , y = 150
+            , x = 900
             }
