@@ -44,22 +44,7 @@ terms sys =
             [ MathML.UntypedTerms.view ]
 
         Simple ->
-            [ b [] [ text "Pre-typed Terms:" ]
-            , br [] []
-            , text "Variable - if α ∈ V, then α ∈ Λ"
-            , sup [] [ text "→" ]
-            , br [] []
-            , text "Application - if M,N ∈ Λ"
-            , sup [] [ text "→" ]
-            , text "then (MN) ∈Λ"
-            , sup [] [ text "→" ]
-            , br [] []
-            , text "Abstraction - if x ∈ 𝕍, σ in 𝕋, and M ∈ Λ"
-            , sup [] [ text "→" ]
-            , text ", then (λ  x : σ . M). ∈ Λ"
-            , sup [] [ text "→" ]
-            , br [] []
-            , b [] [ text "Derivation Rules:" ]
+            [ b [] [ text "Derivation Rules:" ]
             , br [] []
             , text "variable - Γ ⊢ x : σ  if x : σ ∈ Γ"
             , br [] []
@@ -116,34 +101,7 @@ terms sys =
             ]
 
         Two ->
-            [ b [] [ text "Pre-typed Terms:" ]
-            , br [] []
-            , text "Variable - if α ∈ V, then α ∈ Λ"
-            , sub [] [ text "2" ]
-            , br [] []
-            , text "Application A - if M,N ∈ Λ"
-            , sub [] [ text "2" ]
-            , text ", then (MN) ∈Λ"
-            , sup [] [ text "2" ]
-            , br [] []
-            , text "Application B - if M ∈ Λ"
-            , sub [] [ text "2" ]
-            , text "and σ ∈𝕋, then (Mσ) ∈Λ"
-            , sup [] [ text "2" ]
-            , br [] []
-            , text "Abstraction A - if x ∈ V, σ in 𝕋"
-            , sub [] [ text "2" ]
-            , text " and M ∈ Λ"
-            , sub [] [ text "2" ]
-            , text ", then (λ  x : σ . M). ∈ Λ"
-            , sub [] [ text "2" ]
-            , br [] []
-            , text "Abstraction B - if σ ∈ 𝕍 and M in Λ"
-            , sub [] [ text "2" ]
-            , text ", then (λ  σ : * . M). ∈ Λ"
-            , sub [] [ text "2" ]
-            , br [] []
-            , b [] [ text "Derivation Rules:" ]
+            [ b [] [ text "Derivation Rules:" ]
             , br [] []
             , text "variable - Γ ⊢ x : σ  if Γ is λ2 context, and x : σ ∈ Γ"
             , br [] []

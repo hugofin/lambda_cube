@@ -24,6 +24,7 @@ import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import SyntaxBox
 import System exposing (System(..))
 import TermsBox
 import Title
@@ -345,151 +346,6 @@ rules_box sys =
                 [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
 
 
-syntax_box : System -> Html Msg
-syntax_box sys =
-    case sys of
-        Home ->
-            div [] []
-
-        None ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" leaf
-                , style "color" white
-                , style "top" "350px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "padding" "10px"
-                , style "text-align" "left"
-                ]
-                [ b [] [ text "Syntax:" ], br [] [], text "a, b, c... are used for term variables", br [] [], text "L, M, N... are used to denote lambda terms", br [] [], text " ≡ is used to denote syntactic equivalence ", br [] [], text "as an example, the equation f(x) = x+1 could be represented as λ x . add x 1" ]
-
-        Simple ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" mauve
-                , style "color" white
-                , style "top" "500px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ b [] [ text "Syntax:" ], br [] [], text "α, β, γ... are used for type variables", br [] [], text "σ, τ, ρ... are used to denote arbitrairy types", br [] [], text " arrow types are right associative, meaning that σ→(τ→ρ) ≡ σ→τ→ρ.", br [] [], text "as an example, the equation f(x) = x", sup [] [ text "2" ], text "+1 could be represented as λ x: ℕ . add (mult x x) 1 : ℕ → ℕ  " ]
-
-        P ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" red
-                , style "color" white
-                , style "top" "500px"
-                , style "left" "50px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
-
-        Two ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" green
-                , style "color" white
-                , style "top" "525px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type" ]
-
-        W_ ->
-            div
-                [ style "height" "175px"
-                , style "width" "500px"
-                , style "background-color" sky
-                , style "color" white
-                , style "top" "-50px"
-                , style "left" "525px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
-                , br [] []
-                , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
-                ]
-
-        W ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" teal
-                , style "color" white
-                , style "top" "250px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "" ]
-
-        PW_ ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" purple
-                , style "color" white
-                , style "top" "250px"
-                , style "left" "625px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "" ]
-
-        P2 ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" yellow
-                , style "color" white
-                , style "top" "400px"
-                , style "left" "625px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "" ]
-
-        C ->
-            div
-                [ style "height" "200px"
-                , style "width" "500px"
-                , style "background-color" steel
-                , style "color" white
-                , style "top" "150px"
-                , style "left" "-125px"
-                , style "position" "absolute"
-                , style "font-size" "20px"
-                , style "text-align" "left"
-                , style "padding" "10px"
-                ]
-                [ text "" ]
-
-
 view : Model -> Html Msg
 view model =
     div
@@ -542,7 +398,7 @@ view model =
                                 sys ->
                                     [ rules_box sys
                                     , TermsBox.view sys
-                                    , syntax_box sys
+                                    , SyntaxBox.view sys
                                     ]
                     in
                     trans_buttons ++ overlays
