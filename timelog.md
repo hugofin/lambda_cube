@@ -128,6 +128,14 @@
 
 * *6 hour* Refactoring code
 
-### Saturday 30th December 2023
+### Monday 1st January 2024
 
 * *6 hour* Refactoring code, visual improvements
+
+### Tuesday 2nd January 2024
+
+* *5 hour* Refactoring code, visual improvements
+
+### Wednesday 3rd January 2024
+
+* *3 hour* Writing syntax box contents in LaTeX

@@ -3,6 +3,7 @@ module SyntaxBox exposing (view)
 import Color exposing (..)
 import Html exposing (Html, b, br, div, sup, text)
 import Html.Attributes exposing (style)
+import MathML.UntypedSyntax
 import System exposing (System(..))
 import Utils exposing (px)
 
@@ -35,10 +36,10 @@ syntax : System -> List (Html msg)
 syntax sys =
     case sys of
         Home ->
-            [ b [] [ text "Syntax:" ], br [] [], text "a, b, c... are used for term variables", br [] [], text "L, M, N... are used to denote lambda terms", br [] [], text " ≡ is used to denote syntactic equivalence ", br [] [], text "as an example, the equation f(x) = x+1 could be represented as λ x . add x 1" ]
+            []
 
         None ->
-            [ b [] [ text "Syntax:" ], br [] [], text "α, β, γ... are used for type variables", br [] [], text "σ, τ, ρ... are used to denote arbitrairy types", br [] [], text " arrow types are right associative, meaning that σ→(τ→ρ) ≡ σ→τ→ρ.", br [] [], text "as an example, the equation f(x) = x", sup [] [ text "2" ], text "+1 could be represented as λ x: ℕ . add (mult x x) 1 : ℕ → ℕ  " ]
+            [ MathML.UntypedSyntax.view ]
 
         Simple ->
             [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
@@ -79,8 +80,8 @@ position sys =
             }
 
         None ->
-            { height = 200
-            , width = 500
+            { height = 400
+            , width = 1000
             , y = 350
             , x = 25
             }
