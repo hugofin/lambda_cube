@@ -3,11 +3,11 @@
    \text{untyped}\\ 
    \hline
    \text{syntax}\\
-   t::= &             & \text{terms}              & \text{evaluation} & & t \rightarrow t' \\
-        &           x & \text{variable}           & & \cfrac{t_1 \rightarrow t_1'}{t_1t_2\rightarrow t_1't_2} \\
-        & \lambda x.t & \text{abstraction}  \\
-        & t \ t       & \text{application} & & \cfrac{t_2 \rightarrow t_2'}{v_1t_2\rightarrow v_1t_2'}\\ \\
-   v::= &             & \text{values} & & (\lambda x.t_{1 \ 2})v_2 \rightarrow [x\rightarrow v_2] t_{1 \ 2} \\
+   t::= & & \text{terms} & \text{evaluation} & & t \rightarrow t' \\
+        & x & \text{variable} & & \cfrac{t_1 \rightarrow t_1'}{t_1 t_2\rightarrow t_1't_2} \\
+        & \lambda x.t & \text{abstraction} \\
+        & t \ t & \text{application} & & \cfrac{t_2 \rightarrow t_2'}{v_1t_2\rightarrow v_1t_2'}\\ \\
+   v::= &  & \text{values} & & (\lambda x.t_{1 \ 2})v_2 \rightarrow [x\rightarrow v_2] t_{1 \ 2} \\
         & \lambda x.t & \text{abstraction values}
 
 \end{array}

@@ -1,7 +1,7 @@
 module TermsBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, br, div, sub, sup, text, u)
+import Html exposing (Html, b, br, div, sub, text, u)
 import Html.Attributes exposing (style)
 import MathML.UntypedTerms
 import System exposing (System(..))
@@ -240,7 +240,7 @@ position sys =
             }
 
         None ->
-            { height = 190
+            { height = 0
             , width = 490
             , y = 50
             , x = 425

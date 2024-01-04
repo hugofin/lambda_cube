@@ -19,12 +19,12 @@ import Browser
 import Browser.Events exposing (onAnimationFrameDelta)
 import Color exposing (..)
 import Cube
+import ExplainationBox
 import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
-import RulesBox
 import SyntaxBox
 import System exposing (System(..))
 import TermsBox
@@ -243,9 +243,9 @@ view model =
                                     []
 
                                 sys ->
-                                    [ RulesBox.view sys
+                                    [ SyntaxBox.view sys
                                     , TermsBox.view sys
-                                    , SyntaxBox.view sys
+                                    , ExplainationBox.view sys
                                     ]
                     in
                     trans_buttons ++ overlays
