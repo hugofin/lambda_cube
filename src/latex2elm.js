@@ -26,12 +26,12 @@ function latex2elm(moduleName, latex) {
     let html;
 
     try {
-        html = katex.renderToString(latex, {output: "html"})
+        html = katex.renderToString(latex, { output: "html" })
     } catch (error) {
         console.error("[Error] " + error.rawMessage)
         return `text "error: ${error.rawMessage}"`
     }
-    
+
     const parser = new DOMParser()
 
     const dom = parser.parseFromString(html, "text/html")
@@ -56,7 +56,7 @@ view = math [Html.Attributes.attribute "display" "block"] [${domToElm(dom.body.c
 
 const infile = Deno.args[0]
 
-let moduleName = path.parse(infile).name
+let moduleName = path.parse(infile).name[0].toUpperCase() + path.parse(infile).name.substring(1);
 
 const latex = await Deno.readTextFile(infile);
 
