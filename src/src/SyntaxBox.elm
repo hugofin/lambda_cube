@@ -11,13 +11,11 @@ import Utils exposing (px)
 view : System -> Html msg
 view sys =
     let
-        { height, width, y, x } =
+        { y, x } =
             position sys
     in
     div
-        [ style "height" (px height)
-        , style "width" (px width)
-        , style "background-color" black
+        [ style "background-color" black
         , style "color" white
         , style "top" (px y)
         , style "left" (px x)
@@ -26,6 +24,7 @@ view sys =
         , style "border" "0px"
         , style "text-align" "left"
         , style "padding" "10px"
+        , style "display" "inline-block"
         ]
         (syntax sys)
 
@@ -34,107 +33,88 @@ syntax : System -> List (Html msg)
 syntax sys =
     case sys of
         Home ->
-            [ MathML.UntypedSyntax.view ]
+            []
 
         None ->
-            [ text "Untyped lambda calculus is a system of computation which only has terms." ]
+            [ MathML.UntypedSyntax.view ]
 
         Simple ->
-            [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
+            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
 
         P ->
-            [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types" ]
+            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
 
         Two ->
-            [ text "In system F, terms can depend on types.", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", sub [] [ text "2" ], br [] [], text "arrow type - if σ,τ ∈ 𝕋", sub [] [ text "2" ], text ", then (σ→τ) ∈ 𝕋", sub [] [ text "2" ], br [] [], text "Π type - if α ∈ 𝕍 and σ ∈ 𝕋", sub [] [ text "2" ], text ", then (Πα : *. σ) ∈ 𝕋", sub [] [ text "2" ] ]
+            [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type" ]
 
         W_ ->
-            [ text "in system F"
-            , text " (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use."
+            [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
+            , br [] []
+            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
             ]
 
         W ->
-            [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types" ]
+            [ text "" ]
 
         PW_ ->
-            [ text "as this system is a combination of types can bind both terms and types.  whats the point of having the kind system if there isnt any arrow types anymore" ]
+            [ text "" ]
 
         P2 ->
-            [ text "in the system P2, terms can bind types or types can bind terms.  Presumably this lets you have polymorphic generalised types" ]
+            [ text "" ]
 
         C ->
-            [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
+            [ text "" ]
 
 
-position : System -> { x : Int, y : Int, height : Int, width : Int }
+position : System -> { x : Int, y : Int }
 position sys =
     case sys of
         Home ->
-            { height = 0
-            , width = 0
-            , y = 0
+            { y = 0
             , x = 0
             }
 
         None ->
-            { height = 100
-            , width = 500
-            , y = 50
-            , x = 425
+            { y = 375
+            , x = 25
             }
 
         Simple ->
-            { height = 130
-            , width = 500
-            , y = 375
+            { y = 375
             , x = 425
             }
 
         P ->
-            { height = 100
-            , width = 500
-            , y = 225
+            { y = 225
             , x = 650
             }
 
         Two ->
-            { height = 150
-            , width = 500
-            , y = 300
+            { y = 300
             , x = 575
             }
 
         W_ ->
-            { height = 100
-            , width = 500
-            , y = 210
+            { y = 210
             , x = -125
             }
 
         W ->
-            { height = 100
-            , width = 500
-            , y = 525
+            { y = 525
             , x = -125
             }
 
         PW_ ->
-            { height = 100
-            , width = 500
-            , y = 0
+            { y = 0
             , x = 625
             }
 
         P2 ->
-            { height = 100
-            , width = 500
-            , y = 150
+            { y = 150
             , x = 625
             }
 
         C ->
-            { height = 125
-            , width = 500
-            , y = 15
+            { y = 15
             , x = 775
             }

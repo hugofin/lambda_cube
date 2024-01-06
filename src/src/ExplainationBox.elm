@@ -42,31 +42,30 @@ syntax sys =
             [ MathML.UntypedExplaination.view ]
 
         Simple ->
-            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
+            [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
 
         P ->
-            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
+            [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types" ]
 
         Two ->
-            [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type" ]
+            [ text "In system F, terms can depend on types.", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", div [] [ text "2" ], br [] [], text "arrow type - if σ,τ ∈ 𝕋", div [] [ text "2" ], text ", then (σ→τ) ∈ 𝕋", div [] [ text "2" ], br [] [], text "Π type - if α ∈ 𝕍 and σ ∈ 𝕋", div [] [ text "2" ], text ", then (Πα : *. σ) ∈ 𝕋", div [] [ text "2" ] ]
 
         W_ ->
-            [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
-            , br [] []
-            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
+            [ text "in system F"
+            , text " (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use."
             ]
 
         W ->
-            [ text "" ]
+            [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types" ]
 
         PW_ ->
-            [ text "" ]
+            [ text "as this system is a combination of types can bind both terms and types.  whats the point of having the kind system if there isnt any arrow types anymore" ]
 
         P2 ->
-            [ text "" ]
+            [ text "in the system P2, terms can bind types or types can bind terms.  Presumably this lets you have polymorphic generalised types" ]
 
         C ->
-            [ text "" ]
+            [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
 
 
 position : System -> { x : Int, y : Int, height : Int, width : Int }
@@ -80,10 +79,10 @@ position sys =
             }
 
         None ->
-            { height = 400
-            , width = 1000
+            { height = 0
+            , width = 0
             , y = 350
-            , x = 25
+            , x = 925
             }
 
         Simple ->
