@@ -44,135 +44,20 @@ terms sys =
             [ MathML.UntypedTerms.view ]
 
         Simple ->
-            [ b [] [ text "Derivation Rules:" ]
-            , br [] []
-            , text "variable - Γ ⊢ x : σ  if x : σ ∈ Γ"
-            , br [] []
-            , text "application - "
-            , u [] [ text "Γ ⊢ M : σ → τ ⠀⠀ Γ ⊢ N : σ" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : τ"
-            , br [] []
-            , text "abstraction - "
-            , u [] [ text "⠀⠀Γ,x : σ ⊢ M : τ⠀⠀" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : σ . M:σ→τ"
-            ]
+            []
 
         P ->
-            [ b [] [ text "Derivation Rules:" ]
-            , br [] []
-            , text "sort - 0 ⊢ * : ☐"
-            , br [] []
-            , text "variable"
-            , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-            , br [] []
-            , text "weak - "
-            , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-            , br [] []
-            , text "formation - "
-            , u [] [ text "Γ ⊢ A : * ⠀⠀ Γ,x : A ⊢ B : s" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ Πx : A. B : s"
-            , br [] []
-            , text "appliaction - "
-            , u [] [ text "Γ ⊢ M : Πx :A . B ⠀⠀ Γ ⊢ N : A" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B[x:= N]"
-            , br [] []
-            , text "abstraction - "
-            , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ Πx :A . B : s" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):Πx:A . B"
-            , br [] []
-            , text "conversion - "
-            , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-            , text "⠀⠀if B ="
-            , sub [] [ text "β" ]
-            , text "B'"
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
-            ]
+            []
 
         Two ->
-            [ b [] [ text "Derivation Rules:" ]
-            , br [] []
-            , text "variable - Γ ⊢ x : σ  if Γ is λ2 context, and x : σ ∈ Γ"
-            , br [] []
-            , text "formation - Γ ⊢ B : *  if Γ is λ2 context, B ∈ 𝕋2, and every free type variable in B is in Γ"
-            , br [] []
-            , text "application 1 - "
-            , u [] [ text "Γ ⊢ M : σ → τ ⠀⠀ Γ ⊢ N : σ" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : τ"
-            , br [] []
-            , text "application 2 - "
-            , u [] [ text "Γ ⊢ M : (Πα : * .A ) ⠀⠀ Γ ⊢ B : *" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MB : A[α := B]"
-            , br [] []
-            , text "abstraction 1 - "
-            , u [] [ text "⠀⠀Γ,x : σ ⊢ M : τ⠀⠀" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : σ . M:σ→τ"
-            , br [] []
-            , text "abstraction 2 - "
-            , u [] [ text "⠀⠀Γ,α : * ⊢ M : A⠀⠀" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ (λ  α : * . M):(Πα : * .A )"
+            [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type"
+            , text "In system F, terms can depend on types. variable type - if α ∈ 𝕍, then α ∈ 𝕋2, arrow type - if σ,τ ∈ 𝕋2, then (σ→τ) ∈ 𝕋2, Π type - if α ∈ 𝕍 and σ ∈ 𝕋2, then (Πα : *. σ) ∈ 𝕋2"
             ]
 
         W_ ->
-            [ text "The set of kinds (𝕂) is as follows:"
+            [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
             , br [] []
-            , text "Type Kind  - * ∈ 𝕂 "
-            , br [] []
-            , text "Abstraction Kind  - (* → *)  ∈ 𝕂 "
-            , br [] []
-            , b [] [ text "Derivation Rules:" ]
-            , br [] []
-            , text "sort - 0 ⊢ * : ☐"
-            , br [] []
-            , text "variable"
-            , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-            , br [] []
-            , text "weak - "
-            , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-            , br [] []
-            , text "formation - "
-            , u [] [ text "Γ ⊢ A : s ⠀⠀ Γ ⊢ B : s" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A → B : s"
-            , br [] []
-            , text "appliaction - "
-            , u [] [ text "Γ ⊢ M : A → B ⠀⠀ Γ ⊢ N : A" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-            , br [] []
-            , text "abstraction - "
-            , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ A → B : s" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):A → B"
-            , br [] []
-            , text "conversion - "
-            , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-            , text "⠀⠀if B ="
-            , sub [] [ text "β" ]
-            , text "B'"
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
+            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
             ]
 
         W ->
@@ -185,48 +70,7 @@ terms sys =
             [ text "" ]
 
         C ->
-            [ b [] [ text "Derivation Rules:" ]
-            , br [] []
-            , text "sort - 0 ⊢ * : ☐"
-            , br [] []
-            , text "variable"
-            , u [] [ text "⠀⠀⠀Γ ⊢ A : s⠀⠀⠀" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀Γ,x : A ⊢ x : A"
-            , br [] []
-            , br [] []
-            , text "weak - "
-            , u [] [ text "Γ ⊢ A : B ⠀⠀ Γ ⊢ C : s" ]
-            , text "⠀⠀if x ∉Γ "
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B"
-            , br [] []
-            , text "formation - "
-            , u [] [ text "Γ ⊢ A : s", sub [] [ text "1" ], text " ⠀⠀ Γ,x : A ⊢ B : s" ]
-            , sub [] [ text "2" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ Πx : A. B : s"
-            , sub [] [ text "2" ]
-            , br [] []
-            , text "appliaction - "
-            , u [] [ text "Γ ⊢ M : Πx :A . B ⠀⠀ Γ ⊢ N : A" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ MN : B[x:= N]"
-            , br [] []
-            , text "abstraction - "
-            , u [] [ text "⠀⠀Γ,x : A ⊢ M : B⠀⠀Γ ⊢ Πx :A . B : s" ]
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ λ  x : A . M):Πx:A . B"
-            , br [] []
-            , text "conversion - "
-            , u [] [ text "⠀⠀Γ ⊢ A : B⠀⠀Γ ⊢ B' : s" ]
-            , text "⠀⠀if B ="
-            , sub [] [ text "β" ]
-            , text "B'"
-            , br [] []
-            , text "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Γ ⊢ A : B'"
-            ]
+            []
 
 
 position : System -> { x : Int, y : Int, height : Int, width : Int }
@@ -249,29 +93,29 @@ position sys =
         Simple ->
             { height = 270
             , width = 600
-            , y = 375
-            , x = 425
+            , y = 275
+            , x = 750
             }
 
         P ->
-            { height = 375
-            , width = 490
-            , y = 225
-            , x = 650
+            { height = 10
+            , width = 10
+            , y = 600
+            , x = 800
             }
 
         Two ->
-            { height = 490
-            , width = 600
-            , y = 300
-            , x = 575
+            { height = 300
+            , width = 500
+            , y = 150
+            , x = 25
             }
 
         W_ ->
-            { height = 460
+            { height = 125
             , width = 550
             , y = 210
-            , x = -125
+            , x = 925
             }
 
         W ->
@@ -296,8 +140,8 @@ position sys =
             }
 
         C ->
-            { height = 400
-            , width = 490
+            { height = 10
+            , width = 10
             , y = 15
-            , x = 775
+            , x = 25
             }

@@ -45,10 +45,10 @@ syntax sys =
             [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
 
         P ->
-            [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types" ]
+            [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types", text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
 
         Two ->
-            [ text "In system F, terms can depend on types.", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", div [] [ text "2" ], br [] [], text "arrow type - if σ,τ ∈ 𝕋", div [] [ text "2" ], text ", then (σ→τ) ∈ 𝕋", div [] [ text "2" ], br [] [], text "Π type - if α ∈ 𝕍 and σ ∈ 𝕋", div [] [ text "2" ], text ", then (Πα : *. σ) ∈ 𝕋", div [] [ text "2" ] ]
+            []
 
         W_ ->
             [ text "in system F"
@@ -79,16 +79,16 @@ position sys =
             }
 
         None ->
-            { height = 0
-            , width = 0
+            { height = 10
+            , width = 10
             , y = 350
-            , x = 925
+            , x = 1000
             }
 
         Simple ->
             { height = 270
             , width = 500
-            , y = 500
+            , y = 100
             , x = 25
             }
 
@@ -96,21 +96,21 @@ position sys =
             { height = 200
             , width = 500
             , y = 500
-            , x = 175
+            , x = 25
             }
 
         Two ->
-            { height = 200
-            , width = 500
-            , y = 300
-            , x = 575
+            { height = 10
+            , width = 10
+            , y = 475
+            , x = 25
             }
 
         W_ ->
-            { height = 175
+            { height = 75
             , width = 500
             , y = -50
-            , x = 650
+            , x = 925
             }
 
         W ->
@@ -135,8 +135,8 @@ position sys =
             }
 
         C ->
-            { height = 400
+            { height = 150
             , width = 490
-            , y = 150
-            , x = 900
+            , y = 0
+            , x = 25
             }

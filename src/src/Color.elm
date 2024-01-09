@@ -54,3 +54,8 @@ steel =
 black : String
 black =
     "#0f0f0f"
+
+
+orange : String
+orange =
+    "#ff8e42"

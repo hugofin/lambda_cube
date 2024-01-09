@@ -1,9 +1,14 @@
 module SyntaxBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, br, div, sub, text)
+import Html exposing (Html, br, div, text)
 import Html.Attributes exposing (style)
+import MathML.CSyntax
+import MathML.PSyntax
+import MathML.SimpleSyntax
+import MathML.TwoSyntax
 import MathML.UntypedSyntax
+import MathML.WeakWSyntax
 import System exposing (System(..))
 import Utils exposing (px)
 
@@ -39,19 +44,16 @@ syntax sys =
             [ MathML.UntypedSyntax.view ]
 
         Simple ->
-            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
+            [ MathML.SimpleSyntax.view ]
 
         P ->
-            [ text "the arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
+            [ MathML.PSyntax.view ]
 
         Two ->
-            [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type" ]
+            [ MathML.TwoSyntax.view ]
 
         W_ ->
-            [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
-            , br [] []
-            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
-            ]
+            [ MathML.WeakWSyntax.view ]
 
         W ->
             [ text "" ]
@@ -63,7 +65,7 @@ syntax sys =
             [ text "" ]
 
         C ->
-            [ text "" ]
+            [ MathML.CSyntax.view ]
 
 
 position : System -> { x : Int, y : Int }
@@ -80,23 +82,23 @@ position sys =
             }
 
         Simple ->
-            { y = 375
-            , x = 425
+            { y = 425
+            , x = 75
             }
 
         P ->
-            { y = 225
+            { y = -100
             , x = 650
             }
 
         Two ->
-            { y = 300
-            , x = 575
+            { y = 175
+            , x = 750
             }
 
         W_ ->
-            { y = 210
-            , x = -125
+            { y = 0
+            , x = 25
             }
 
         W ->
@@ -115,6 +117,6 @@ position sys =
             }
 
         C ->
-            { y = 15
-            , x = 775
+            { y = -150
+            , x = 700
             }

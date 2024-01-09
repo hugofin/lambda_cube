@@ -1,0 +1,11 @@
+\def\arraystretch{1.25}
+\begin{array}{c c c}
+\text{syntax}\\ 
+     \hline \\
+        & \cfrac{\Gamma : \lambda _2\ \ \ \ \ x: \sigma \in \Gamma}{\Gamma \vdash x : \sigma} & \text{variable}  \\\\
+        & \cfrac{\Gamma : \lambda _2\ \ \ \ \ x: B \in \mathbb{T_2}}{\Gamma \vdash B : \ast} & \text{formation}  \\\\
+        & \cfrac{\Gamma \vdash M : \sigma \rightarrow \tau \ \ \ \ \ \Gamma \vdash N : \sigma}{\Gamma \vdash MN : \tau} & \text{application 1}  \\\\
+        & \cfrac{\Gamma \vdash M : (\Pi \alpha : \ast . A)  \ \ \ \ \ \Gamma \vdash B:\ast}{\Gamma \vdash MN : B[ x := N]} & \text{application 2} \\\\
+        & \cfrac{\Gamma, x : \sigma \vdash M : \tau}{\Gamma \vdash \lambda x : \sigma M : \sigma \rightarrow \tau} & \text{abstraction 1} \\\\
+        & \cfrac{\Gamma, x : \alpha \vdash M : A}{\Gamma \vdash (\lambda \alpha : \ast . M): (\Pi \alpha : \ast . A)}& \text{abstraction 2}
+\end{array}
