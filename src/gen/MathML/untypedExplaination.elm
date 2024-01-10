@@ -1,6 +1,6 @@
 module MathML.UntypedExplaination exposing (view)
 
-import Html exposing (math, text)
+import Html exposing (math)
 import Html.Attributes exposing (attribute)
 import VirtualDom exposing (nodeNS)
 

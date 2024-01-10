@@ -39,7 +39,7 @@ syntax sys =
             []
 
         None ->
-            [ MathML.UntypedExplaination.view ]
+            [ text "Untyped Lambda calculus is a computational theory that an entire programming system can be represented using only functions." ]
 
         Simple ->
             [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
@@ -79,10 +79,10 @@ position sys =
             }
 
         None ->
-            { height = 10
-            , width = 10
-            , y = 350
-            , x = 1000
+            { height = 200
+            , width = 500
+            , y = 0
+            , x = 25
             }
 
         Simple ->
@@ -116,7 +116,7 @@ position sys =
         W ->
             { height = 200
             , width = 500
-            , y = 250
+            , y = 0
             , x = 25
             }
 

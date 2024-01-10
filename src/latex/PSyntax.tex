@@ -8,5 +8,5 @@
         & \cfrac{\Gamma \vdash A:\ast \ \ \ \ \ \Gamma ,x :A \vdash B : s}{\Gamma \vdash \Pi x : A . B :s}& & \text{formation}  \\\\
         & \cfrac{\Gamma \vdash M : \Pi x : A.B  \ \ \ \ \ \Gamma \vdash N:A}{\Gamma \vdash MN : B[ x := N]} & & \text{application}\\ \\
         & \cfrac{\Gamma, x : A \vdash M : B \ \ \ \ \ \Gamma \vdash A \rightarrow B :s}{\Gamma \vdash ( \lambda x : A.M) :A \rightarrow B} & & \text{abstraction} \\ \\
-        & \cfrac{\Gamma \vdash A:B \ \ \ \ \ \Gamma \vdash B' : s}{\Gamma \vdash A : B'}& \text{if } B =_\beta B'  & \text{Conversion}
+        & \cfrac{\Gamma \vdash A:B \ \ \ \ \ \Gamma \vdash B' : s}{\Gamma \vdash A : B'}& \text{if } B =_\beta B'  & \text{conversion}
 \end{array}

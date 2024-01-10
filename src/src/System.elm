@@ -48,7 +48,7 @@ color sys =
             steel
 
         Home ->
-            orange
+            steel
 
 
 toString : System -> String

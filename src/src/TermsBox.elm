@@ -1,7 +1,7 @@
 module TermsBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, br, div, sub, text, u)
+import Html exposing (Html, br, div, text)
 import Html.Attributes exposing (style)
 import MathML.UntypedTerms
 import System exposing (System(..))
@@ -84,10 +84,10 @@ position sys =
             }
 
         None ->
-            { height = 0
+            { height = 600
             , width = 490
-            , y = 50
-            , x = 425
+            , y = 0
+            , x = 975
             }
 
         Simple ->
@@ -98,10 +98,10 @@ position sys =
             }
 
         P ->
-            { height = 10
-            , width = 10
-            , y = 600
-            , x = 800
+            { height = 200
+            , width = 625
+            , y = 450
+            , x = 670
             }
 
         Two ->
@@ -121,8 +121,8 @@ position sys =
         W ->
             { height = 190
             , width = 490
-            , y = 525
-            , x = -125
+            , y = 225
+            , x = 825
             }
 
         PW_ ->

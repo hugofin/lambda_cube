@@ -1,7 +1,7 @@
 module SyntaxBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, br, div, text)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
 import MathML.CSyntax
 import MathML.PSyntax
@@ -16,11 +16,14 @@ import Utils exposing (px)
 view : System -> Html msg
 view sys =
     let
-        { y, x } =
+        { height, width, y, x } =
             position sys
     in
     div
         [ style "background-color" black
+        , style "width" (px width)
+        , style "height" (px height)
+        , style "overflow" "auto"
         , style "color" white
         , style "top" (px y)
         , style "left" (px x)
@@ -68,55 +71,75 @@ syntax sys =
             [ MathML.CSyntax.view ]
 
 
-position : System -> { x : Int, y : Int }
+position : System -> { height : Int, width : Int, x : Int, y : Int }
 position sys =
     case sys of
         Home ->
-            { y = 0
+            { height = 300
+            , width = 500
+            , y = 0
             , x = 0
             }
 
         None ->
-            { y = 375
+            { height = 400
+            , width = 900
+            , y = 300
             , x = 25
             }
 
         Simple ->
-            { y = 425
-            , x = 75
+            { height = 300
+            , width = 550
+            , y = 425
+            , x = 25
             }
 
         P ->
-            { y = -100
+            { height = 500
+            , width = 775
+            , y = -100
             , x = 650
             }
 
         Two ->
-            { y = 175
+            { height = 500
+            , width = 625
+            , y = 175
             , x = 750
             }
 
         W_ ->
-            { y = 0
+            { height = 500
+            , width = 800
+            , y = 280
             , x = 25
             }
 
         W ->
-            { y = 525
-            , x = -125
+            { height = 300
+            , width = 500
+            , y = 250
+            , x = 25
             }
 
         PW_ ->
-            { y = 0
+            { height = 300
+            , width = 500
+            , y = 0
             , x = 625
             }
 
         P2 ->
-            { y = 150
+            { height = 300
+            , width = 500
+            , y = 150
             , x = 625
             }
 
         C ->
-            { y = -150
-            , x = 700
+            { height = 500
+            , width = 775
+            , y = -100
+            , x = 675
             }
