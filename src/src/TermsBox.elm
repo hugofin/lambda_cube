@@ -50,9 +50,7 @@ terms sys =
             []
 
         Two ->
-            [ text "In this system, parametric polymorphism is used, so that we can define a function once and use it on many different types. To do that, we substitute in a star (*) where the type would normally be in a term.  For instance a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type"
-            , text "In system F, terms can depend on types. variable type - if α ∈ 𝕍, then α ∈ 𝕋2, arrow type - if σ,τ ∈ 𝕋2, then (σ→τ) ∈ 𝕋2, Π type - if α ∈ 𝕍 and σ ∈ 𝕋2, then (Πα : *. σ) ∈ 𝕋2"
-            ]
+            []
 
         W_ ->
             [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
@@ -85,9 +83,9 @@ position sys =
 
         None ->
             { height = 600
-            , width = 490
+            , width = 500
             , y = 0
-            , x = 975
+            , x = 960
             }
 
         Simple ->
@@ -105,38 +103,38 @@ position sys =
             }
 
         Two ->
-            { height = 275
-            , width = 500
+            { height = 10
+            , width = 10
             , y = 150
             , x = 25
             }
 
         W_ ->
-            { height = 125
-            , width = 550
-            , y = 210
-            , x = 925
+            { height = 150
+            , width = 490
+            , y = 95
+            , x = 25
             }
 
         W ->
             { height = 0
             , width = 0
-            , y = 225
-            , x = 825
+            , y = 0 --225
+            , x = 25 --825
             }
 
         PW_ ->
-            { height = 190
-            , width = 490
-            , y = 0
-            , x = 625
+            { height = 10
+            , width = 10
+            , y = -100
+            , x = 25
             }
 
         P2 ->
-            { height = 190
-            , width = 490
-            , y = 150
-            , x = 625
+            { height = 10
+            , width = 10
+            , y = -100
+            , x = 200
             }
 
         C ->

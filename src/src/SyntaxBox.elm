@@ -113,7 +113,7 @@ position sys =
         W_ ->
             { height = 400
             , width = 650
-            , y = 280
+            , y = 300
             , x = 25
             }
 
@@ -126,16 +126,16 @@ position sys =
 
         PW_ ->
             { height = 300
-            , width = 500
-            , y = 0
-            , x = 625
+            , width = 750
+            , y = -100
+            , x = 725
             }
 
         P2 ->
             { height = 300
-            , width = 500
-            , y = 150
-            , x = 625
+            , width = 750
+            , y = -100
+            , x = 725
             }
 
         C ->

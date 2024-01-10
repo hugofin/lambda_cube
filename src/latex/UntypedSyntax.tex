@@ -1,13 +1,13 @@
 \def\arraystretch{1.25}
-   \begin{array}{c c c|  c c c}
+   \begin{array}{c c c | c c c}
    
-   \text{syntax} & & & & & \\
-   \hline & & & & & \\
-   t::= & & \text{terms} & \text{evaluation} & & t \rightarrow t' \\
-        & x & \text{variable} & & \cfrac{t_1 \rightarrow t_1'}{t_1 t_2\rightarrow t_1't_2} \\
-        & \lambda x.t & \text{abstraction} \\
-        & t \ t & \text{application} & & \cfrac{t_2 \rightarrow t_2'}{v_1t_2\rightarrow v_1t_2'}\\ \\
-   v::= &  & \text{values} & & (\lambda x.t_{1 \ 2})v_2 \rightarrow [x\rightarrow v_2] t_{1 \ 2} \\
-        & \lambda x.t & \text{abstraction values}
+   \text{syntax} &             &                           & \text{evaluation} &                                                                  & t \rightarrow t'  \\
+   \hline        &             &                           &                   &                                                                  & \\
+   t::=          &             & \text{terms}              &                   &                                                                  & \\
+                 & x           & \text{variable}           &                   & \cfrac{t_1 \rightarrow t_1'}{t_1 t_2\rightarrow t_1't_2}         & \\
+                 & \lambda x.t & \text{abstraction}        &                   &                                                                  & \\
+                 & t \ t       & \text{application}        &                   & \cfrac{t_2 \rightarrow t_2'}{v_1t_2\rightarrow v_1t_2'}          & \\ \\
+   v::=          &             & \text{values}             &                   & (\lambda x.t_{1 \ 2})v_2 \rightarrow[x\rightarrow v_2] t_{1 \ 2} & \\
+                 & \lambda x.t & \text{abstraction values} &                   &                                                                  &
 
 \end{array}
