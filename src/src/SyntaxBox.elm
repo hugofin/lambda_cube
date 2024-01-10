@@ -8,6 +8,7 @@ import MathML.PSyntax
 import MathML.SimpleSyntax
 import MathML.TwoSyntax
 import MathML.UntypedSyntax
+import MathML.WSyntax
 import MathML.WeakWSyntax
 import System exposing (System(..))
 import Utils exposing (px)
@@ -59,7 +60,7 @@ syntax sys =
             [ MathML.WeakWSyntax.view ]
 
         W ->
-            [ text "" ]
+            [ MathML.WSyntax.view ]
 
         PW_ ->
             [ text "" ]
@@ -110,8 +111,8 @@ position sys =
             }
 
         W_ ->
-            { height = 500
-            , width = 800
+            { height = 400
+            , width = 650
             , y = 280
             , x = 25
             }

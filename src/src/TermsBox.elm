@@ -105,7 +105,7 @@ position sys =
             }
 
         Two ->
-            { height = 300
+            { height = 275
             , width = 500
             , y = 150
             , x = 25
@@ -119,8 +119,8 @@ position sys =
             }
 
         W ->
-            { height = 190
-            , width = 490
+            { height = 0
+            , width = 0
             , y = 225
             , x = 825
             }

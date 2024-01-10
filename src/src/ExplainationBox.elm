@@ -3,7 +3,6 @@ module ExplainationBox exposing (view)
 import Color exposing (..)
 import Html exposing (Html, br, div, text)
 import Html.Attributes exposing (style)
-import MathML.UntypedExplaination
 import System exposing (System(..))
 import Utils exposing (px)
 
@@ -56,7 +55,7 @@ syntax sys =
             ]
 
         W ->
-            [ text "System Fω combines both the Λ constructor of System F and the type constructors from System F ω _ . Thus System Fω provides both terms that depend on types and types that depend on types" ]
+            [ text "In system Fω, kinds can have an arbitrairy length, and it can be seen as the union of all lower order polymorphic lambda calculi.  In extending system F with type operators, we have a more computationally powerful system." ]
 
         PW_ ->
             [ text "as this system is a combination of types can bind both terms and types.  whats the point of having the kind system if there isnt any arrow types anymore" ]

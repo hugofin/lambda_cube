@@ -1,0 +1,16 @@
+\def\arraystretch{1.25}
+\begin{array}{c c c c}
+\text{kinds}\\
+\hline \\
+ & \ast \in \mathbb{K} & & \text{kind type} \\
+ & (\ast \rightarrow \ast) \in \mathbb{K} & & \text{abstraction type}
+\text{syntax}\\ 
+     \hline\\
+        & 0\vdash \ast : \Box & &\text{sort} \\\\
+        & \cfrac{\Gamma \vdash A:s}{\Gamma,x : A \vdash x : A}& \text{if } x \notin \Gamma  & \text{variable} \\\\
+        & \cfrac{\Gamma \vdash A:B \ \ \ \ \ \Gamma \vdash C : s}{\Gamma \vdash MN : B}& \text{if } x \notin \Gamma  & \text{weak} \\\\
+        & \cfrac{\Gamma \vdash A:s \ \ \ \ \ \Gamma  \vdash B : s}{\Gamma \vdash A \rightarrow B :s}& & \text{formation}  \\\\
+        & \cfrac{\Gamma \vdash M : A \rightarrow B  \ \ \ \ \ \Gamma \vdash N:A}{\Gamma \vdash MN : B} & & \text{application}\\ \\
+        & \cfrac{\Gamma, x : A \vdash M : B \ \ \ \ \ \Gamma \vdash A \rightarrow B :s}{\Gamma \vdash ( \lambda x : A.M) :A \rightarrow B} & & \text{abstraction} \\ \\
+        & \cfrac{\Gamma \vdash A:B \ \ \ \ \ \Gamma \vdash B' : s}{\Gamma \vdash A : B'}& \text{if } B =_\beta B'  & \text{conversion}
+\end{array}
