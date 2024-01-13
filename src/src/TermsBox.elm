@@ -83,7 +83,7 @@ position sys =
 
         None ->
             { height = 600
-            , width = 500
+            , width = 400
             , y = 0
             , x = 960
             }

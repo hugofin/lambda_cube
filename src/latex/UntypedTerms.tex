@@ -3,5 +3,14 @@
 \beta\text{ Reduction}&\\ 
      \hline \\
   (\lambda x .M) N \rightarrow_\beta M[x := N]& \text{basis}\\ \\
-  \cfrac{M\rightarrow_\beta N}{ML\rightarrow_\beta NL \ \  \lambda x .M \rightarrow_\beta \lambda x.N }  & \text{compatibility}
+  \cfrac{B\rightarrow_\beta B'}{\lambda x :A.\ B \rightarrow_\beta \lambda x :A.\ B'}  & \\ \\
+  \cfrac{A\rightarrow_\beta A'}{\lambda x :A.\ B \rightarrow_\beta \lambda x :A'.\ B}  & \\ \\
+  \cfrac{B\rightarrow_\beta B'}{\Pi x :A.\ B \rightarrow_\beta \Pi x :A.\ B'}  & \\ \\
+  \cfrac{A\rightarrow_\beta A'}{\Pi x :A.\ B \rightarrow_\beta \Pi x :A'.\ B}  & \\ \\
+\text{Beta Reduction takes a } & \text{} \\ 
+\text{reducable expression, and} &  \\ 
+\text{converts it into a contraction} &  \\ 
+\text{as seen in the basis rule.} &  \\ \\
+\text{Beta Reduction is shown by} & \rightarrow_\beta \\ 
+\text{Beta Conversion is shown by} & =_\beta \\ 
 \end{array}

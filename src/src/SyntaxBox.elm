@@ -139,7 +139,7 @@ position sys =
             }
 
         C ->
-            { height = 500
+            { height = 475
             , width = 775
             , y = -100
             , x = 675
