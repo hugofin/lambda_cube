@@ -25,6 +25,7 @@ import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import Sidebar
 import SyntaxBox
 import System exposing (System(..))
 import TermsBox
@@ -143,30 +144,6 @@ type alias Flags =
     Value
 
 
-button_side : System -> Html Msg
-button_side sys =
-    let
-        msg =
-            System.toString sys
-
-        col =
-            System.color sys
-    in
-    button
-        [ onClick (SystemClicked sys)
-        , style "height" "55px"
-        , style "width" "150px"
-        , style "background-color" col
-        , style "color" white
-        , style "font-size" "30px"
-        , style "border" "0px"
-        , style "border-top-right-radius" "20px"
-        , style "border-bottom-right-radius" "20px"
-        , style "cursor" "pointer"
-        ]
-        [ text msg ]
-
-
 button_trans : Bool -> System -> ( String, String ) -> Html Msg
 button_trans off sys ( x, y ) =
     button
@@ -200,18 +177,7 @@ view model =
         [ div []
             [ Title.view model.system ]
         , div [ style "display" "flex", style "flex-direction" "row" ]
-            [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
-                [ button_side Home
-                , button_side None
-                , button_side Simple
-                , button_side P
-                , button_side Two
-                , button_side W_
-                , button_side W
-                , button_side PW_
-                , button_side P2
-                , button_side C
-                ]
+            [ Sidebar.view SystemClicked model.system
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
                     [ Cube.view

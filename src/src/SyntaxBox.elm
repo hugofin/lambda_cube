@@ -118,7 +118,7 @@ position sys =
             }
 
         W ->
-            { height = 300
+            { height = 200
             , width = 500
             , y = 250
             , x = 25

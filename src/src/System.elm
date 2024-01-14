@@ -1,6 +1,7 @@
 module System exposing (System(..), color, hasProperty, toString, toggleProperty)
 
 import Color exposing (..)
+import Html exposing (Html, b, text, u)
 import Property exposing (..)
 
 
@@ -51,38 +52,38 @@ color sys =
             steel
 
 
-toString : System -> String
+toString : System -> Html msg
 toString sys =
     case sys of
         None ->
-            "untyped"
+            b [] [ text "untyped" ]
 
         Simple ->
-            "λ→"
+            b [] [ text "λ→" ]
 
         P ->
-            "P"
+            b [] [ text "P" ]
 
         Two ->
-            "2"
+            b [] [ text "2" ]
 
         W_ ->
-            "ω_"
+            b [] [ u [] [ text "ω" ] ]
 
         W ->
-            "ω"
+            b [] [ text "ω" ]
 
         PW_ ->
-            "Pω_"
+            b [] [ text "P", u [] [ text "ω" ] ]
 
         P2 ->
-            "P2"
+            b [] [ text "P2" ]
 
         C ->
-            "C"
+            b [] [ text "C" ]
 
         Home ->
-            "home"
+            b [] [ text "home" ]
 
 
 toggleProperty : Property -> System -> System
