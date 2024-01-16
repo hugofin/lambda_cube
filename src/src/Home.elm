@@ -25,6 +25,8 @@ import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import ReferenceButtons
+import ReferenceFooter
 import Sidebar
 import SyntaxBox
 import System exposing (System(..))
@@ -52,6 +54,7 @@ init _ =
       , system = Home
       , target = target
       , eye = eye
+      , banner = False
       }
     , Cmd.none
     )
@@ -80,6 +83,9 @@ update msg model =
 
         SystemClicked sys ->
             ( { model | system = sys }, Cmd.none )
+
+        ToggleReference ->
+            ( { model | banner = not model.banner }, Cmd.none )
 
 
 targetAndEyeFromSystem : System -> { target : Vec3, eye : Vec3 }
@@ -132,12 +138,14 @@ type alias Model =
     , system : System
     , target : Vec3
     , eye : Vec3
+    , banner : Bool
     }
 
 
 type Msg
     = Tick Float
     | SystemClicked System
+    | ToggleReference
 
 
 type alias Flags =
@@ -212,6 +220,11 @@ view model =
                                     [ SyntaxBox.view sys
                                     , TermsBox.view sys
                                     , ExplainationBox.view sys
+                                    , if model.banner == True then
+                                        ReferenceFooter.view ToggleReference sys
+
+                                      else
+                                        ReferenceButtons.view ToggleReference sys
                                     ]
                     in
                     trans_buttons ++ overlays
