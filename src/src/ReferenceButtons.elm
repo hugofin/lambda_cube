@@ -18,8 +18,8 @@ open : msg -> Int -> Int -> String -> String -> String -> Html msg
 open buttonclicked x y a tcol mcol =
     div
         [ onClick buttonclicked
-        , style "height" "20px"
-        , style "width" "20px"
+        , style "height" (px 20)
+        , style "width" (px 20)
         , style "position" "absolute"
         , style "top" (px y)
         , style "left" (px x)
@@ -40,25 +40,25 @@ buttons buttonclicked sys =
             [ open buttonclicked 922 300 "1" white black ]
 
         Simple ->
-            []
+            [ open buttonclicked 572 425 "1" white black ]
 
         P ->
-            []
+            [ open buttonclicked 1410 -100 "1" white black ]
 
         Two ->
-            []
+            [ open buttonclicked 1350 175 "1" white black ]
 
         W_ ->
-            []
+            [ open buttonclicked 672 300 "1" white black ]
 
         W ->
-            [ text "" ]
+            [ open buttonclicked 522 250 "1" white black ]
 
         PW_ ->
-            [ text "" ]
+            [ open buttonclicked 1470 -100 "1" white black ]
 
         P2 ->
-            [ text "" ]
+            [ open buttonclicked 1470 -100 "1" white black ]
 
         C ->
-            []
+            [ open buttonclicked 1435 -100 "1" white black ]

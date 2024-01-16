@@ -1,10 +1,11 @@
 module ReferenceFooter exposing (..)
 
 import Color exposing (..)
-import Html exposing (Html, div, text)
+import Html exposing (Html, b, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import System exposing (System(..))
+import Utils exposing (px)
 
 
 view : msg -> System -> Html msg
@@ -20,8 +21,8 @@ view buttonclicked sys =
             , style "width" "100%"
             , style "background-color" steel
             , style "opacity" "70%"
-            , style "top" "0px"
-            , style "left" "0px"
+            , style "top" (px 0)
+            , style "left" (px 0)
             , style "position" "fixed"
             ]
             []
@@ -29,12 +30,12 @@ view buttonclicked sys =
             [ style "width" "100%"
             , style "background-color" color
             , style "color" white
-            , style "bottom" "0px"
-            , style "left" "0px"
+            , style "bottom" (px 0)
+            , style "left" (px 0)
             , style "position" "fixed"
-            , style "font-size" "20px"
-            , style "padding" "10px"
-            , style "padding-bottom" "30px"
+            , style "font-size" (px 20)
+            , style "padding" (px 10)
+            , style "padding-bottom" (px 30)
             , style "text-align" "left"
             ]
             [ div []
@@ -43,8 +44,12 @@ view buttonclicked sys =
                     , style "flex-direction" "row"
                     , style "column-gap" "90%"
                     ]
-                    [ text "Citations: ", close buttonclicked ]
-                , div [] (citation sys)
+                    [ text "References: ", close buttonclicked ]
+                , div
+                    [ style "display" "flex"
+                    , style "flex-direction" "column"
+                    ]
+                    (citation sys)
                 ]
             ]
         ]
@@ -57,7 +62,9 @@ citation sys =
             []
 
         None ->
-            [ text "[1] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ]
+            [ div [] [ text "[1] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ]
+            , div [] [ text "[2] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ]
+            ]
 
         Simple ->
             []
@@ -86,10 +93,10 @@ citation sys =
 
 close : msg -> Html msg
 close buttonclicked =
-    div
+    b
         [ onClick buttonclicked
-        , style "height" "20px"
-        , style "width" "20px"
+        , style "height" (px 20)
+        , style "width" (px 20)
         , style "cursor" "pointer"
         ]
         [ text "⨉" ]

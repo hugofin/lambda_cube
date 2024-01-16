@@ -220,11 +220,12 @@ view model =
                                     [ SyntaxBox.view sys
                                     , TermsBox.view sys
                                     , ExplainationBox.view sys
+                                    , ReferenceButtons.view ToggleReference sys
                                     , if model.banner == True then
                                         ReferenceFooter.view ToggleReference sys
 
                                       else
-                                        ReferenceButtons.view ToggleReference sys
+                                        div [] []
                                     ]
                     in
                     trans_buttons ++ overlays

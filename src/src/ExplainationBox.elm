@@ -38,7 +38,11 @@ syntax sys =
             []
 
         None ->
-            [ text "Untyped Lambda calculus is a computational theory that an entire programming system can be represented using only functions." ]
+            [ text "Untyped Lambda calculus is a computational theory that an entire programming system can be represented using only functions."
+            , br [] []
+            , br [] []
+            , text " Through abstraction, application and beta reduction we are able to compute any complex series of terms and end up with a value as our answer."
+            ]
 
         Simple ->
             [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
