@@ -89,10 +89,10 @@ position sys =
             }
 
         Simple ->
-            { height = 270
-            , width = 600
-            , y = 275
-            , x = 750
+            { height = 10
+            , width = 10
+            , y = 300
+            , x = 25
             }
 
         P ->
@@ -134,7 +134,7 @@ position sys =
             { height = 10
             , width = 10
             , y = -100
-            , x = 200
+            , x = 725
             }
 
         C ->

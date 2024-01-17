@@ -1,7 +1,7 @@
 module Sidebar exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div)
+import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import System exposing (System(..))
@@ -9,8 +9,9 @@ import System exposing (System(..))
 
 view : (System -> msg) -> System -> Html msg
 view systemClicked sys =
-    div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px" ]
-        [ button_side Home sys systemClicked
+    div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px", style "align-items" "center" ]
+        [ --button_escape sys systemClicked,
+          button_side Home sys systemClicked
         , button_side None sys systemClicked
         , button_side Simple sys systemClicked
         , button_side P sys systemClicked
@@ -55,3 +56,28 @@ button_side sys current systemClicked =
         , style "border-color" col
         ]
         [ msg ]
+
+
+button_escape : System -> (System -> msg) -> Html msg
+button_escape current systemClicked =
+    if current /= Home then
+        button
+            [ onClick (systemClicked Home)
+            , style "height" "70px"
+            , style "width" "70px"
+            , style "border" "5px solid"
+            , style "font-size" "40px"
+            , style "cursor" "pointer"
+            , style "background-color" "rgba(0, 0, 0, 0.0)"
+            , style "border-color" "rgba(0, 0, 0, 0.0)"
+            , style "color" (System.color current)
+            ]
+            [ text "↩" ]
+
+    else
+        div
+            [ style "height" "70px"
+            , style "width" "70px"
+            , style "opacity" "0%"
+            ]
+            []

@@ -37,10 +37,10 @@ buttons buttonclicked sys =
             []
 
         None ->
-            [ open buttonclicked 922 300 "1" white black ]
+            [ open buttonclicked 922 300 "1" white black, open buttonclicked 1360 10 "2" black white ]
 
         Simple ->
-            [ open buttonclicked 572 425 "1" white black ]
+            [ open buttonclicked 1198 300 "1" white black ]
 
         P ->
             [ open buttonclicked 1410 -100 "1" white black ]
@@ -58,7 +58,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 1470 -100 "1" white black ]
 
         P2 ->
-            [ open buttonclicked 1470 -100 "1" white black ]
+            [ open buttonclicked 1470 200 "1" white black ]
 
         C ->
             [ open buttonclicked 1435 -100 "1" white black ]

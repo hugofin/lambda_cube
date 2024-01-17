@@ -45,7 +45,13 @@ syntax sys =
             ]
 
         Simple ->
-            [ text "The Simple type system allows terms to be defined using other terms", br [] [], br [] [], text "variable type - if α ∈ 𝕍, then α ∈ 𝕋", br [] [], text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋" ]
+            [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions.  The two different styles of types we can have are:"
+            , br [] []
+            , br [] []
+            , text "variable type - if α ∈ 𝕍, then α ∈ 𝕋"
+            , br [] []
+            , text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋"
+            ]
 
         P ->
             [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
@@ -97,7 +103,7 @@ position sys =
         Simple ->
             { height = 270
             , width = 500
-            , y = 100
+            , y = 300
             , x = 25
             }
 
@@ -138,9 +144,9 @@ position sys =
 
         P2 ->
             { height = 190
-            , width = 490
+            , width = 750
             , y = -100
-            , x = 200
+            , x = 725
             }
 
         C ->

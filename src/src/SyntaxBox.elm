@@ -92,8 +92,8 @@ position sys =
         Simple ->
             { height = 300
             , width = 550
-            , y = 425
-            , x = 25
+            , y = 300
+            , x = 650
             }
 
         P ->
@@ -134,7 +134,7 @@ position sys =
         P2 ->
             { height = 300
             , width = 750
-            , y = -100
+            , y = 200
             , x = 725
             }
 
