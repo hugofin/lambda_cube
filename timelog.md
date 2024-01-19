@@ -138,4 +138,42 @@
 
 ### Wednesday 3rd January 2024
 
-* *3 hour* Writing syntax box contents in LaTeX
+* *3 hour* Writing syntax box contents for untyped calculus in LaTeX
+
+### Saturday 6th January 2024
+
+* *3 hour* Writing syntax box contents for lambda 2 in LaTeX
+
+### Monday 8th January 2024
+
+* *2 hour* Writing syntax box contents for lambda W_ and W in LaTeX
+
+### Monday 8th January 2024
+
+* *5 hour* Writing syntax box contents for lambda P and CoC in LaTeX
+
+### Tuesday 9th January 2024
+
+* *3 hour* Searching for sources on PW_ and P2
+
+### Friday 12th January 2024
+
+* *1 hour* Added beta reduction to the untyped node
+
+### Saturday 13th January 2024
+
+* *2 hour* Fixed typesetting issue in the translator
+* *1 hour* Added an arrow to the untyped node
+
+### Sunday 14th January 2024
+
+* *2 hour* Redid the sidebar
+* *3 hour* Added footnote/citation box
+
+### Monday 15th January 2024
+
+* *1 hour* Created A return to home arrow
+
+### Monday 15th January 2024
+
+* *3 hour* Searching for sources on PW_ and P2
