@@ -4,6 +4,7 @@ import Html exposing (Html)
 import Html.Attributes exposing (height, style, width)
 import Math.Matrix4 as Mat4 exposing (Mat4)
 import Math.Vector3 as Vec3 exposing (Vec3, vec3)
+import System exposing (System(..))
 import WebGL exposing (Mesh, Shader)
 
 
@@ -15,7 +16,7 @@ type alias Uniforms =
     }
 
 
-view : { theta : Float, eye : Vec3, target : Vec3 } -> Html msg
+view : { theta : Float, eye : Vec3, target : Vec3, system : System } -> Html msg
 view model =
     WebGL.toHtml
         [ width 2400, height 1600, style "display" "block", style "width" "1200px", style "height" "800px" ]
@@ -32,9 +33,18 @@ view model =
         ]
 
 
-uniforms : { theta : Float, eye : Vec3, target : Vec3 } -> Uniforms
-uniforms { theta, eye, target } =
-    { rotation = Mat4.makeRotate (0 * sin theta) (vec3 1 1 1)
+uniforms : { theta : Float, eye : Vec3, target : Vec3, system : System } -> Uniforms
+uniforms { theta, eye, target, system } =
+    let
+        scale =
+            case system of
+                Home ->
+                    0.05
+
+                _ ->
+                    0.0
+    in
+    { rotation = Mat4.makeRotate (scale * sin theta) (vec3 0.5 0.5 0.5)
     , perspective = Mat4.makePerspective 45 1.5 0.01 10
     , camera = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade = 1
