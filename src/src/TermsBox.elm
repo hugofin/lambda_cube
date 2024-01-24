@@ -53,10 +53,7 @@ terms sys =
             []
 
         W_ ->
-            [ text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
-            , br [] []
-            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
-            ]
+            []
 
         W ->
             [ text "" ]
@@ -110,9 +107,9 @@ position sys =
             }
 
         W_ ->
-            { height = 150
-            , width = 490
-            , y = 95
+            { height = 10
+            , width = 10
+            , y = 0
             , x = 25
             }
 

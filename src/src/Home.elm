@@ -20,6 +20,7 @@ import Browser.Events exposing (onAnimationFrameDelta)
 import Color exposing (..)
 import Cube
 import ExplainationBox
+import GuideFooter
 import Html exposing (Html, button, div, text)
 import Html.Attributes exposing (disabled, style)
 import Html.Events exposing (onClick)
@@ -55,6 +56,7 @@ init _ =
       , target = target
       , eye = eye
       , banner = False
+      , guide = False
       }
     , Cmd.none
     )
@@ -86,6 +88,9 @@ update msg model =
 
         ToggleReference ->
             ( { model | banner = not model.banner }, Cmd.none )
+
+        ToggleGuide ->
+            ( { model | guide = not model.guide }, Cmd.none )
 
 
 targetAndEyeFromSystem : System -> { target : Vec3, eye : Vec3 }
@@ -139,6 +144,7 @@ type alias Model =
     , target : Vec3
     , eye : Vec3
     , banner : Bool
+    , guide : Bool
     }
 
 
@@ -146,6 +152,7 @@ type Msg
     = Tick Float
     | SystemClicked System
     | ToggleReference
+    | ToggleGuide
 
 
 type alias Flags =
@@ -190,12 +197,14 @@ view model =
             [ Title.view model.system ]
         , div [ style "display" "flex", style "flex-direction" "row" ]
             [ Sidebar.view SystemClicked model.system
+            , GuideFooter.open ToggleGuide
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
                     [ Cube.view
                         { theta = model.theta
                         , eye = model.eye
                         , target = model.target
+                        , system = model.system
                         }
                     ]
                 , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
@@ -234,6 +243,11 @@ view model =
                     in
                     trans_buttons ++ overlays
                 ]
+            , if model.guide == True then
+                GuideFooter.view ToggleGuide model.system
+
+              else
+                div [] []
             ]
         ]
 

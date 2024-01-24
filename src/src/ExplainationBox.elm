@@ -68,6 +68,9 @@ syntax sys =
         W_ ->
             [ text "in system F"
             , text " (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use."
+            , text "this system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
+            , br [] []
+            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
             ]
 
         W ->
@@ -122,9 +125,9 @@ position sys =
             }
 
         W_ ->
-            { height = 75
+            { height = 210
             , width = 500
-            , y = -25
+            , y = 0
             , x = 25
             }
 
