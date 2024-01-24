@@ -12,7 +12,7 @@ import Utils exposing (px)
 view : msg -> System -> Html msg
 view buttonclicked sys =
     let
-        color =
+        _ =
             System.color sys
     in
     div []

@@ -21,9 +21,8 @@ import Color exposing (..)
 import Cube
 import ExplainationBox
 import GuideFooter
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (disabled, style)
-import Html.Events exposing (onClick)
+import Html exposing (Html, div)
+import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
 import ReferenceButtons
@@ -33,6 +32,7 @@ import SyntaxBox
 import System exposing (System(..))
 import TermsBox
 import Title
+import TransferGrid
 
 
 main : Program Flags Model Msg
@@ -57,6 +57,7 @@ init _ =
       , eye = eye
       , banner = False
       , guide = False
+      , over = None
       }
     , Cmd.none
     )
@@ -91,6 +92,9 @@ update msg model =
 
         ToggleGuide ->
             ( { model | guide = not model.guide }, Cmd.none )
+
+        SystemOver sys ->
+            ( { model | over = sys }, Cmd.none )
 
 
 targetAndEyeFromSystem : System -> { target : Vec3, eye : Vec3 }
@@ -145,6 +149,7 @@ type alias Model =
     , eye : Vec3
     , banner : Bool
     , guide : Bool
+    , over : System
     }
 
 
@@ -153,36 +158,11 @@ type Msg
     | SystemClicked System
     | ToggleReference
     | ToggleGuide
+    | SystemOver System
 
 
 type alias Flags =
     Value
-
-
-button_trans : Bool -> System -> ( String, String ) -> Html Msg
-button_trans off sys ( x, y ) =
-    button
-        [ onClick (SystemClicked sys)
-        , style "height" "75px"
-        , style "width" "75px"
-        , style "background-color" "#ff0000"
-        , style "color" red
-        , style "border" "0px"
-        , style "position" "absolute"
-        , style "top" y
-        , style "left" x
-        , style "opacity" "0%"
-        , style "display" "flex"
-        , disabled off
-        , style "cursor"
-            (if off then
-                "default"
-
-             else
-                "pointer"
-            )
-        ]
-        [ text "" ]
 
 
 
@@ -213,14 +193,7 @@ view model =
                             model.system /= Home
 
                         trans_buttons =
-                            [ button_trans isGrid C ( "665px", "5px" )
-                            , button_trans isGrid W ( "310px", "23px" )
-                            , button_trans isGrid P2 ( "890px", "65px" )
-                            , button_trans isGrid Two ( "380px", "110px" )
-                            , button_trans isGrid PW_ ( "655px", "320px" )
-                            , button_trans isGrid W_ ( "340px", "375px" )
-                            , button_trans isGrid P ( "840px", "500px" )
-                            , button_trans isGrid Simple ( "410px", "600px" )
+                            [ TransferGrid.view isGrid SystemClicked SystemOver model.over
                             , Arrows.view SystemClicked model.system
                             ]
 

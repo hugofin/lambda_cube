@@ -41,8 +41,32 @@ uniforms { theta, eye, target, system } =
                 Home ->
                     0.05
 
-                _ ->
+                None ->
                     0.0
+
+                Simple ->
+                    0.01
+
+                P ->
+                    0.02
+
+                Two ->
+                    0.01
+
+                W_ ->
+                    0.02
+
+                W ->
+                    0.02
+
+                PW_ ->
+                    0.01
+
+                P2 ->
+                    0.01
+
+                C ->
+                    0.01
     in
     { rotation = Mat4.makeRotate (scale * sin theta) (vec3 0.5 0.5 0.5)
     , perspective = Mat4.makePerspective 45 1.5 0.01 10
