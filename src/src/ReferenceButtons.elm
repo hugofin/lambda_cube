@@ -1,4 +1,4 @@
-module ReferenceButtons exposing (..)
+module ReferenceButtons exposing (view)
 
 import Color exposing (..)
 import Html exposing (Html, div, text)

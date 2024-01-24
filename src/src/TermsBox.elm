@@ -1,7 +1,7 @@
 module TermsBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, br, div, text)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
 import MathML.UntypedTerms
 import System exposing (System(..))

@@ -1,4 +1,4 @@
-module GuideFooter exposing (..)
+module GuideFooter exposing (open, view)
 
 import Color exposing (..)
 import Html exposing (Html, b, div, text)
@@ -39,6 +39,12 @@ view buttonclicked sys =
                     , style "flex-direction" "column"
                     ]
                     [ MathML.Guide.view ]
+                , div
+                    [ style "position" "fixed"
+                    , style "left" "78%"
+                    , style "top" "83%"
+                    ]
+                    [ text "beginners are recommended to start at with the untyped calculus, before moving on to simply typed calculus." ]
                 ]
             ]
         ]
@@ -59,24 +65,24 @@ open : msg -> Html msg
 open buttonclicked =
     div
         [ onClick buttonclicked
-        , style "height" (px 80)
+        , style "height" (px 50)
         , style "width" (px 140)
         , style "display" "flex"
         , style "flex-direction" "column"
         , style "row-gap" "10px"
-        , style "align-items" "center"
         , style "text-align" "center"
         , style "position" "absolute"
         , style "top" (px 800)
         , style "left" (px 0)
         , style "cursor" "pointer"
-        , style "background-color" steel
-        , style "color" white
+        , style "background-color" white
+        , style "color" black
         , style "font-size" "30px"
-        , style "border" "5px solid"
+        , style "border" "1px solid"
         , style "border-left" "0px solid"
         , style "border-top-right-radius" "10px"
         , style "border-bottom-right-radius" "10px"
         , style "cursor" "pointer"
+        , style "font-size" "20px"
         ]
         [ text "guide" ]

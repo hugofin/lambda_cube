@@ -1,4 +1,4 @@
-module TransferGrid exposing (..)
+module TransferGrid exposing (view)
 
 import Color exposing (..)
 import Html exposing (Html, button, div, text)

@@ -1,4 +1,4 @@
-module ReferenceFooter exposing (..)
+module ReferenceFooter exposing (view)
 
 import Color exposing (..)
 import Html exposing (Html, b, div, text)
