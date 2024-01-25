@@ -70,6 +70,16 @@ svg_arrow systemClicked system property =
             , Svg.Attributes.transform turn
             ]
             []
+        , if not adding then
+            Svg.polygon
+                [ Svg.Attributes.points "5,5 55,5 66,10 55,15, 5,15"
+                , Svg.Attributes.style ("fill:" ++ white)
+                , Svg.Attributes.transform turn
+                ]
+                []
+
+          else
+            div [] []
         ]
 
 
