@@ -1,4 +1,4 @@
-module TermsBox exposing (view)
+module ReductionBox exposing (view)
 
 import Color exposing (..)
 import Html exposing (Html, div, text)
