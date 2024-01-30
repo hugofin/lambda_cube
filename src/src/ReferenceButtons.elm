@@ -40,7 +40,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 922 300 "1" white black, open buttonclicked 1360 10 "2" black white ]
 
         Simple ->
-            [ open buttonclicked 1198 300 "1" white black ]
+            [ open buttonclicked 1248 300 "1" white black, open buttonclicked 517 406 "2" black white ]
 
         P ->
             [ open buttonclicked 1410 -100 "1" white black ]

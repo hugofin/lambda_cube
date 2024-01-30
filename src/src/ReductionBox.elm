@@ -3,7 +3,8 @@ module ReductionBox exposing (view)
 import Color exposing (..)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
-import MathML.UntypedTerms
+import MathML.SimpleReduction
+import MathML.UntypedReduction
 import System exposing (System(..))
 import Utils exposing (px)
 
@@ -41,10 +42,10 @@ terms sys =
             []
 
         None ->
-            [ MathML.UntypedTerms.view ]
+            [ MathML.UntypedReduction.view ]
 
         Simple ->
-            []
+            [ text "Beta reduction works in a similar way to the untyped calculus, with the expansion that a redex can have a type", MathML.SimpleReduction.view ]
 
         P ->
             []
@@ -86,9 +87,9 @@ position sys =
             }
 
         Simple ->
-            { height = 10
-            , width = 10
-            , y = 300
+            { height = 300
+            , width = 490
+            , y = 400
             , x = 25
             }
 

@@ -90,8 +90,8 @@ position sys =
             }
 
         Simple ->
-            { height = 300
-            , width = 550
+            { height = 410
+            , width = 600
             , y = 300
             , x = 650
             }

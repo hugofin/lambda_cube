@@ -45,13 +45,7 @@ syntax sys =
             ]
 
         Simple ->
-            [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions.  The two different styles of types we can have are:"
-            , br [] []
-            , br [] []
-            , text "variable type - if α ∈ 𝕍, then α ∈ 𝕋"
-            , br [] []
-            , text "arrow type - if σ,τ ∈ 𝕋, then (σ→τ) ∈ 𝕋"
-            ]
+            [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
 
         P ->
             [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
@@ -80,7 +74,7 @@ syntax sys =
             [ text "This system has type operators and types that can depend on terms.  This means that we can express the more detailed types, and we can have type abstactions using kinds." ]
 
         P2 ->
-            [ b [] [ text "in the system P2, terms can bind types or types can bind terms.  Presumably this lets you have polymorphic generalised types" ] ]
+            [ b [] [ text "in the system P2 (standing for second order predicate logic), terms can bind types or types can bind terms.  " ] ]
 
         C ->
             [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
@@ -104,9 +98,9 @@ position sys =
             }
 
         Simple ->
-            { height = 270
+            { height = 160
             , width = 500
-            , y = 300
+            , y = 200
             , x = 25
             }
 

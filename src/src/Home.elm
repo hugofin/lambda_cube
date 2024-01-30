@@ -25,12 +25,12 @@ import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import ReductionBox
 import ReferenceButtons
 import ReferenceFooter
 import Sidebar
 import SyntaxBox
 import System exposing (System(..))
-import TermsBox
 import Title
 import TransferGrid
 
@@ -204,7 +204,7 @@ view model =
 
                                 sys ->
                                     [ SyntaxBox.view sys
-                                    , TermsBox.view sys
+                                    , ReductionBox.view sys
                                     , ExplainationBox.view sys
                                     , ReferenceButtons.view ToggleReference sys
                                     , if model.banner == True then

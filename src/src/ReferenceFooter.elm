@@ -67,7 +67,9 @@ citation sys =
             ]
 
         Simple ->
-            []
+            [ div [] [ text "[1] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ]
+            , div [] [ text "[2] Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ]
+            ]
 
         P ->
             []

@@ -1,5 +1,5 @@
 
-module MathML.UntypedTerms exposing (view)
+module MathML.UntypedReduction exposing (view)
 
 import Html exposing (math, text)
 import VirtualDom exposing (nodeNS)
