@@ -74,13 +74,23 @@ syntax sys =
             [ b [] [ text "In system Fω, kinds can have an arbitrairy length. The Higher order polymorphic lambda calculus can be seen as the union of all lower order polymorphic lambda calculi.  In extending system F with type operators, we have a more computationally powerful system." ] ]
 
         PW_ ->
-            [ text "This system has the notion of kinds and dependant types.  This means that we can express more detailed types, as well as abstactions over them using kinds.", br [] [], br [] [], text "P", u [] [ text "ω" ], text " is largely unexplored and rarely used, as it is as complex as the calculus of constructions without being as powerful." ]
+            [ text "This system has the notion of kinds and dependant types.  This means that we can express more detailed types, as well as abstactions over them using kinds."
+            , br [] []
+            , br [] []
+            , text "P"
+            , u [] [ text "ω" ]
+            , text " is largely unexplored and rarely used, as it is as complex as the calculus of constructions without being as powerful."
+            ]
 
         P2 ->
             [ b [] [ text "in the system P2 (standing for second order predicate logic), terms can bind types or types can bind terms.  " ] ]
 
         C ->
-            [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful." ]
+            [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful."
+            , br [] []
+            , br [] []
+            , text "The main application for the Calculus of Construction is for developing proof assistants, such as Coq or Matita.  These are programs which aid the user in developing formal proofs, with CoC being used as it is strongly normalising, and therefore consistent"
+            ]
 
 
 position : System -> { x : Int, y : Int, height : Int, width : Int }
@@ -150,8 +160,8 @@ position sys =
             }
 
         C ->
-            { height = 150
-            , width = 490
+            { height = 280
+            , width = 500
             , y = 0
             , x = 25
             }

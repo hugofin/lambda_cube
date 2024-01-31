@@ -3,6 +3,7 @@ module ReductionBox exposing (view)
 import Color exposing (..)
 import Html exposing (Html, br, div, text)
 import Html.Attributes exposing (style)
+import MathML.CReduction
 import MathML.SimpleReduction
 import MathML.UntypedReduction
 import System exposing (System(..))
@@ -31,6 +32,7 @@ view sys =
         , style "text-align" "left"
         , style "padding" "10px"
         , style "border-color" color
+        , style "overflow" "auto"
         ]
         (terms sys)
 
@@ -66,7 +68,7 @@ terms sys =
             [ text "" ]
 
         C ->
-            []
+            [ MathML.CReduction.view ]
 
 
 position : System -> { x : Int, y : Int, height : Int, width : Int }
@@ -136,8 +138,8 @@ position sys =
             }
 
         C ->
-            { height = 10
-            , width = 10
-            , y = 15
+            { height = 300
+            , width = 490
+            , y = 425
             , x = 25
             }
