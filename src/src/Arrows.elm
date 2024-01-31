@@ -63,6 +63,7 @@ svg_arrow systemClicked system property =
         , Html.Attributes.style "position" "absolute"
         , Html.Attributes.style "top" (px top)
         , Html.Attributes.style "left" (px left)
+        , Html.Attributes.style "cursor" "pointer"
         ]
         [ Svg.polygon
             [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"

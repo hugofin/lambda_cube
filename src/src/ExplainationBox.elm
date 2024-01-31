@@ -56,6 +56,9 @@ syntax sys =
                 , br [] []
                 , br [] []
                 , text "For instance, a polymorphic identity function would look like  λ α : * . λ x : α . x, where the star can be substituted for any type.  In system F, terms can depend on types. variable type - if α ∈ 𝕍, then α ∈ 𝕋2, arrow type - if σ,τ ∈ 𝕋2, then (σ→τ) ∈ 𝕋2, Π type - if α ∈ 𝕍 and σ ∈ 𝕋2, then (Πα : *. σ) ∈ 𝕋2"
+                , br [] []
+                , br [] []
+                , text "Polymorphic lambda calculus is used as the basis for the programming language 'Haskell'"
                 ]
             ]
 
@@ -112,9 +115,9 @@ position sys =
             }
 
         Two ->
-            { height = 300
+            { height = 360
             , width = 500
-            , y = 150
+            , y = 100
             , x = 25
             }
 

@@ -1,7 +1,7 @@
 module ReductionBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, div, text)
+import Html exposing (Html, br, div, text)
 import Html.Attributes exposing (style)
 import MathML.SimpleReduction
 import MathML.UntypedReduction
@@ -45,13 +45,13 @@ terms sys =
             [ MathML.UntypedReduction.view ]
 
         Simple ->
-            [ text "Beta reduction works in a similar way to the untyped calculus, with the expansion that a redex can have a type", MathML.SimpleReduction.view ]
+            [ text "Beta reduction works in a similar way to the untyped calculus, with the expansion that a redex can have a type", br [] [], br [] [], MathML.SimpleReduction.view ]
 
         P ->
             []
 
         Two ->
-            []
+            [ text "In the polymorphic calculus, the rules for β reduction are the same as in simply typed calculus.", br [] [], br [] [], MathML.SimpleReduction.view ]
 
         W_ ->
             []
@@ -101,9 +101,9 @@ position sys =
             }
 
         Two ->
-            { height = 10
-            , width = 10
-            , y = 150
+            { height = 230
+            , width = 490
+            , y = 500
             , x = 25
             }
 
