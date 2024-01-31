@@ -122,9 +122,9 @@ position sys =
             }
 
         PW_ ->
-            { height = 10
-            , width = 10
-            , y = -100
+            { height = 0
+            , width = 0
+            , y = 0
             , x = 25
             }
 

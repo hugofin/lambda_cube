@@ -1,7 +1,7 @@
 module ExplainationBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, br, div, text)
+import Html exposing (Html, b, br, div, text, u)
 import Html.Attributes exposing (style)
 import System exposing (System(..))
 import Utils exposing (px)
@@ -74,7 +74,7 @@ syntax sys =
             [ b [] [ text "In system Fω, kinds can have an arbitrairy length. The Higher order polymorphic lambda calculus can be seen as the union of all lower order polymorphic lambda calculi.  In extending system F with type operators, we have a more computationally powerful system." ] ]
 
         PW_ ->
-            [ text "This system has type operators and types that can depend on terms.  This means that we can express the more detailed types, and we can have type abstactions using kinds." ]
+            [ text "This system has the notion of kinds and dependant types.  This means that we can express more detailed types, as well as abstactions over them using kinds.", br [] [], br [] [], text "P", u [] [ text "ω" ], text " is largely unexplored and rarely used, as it is as complex as the calculus of constructions without being as powerful." ]
 
         P2 ->
             [ b [] [ text "in the system P2 (standing for second order predicate logic), terms can bind types or types can bind terms.  " ] ]
@@ -136,10 +136,10 @@ position sys =
             }
 
         PW_ ->
-            { height = 200
+            { height = 180
             , width = 500
-            , y = -100
-            , x = 25
+            , y = 0
+            , x = 725
             }
 
         P2 ->

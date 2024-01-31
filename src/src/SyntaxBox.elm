@@ -1,7 +1,7 @@
 module SyntaxBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, div, text)
+import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import MathML.CSyntax
 import MathML.PSyntax
@@ -63,10 +63,10 @@ syntax sys =
             [ MathML.WSyntax.view ]
 
         PW_ ->
-            [ text "" ]
+            [ MathML.PSyntax.view ]
 
         P2 ->
-            [ text "" ]
+            []
 
         C ->
             [ MathML.CSyntax.view ]
@@ -127,8 +127,8 @@ position sys =
         PW_ ->
             { height = 300
             , width = 750
-            , y = -100
-            , x = 725
+            , y = 450
+            , x = 100
             }
 
         P2 ->

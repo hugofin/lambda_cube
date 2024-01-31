@@ -55,7 +55,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 522 250 "1" white black ]
 
         PW_ ->
-            [ open buttonclicked 1470 -100 "1" white black ]
+            [ open buttonclicked 840 450 "1" white black ]
 
         P2 ->
             [ open buttonclicked 1470 200 "1" white black ]
