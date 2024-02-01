@@ -177,3 +177,29 @@
 ### Monday 15th January 2024
 
 * *3 hour* Searching for sources on PW_ and P2
+
+### Friday 19th January 2024
+
+* *3 hour* added the guide footer
+
+### Tuesday 23rd January 2024
+
+* *3 hour* added the guide footer
+* *1 hour* added and scaled the movement of the cube
+* *1 hour* added labels to the nodes on mouseover
+
+
+### Thursday 25th January 2024
+
+* *1 hour* work on the transfer arrows
+
+### Tuesday 30th January 2024
+
+* *2 hour* beta reduction at the STLC node
+
+### Wednesday 31st January 2024
+
+* *2 hour* beta reduction in polymorpihc lambda calculus
+* *1 hour* all information for PW_ node
+* *3 hour* beta reduction and uses for CoC
+* *0.5 hour* changes to the favicon and tyding up imports
