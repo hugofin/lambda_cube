@@ -79,7 +79,7 @@ syntax sys =
             , br [] []
             , text "P"
             , u [] [ text "ω" ]
-            , text " is largely unexplored and rarely used, as it is as complex as the calculus of constructions without being as powerful."
+            , text " is largely unexplored and unused, as it is as complex as the calculus of constructions without being as powerful."
             ]
 
         P2 ->

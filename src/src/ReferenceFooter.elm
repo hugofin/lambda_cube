@@ -84,7 +84,7 @@ citation sys =
             [ text "" ]
 
         PW_ ->
-            [ text "" ]
+            [ div [] [ text "[1] - Henk Barendregt. 1991. Introduction to generalized type systems. J. Funct. Prog. 1, 2 (April 1991), 125–154. https://doi.org/10.1017/S0956796800020025" ] ]
 
         P2 ->
             [ text "" ]
