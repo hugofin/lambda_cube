@@ -83,7 +83,7 @@ syntax sys =
             ]
 
         P2 ->
-            [ b [] [ text "in the system P2 (standing for second order predicate logic), terms can bind types or types can bind terms.  " ] ]
+            [ b [] [ text "in second order dependent type theory, terms can bind types or types can bind terms.  We can use this to inductuvely define types, such as the set of all natural numbers.  The system is not often used, as it is broardly as powerful as system F while being more complex to use." ] ]
 
         C ->
             [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful."

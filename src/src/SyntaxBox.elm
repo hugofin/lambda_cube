@@ -4,6 +4,7 @@ import Color exposing (..)
 import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import MathML.CSyntax
+import MathML.P2Syntax
 import MathML.PSyntax
 import MathML.SimpleSyntax
 import MathML.TwoSyntax
@@ -66,7 +67,7 @@ syntax sys =
             [ MathML.PSyntax.view ]
 
         P2 ->
-            []
+            [ MathML.P2Syntax.view ]
 
         C ->
             [ MathML.CSyntax.view ]
