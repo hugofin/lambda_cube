@@ -1,22 +1,30 @@
 module SyntaxBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, div)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
+import Html.Events exposing (onClick)
+import MathML.CRules
 import MathML.CSyntax
+import MathML.P2Rules
 import MathML.P2Syntax
+import MathML.PRules
 import MathML.PSyntax
+import MathML.SimpleRules
 import MathML.SimpleSyntax
+import MathML.TwoRules
 import MathML.TwoSyntax
 import MathML.UntypedSyntax
+import MathML.WRules
 import MathML.WSyntax
+import MathML.WeakWRules
 import MathML.WeakWSyntax
 import System exposing (System(..))
 import Utils exposing (px)
 
 
-view : System -> Html msg
-view sys =
+view : System -> (Bool -> msg) -> Bool -> Html msg
+view sys which a =
     let
         { height, width, y, x } =
             position sys
@@ -33,14 +41,43 @@ view sys =
         , style "font-size" "20px"
         , style "border" "0px"
         , style "text-align" "left"
-        , style "padding" "10px"
         , style "display" "inline-block"
+        , style "display" "flex"
+        , style "flex-direction" "column"
         ]
-        (syntax sys)
+        [ div
+            [ style "display" "flex"
+            , style "flex-direction" "row"
+            ]
+            [ div
+                [ onClick (which True)
+                , style "width" (px (width // 2))
+                , style "text-align" "center"
+                , if a then
+                    style "background-color" black
+
+                  else
+                    style "background-color" steel
+                ]
+                [ text "syntax" ]
+            , div
+                [ onClick (which False)
+                , style "width" (px (width // 2))
+                , style "text-align" "center"
+                , if a then
+                    style "background-color" steel
+
+                  else
+                    style "background-color" black
+                ]
+                [ text "explaination" ]
+            ]
+        , div [ style "padding" "10px" ] (syntax sys a)
+        ]
 
 
-syntax : System -> List (Html msg)
-syntax sys =
+syntax : System -> Bool -> List (Html msg)
+syntax sys a =
     case sys of
         Home ->
             []
@@ -49,28 +86,60 @@ syntax sys =
             [ MathML.UntypedSyntax.view ]
 
         Simple ->
-            [ MathML.SimpleSyntax.view ]
+            if a then
+                [ MathML.SimpleSyntax.view ]
+
+            else
+                [ MathML.SimpleRules.view ]
 
         P ->
-            [ MathML.PSyntax.view ]
+            if a then
+                [ MathML.PSyntax.view ]
+
+            else
+                [ MathML.PRules.view ]
 
         Two ->
-            [ MathML.TwoSyntax.view ]
+            if a then
+                [ MathML.TwoSyntax.view ]
+
+            else
+                [ MathML.TwoRules.view ]
 
         W_ ->
-            [ MathML.WeakWSyntax.view ]
+            if a then
+                [ MathML.WeakWSyntax.view ]
+
+            else
+                [ MathML.WeakWRules.view ]
 
         W ->
-            [ MathML.WSyntax.view ]
+            if a then
+                [ MathML.WSyntax.view ]
+
+            else
+                [ MathML.WRules.view ]
 
         PW_ ->
-            [ MathML.PSyntax.view ]
+            if a then
+                [ MathML.PSyntax.view ]
+
+            else
+                [ MathML.PRules.view ]
 
         P2 ->
-            [ MathML.P2Syntax.view ]
+            if a then
+                [ MathML.P2Syntax.view ]
+
+            else
+                [ MathML.PRules.view ]
 
         C ->
-            [ MathML.CSyntax.view ]
+            if a then
+                [ MathML.CSyntax.view ]
+
+            else
+                [ MathML.CRules.view ]
 
 
 position : System -> { height : Int, width : Int, x : Int, y : Int }

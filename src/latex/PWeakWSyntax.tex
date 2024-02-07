@@ -3,20 +3,23 @@
 
 k::= &                  & \text{kinds} \\
      & *                & \text{kind type}\\
+     & \Pi x:T.k        & \text{type operator}\\
+     & \Pi x:k.k'       & \text{kind operator}\\
 
      &                  & \\
    
 t::= &                  & \text{terms} \\
      & x                & \text{variable}\\
      & \lambda x:T.t    & \text{abstraction}\\
-     & t t              & \text{application}\\
-     & \Lambda x:k.t    & \text{term abstraction}\\
+     & t \ t            & \text{application}\\
 
      &                  & \\
 
 T::= &                  & \text{types} \\
      & x                & \text{atomic type}\\
      & p                & \text{polymorphic type}\\
-     & T \rightarrow T  & \text{type of a function}\\
-     & \lambda x:k.T    & \text{abstraction}\\
+     & \Pi x:A.B        & \text{function}\\
+     & \Lambda x:A.B    & \text{abstraction}\\
+     & t[\ T \ ]        & \text{application}\\
+
 \end{array}

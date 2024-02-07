@@ -1,14 +1,21 @@
 \def\arraystretch{1.25}
-\begin{array}{c c c c c c c}
-\text{kinds}            &   &                                               &   &                         &   & \\
-\hline 
-                        &   & \ast \in \mathbb{K}                           &   & \text{kind type}        &   & \\
-                        &   & (\ast \rightarrow \ast) \in \mathbb{K}        &   & \text{abstraction type} &   & \\ \\
-\text{sorts}            &   &                                               &   &                         &   & \\
-\hline 
-                        &   & s \in \{ \ast, \Box \}                        &   & \text{set of all sorts} &   & \\ \\
-\text{L1}               &   & \text{L3}                                     &   & \text{L2}               &   & \text{L4}\\
-(\lambda x : \alpha .x) & : & \alpha \rightarrow \alpha                     & : & \ast                    & : & \Box\\
-                        &   & \lambda\beta : \ast . \beta \rightarrow \beta & : & \ast \rightarrow \ast   & : & \Box\\\\
+\begin{array}{c c c}
 
+k::= &                  & \text{kinds} \\
+     & *                & \text{kind type}\\
+     & k \rightarrow k  & \text{kind of a type}\atop \text{level function}\\
+
+     &                  & \\
+   
+t::= &                  & \text{terms} \\
+     & x                & \text{variable}\\
+     & \lambda x:T.t    & \text{abstraction}\\
+     & t t              & \text{application}\\
+
+     &                  & \\
+
+T::= &                  & \text{types} \\
+     & x                & \text{atomic type}\\
+     & T \rightarrow T  & \text{type of a function}\\
+     & \lambda x:k.T    & \text{abstraction}\\
 \end{array}

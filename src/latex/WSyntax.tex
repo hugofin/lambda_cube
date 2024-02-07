@@ -1,11 +1,25 @@
 \def\arraystretch{1.25}
-   \begin{array}{c |c c c c}
- 
+\begin{array}{c c c}
 
-     F \omega & \ast, & \ast \rightarrow \ast, & (\ast \rightarrow \ast) \rightarrow \ast, & ... \\
-     ...      &       &                        &                                           & \\
-     F_3      & \ast, & \ast \rightarrow \ast, & (\ast \rightarrow \ast) \rightarrow \ast  & \\
-     F_2      & \ast, & \ast \rightarrow \ast  &                                           & \\
-     F_1      & \ast  &                        &                                           & 
+k::= &                  & \text{kinds} \\
+     & *                & \text{kind type}\\
+     & k \rightarrow k  & \text{kind of a type}\atop \text{level function}\\
 
+     &                  & \\
+   
+t::= &                  & \text{terms} \\
+     & x                & \text{variable}\\
+     & \lambda x:T.t    & \text{abstraction}\\
+     & t t              & \text{application}\\
+     & \Lambda x:k.t    & \text{term abstraction}\\
+     & t [\ T \ ]              & \text{application}\\
+
+     &                  & \\
+
+T::= &                  & \text{types} \\
+     & x                & \text{atomic type}\\
+     & p                & \text{polymorphic type}\\
+     & T \rightarrow T  & \text{type of a function}\\
+     & \lambda x:k.T    & \text{abstraction}\\
+     & \forall x:k.T    & \text{polymorphic}\atop\text{type formation}\\
 \end{array}

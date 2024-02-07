@@ -1,0 +1,9 @@
+\def\arraystretch{1.25}
+   \begin{array}{c c c}
+   \hline\\
+        & \cfrac{\sigma,\tau \in \mathbb{T}}{(\sigma \rightarrow \tau)\in\mathbb{T}}  & \text{type of functions}  \\\\
+        & \cfrac{x : \sigma \in \Gamma}{\Gamma \vdash x:\sigma}  & \text{variable}  \\\\
+        & \cfrac{\Gamma \vdash M : \sigma \rightarrow \tau \ \ \ \ \ \Gamma \vdash N : \sigma}{\Gamma \vdash MN : \tau} & \text{abstraction} \\ \\
+        & \cfrac{\Gamma ,x : \sigma \vdash M : \tau }{\Gamma \vdash \lambda x : \sigma . M : \sigma \rightarrow \tau} & \text{application}
+
+\end{array}

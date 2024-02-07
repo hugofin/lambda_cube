@@ -1,19 +1,25 @@
 \def\arraystretch{1.25}
-   \begin{array}{c c c }
+\begin{array}{c c c}
+
+k::= &                  & \text{kinds} \\
+     & *                & \text{kind type}\\
+     & \Pi x:T.k        & \text{type operator}\\
+
+     &                  & \\
    
-   \text{syntax} &             &                           \\
-   \hline        &             &                           \\
-   t::=          &             & \text{types}              \\
-                 & x           & \text{variable}           \\
-                 & \Pi x : A.B &  \\
-                 & \forall a : K .A & \\
-& \Lambda x : A.B & \\
-& A  [e]& \\
-& & \\
-   v::=          &             & \text{terms}             \\
-                 & \lambda x:A.v &  \\
-                 & v v &  \\
-                 & \Lambda a:k.e &  \\
-                 & e [A] &  \\
+t::= &                  & \text{terms} \\
+     & x                & \text{variable}\\
+     & \lambda x:T.t    & \text{abstraction}\\
+     & t t              & \text{application}\\
+
+     &                  & \\
+
+T::= &                  & \text{types} \\
+     & x                & \text{atomic type}\\
+     & p                & \text{polymorphic type}\\
+     & \Pi x:A.B        & \text{function}\\
+     & \forall x:k.T    & \text{polymorphic} \atop \text{formation}\\
+     & \Lambda x:A.B    & \text{abstraction}\\
+     & t[\ T \ ]        & \text{application}\\
 
 \end{array}

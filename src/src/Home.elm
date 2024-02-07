@@ -57,6 +57,7 @@ init _ =
       , eye = eye
       , banner = False
       , guide = False
+      , syntax = True
       , over = None
       }
     , Cmd.none
@@ -85,13 +86,16 @@ update msg model =
             )
 
         SystemClicked sys ->
-            ( { model | system = sys }, Cmd.none )
+            ( { model | system = sys, syntax = True }, Cmd.none )
 
         ToggleReference ->
             ( { model | banner = not model.banner }, Cmd.none )
 
         ToggleGuide ->
             ( { model | guide = not model.guide }, Cmd.none )
+
+        SetSyntax bool ->
+            ( { model | syntax = bool }, Cmd.none )
 
         SystemOver sys ->
             ( { model | over = sys }, Cmd.none )
@@ -149,6 +153,7 @@ type alias Model =
     , eye : Vec3
     , banner : Bool
     , guide : Bool
+    , syntax : Bool
     , over : System
     }
 
@@ -158,6 +163,7 @@ type Msg
     | SystemClicked System
     | ToggleReference
     | ToggleGuide
+    | SetSyntax Bool
     | SystemOver System
 
 
@@ -203,7 +209,7 @@ view model =
                                     []
 
                                 sys ->
-                                    [ SyntaxBox.view sys
+                                    [ SyntaxBox.view sys SetSyntax model.syntax
                                     , ReductionBox.view sys
                                     , ExplainationBox.view sys
                                     , ReferenceButtons.view ToggleReference sys
