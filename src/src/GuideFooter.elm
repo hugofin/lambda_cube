@@ -74,7 +74,6 @@ open buttonclicked =
         [ onClick buttonclicked
         , style "height" (px 80)
         , style "width" (px 140)
-        , style "text-align" "center"
         , style "position" "absolute"
         , style "top" (px 775)
         , style "left" (px 0)
@@ -86,5 +85,8 @@ open buttonclicked =
         , style "border-top" "2px solid"
         , style "cursor" "pointer"
         , style "font-size" "20px"
+        , style "display" "flex"
+        , style "align-items" "center"
+        , style "justify-content" "center"
         ]
         [ text "guide" ]

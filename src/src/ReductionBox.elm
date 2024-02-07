@@ -96,10 +96,10 @@ position sys =
             }
 
         P ->
-            { height = 200
-            , width = 625
-            , y = 450
-            , x = 670
+            { height = 0
+            , width = 0
+            , y = 520
+            , x = 100
             }
 
         Two ->
@@ -110,8 +110,8 @@ position sys =
             }
 
         W_ ->
-            { height = 10
-            , width = 10
+            { height = 0
+            , width = 0
             , y = 0
             , x = 25
             }
@@ -127,7 +127,7 @@ position sys =
             { height = 0
             , width = 0
             , y = 0
-            , x = 25
+            , x = 800
             }
 
         P2 ->

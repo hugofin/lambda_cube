@@ -1,4 +1,4 @@
-module ReferenceButtons exposing (view)
+module ReferenceButtons exposing (open, view)
 
 import Color exposing (..)
 import Html exposing (Html, div, text)
@@ -40,25 +40,25 @@ buttons buttonclicked sys =
             [ open buttonclicked 922 300 "1" white black, open buttonclicked 1360 10 "2" black white ]
 
         Simple ->
-            [ open buttonclicked 1248 300 "1" white black, open buttonclicked 517 406 "2" black white ]
+            [ open buttonclicked 1300 350 "1" white black, open buttonclicked 517 406 "2" black white ]
 
         P ->
             [ open buttonclicked 1410 -100 "1" white black ]
 
         Two ->
-            [ open buttonclicked 1350 175 "1" white black ]
+            [ open buttonclicked 1345 215 "1" white black ]
 
         W_ ->
-            [ open buttonclicked 672 300 "1" white black ]
+            [ open buttonclicked 705 340 "1" white black ]
 
         W ->
-            [ open buttonclicked 522 250 "1" white black ]
+            [ open buttonclicked 495 290 "1" white black ]
 
         PW_ ->
-            [ open buttonclicked 840 450 "2" white black, open buttonclicked 1220 0 "1" white purple ]
+            [ open buttonclicked 840 490 "2" white black, open buttonclicked 1220 0 "1" white purple ]
 
         P2 ->
-            [ open buttonclicked 1470 200 "1" white black ]
+            [ open buttonclicked 1470 240 "1" white black ]
 
         C ->
-            [ open buttonclicked 1435 -100 "1" white black ]
+            [ open buttonclicked 1445 -60 "1" white black ]

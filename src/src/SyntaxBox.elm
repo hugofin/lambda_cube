@@ -10,6 +10,7 @@ import MathML.P2Rules
 import MathML.P2Syntax
 import MathML.PRules
 import MathML.PSyntax
+import MathML.PWeakWSyntax
 import MathML.SimpleRules
 import MathML.SimpleSyntax
 import MathML.TwoRules
@@ -33,26 +34,28 @@ view sys which a =
         [ style "background-color" black
         , style "width" (px width)
         , style "height" (px height)
-        , style "overflow" "auto"
         , style "color" white
         , style "top" (px y)
         , style "left" (px x)
         , style "position" "absolute"
         , style "font-size" "20px"
         , style "border" "0px"
-        , style "text-align" "left"
-        , style "display" "inline-block"
+        , style "text-align" "center"
         , style "display" "flex"
         , style "flex-direction" "column"
         ]
         [ div
             [ style "display" "flex"
             , style "flex-direction" "row"
+            , style "height" (px 80)
             ]
             [ div
                 [ onClick (which True)
                 , style "width" (px (width // 2))
-                , style "text-align" "center"
+                , style "height" (px 40)
+                , style "display" "flex"
+                , style "align-items" "center"
+                , style "justify-content" "center"
                 , if a then
                     style "background-color" black
 
@@ -63,7 +66,10 @@ view sys which a =
             , div
                 [ onClick (which False)
                 , style "width" (px (width // 2))
-                , style "text-align" "center"
+                , style "height" (px 40)
+                , style "display" "flex"
+                , style "align-items" "center"
+                , style "justify-content" "center"
                 , if a then
                     style "background-color" steel
 
@@ -72,7 +78,7 @@ view sys which a =
                 ]
                 [ text "explaination" ]
             ]
-        , div [ style "padding" "10px" ] (syntax sys a)
+        , div [ style "padding" "10px", style "overflow" "auto" ] (syntax sys a)
         ]
 
 
@@ -122,7 +128,7 @@ syntax sys a =
 
         PW_ ->
             if a then
-                [ MathML.PSyntax.view ]
+                [ MathML.PWeakWSyntax.view ]
 
             else
                 [ MathML.PRules.view ]
@@ -160,15 +166,15 @@ position sys =
             }
 
         Simple ->
-            { height = 410
-            , width = 600
+            { height = 275
+            , width = 700
             , y = 300
             , x = 650
             }
 
         P ->
-            { height = 500
-            , width = 775
+            { height = 400
+            , width = 790
             , y = -100
             , x = 650
             }
@@ -182,13 +188,13 @@ position sys =
 
         W_ ->
             { height = 400
-            , width = 650
+            , width = 735
             , y = 300
             , x = 25
             }
 
         W ->
-            { height = 200
+            { height = 300
             , width = 500
             , y = 250
             , x = 25
@@ -196,21 +202,21 @@ position sys =
 
         PW_ ->
             { height = 300
-            , width = 750
+            , width = 780
             , y = 450
             , x = 100
             }
 
         P2 ->
-            { height = 300
-            , width = 750
+            { height = 375
+            , width = 780
             , y = 200
             , x = 725
             }
 
         C ->
-            { height = 475
-            , width = 775
+            { height = 500
+            , width = 815
             , y = -100
             , x = 675
             }

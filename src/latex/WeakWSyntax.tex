@@ -1,21 +1,15 @@
 \def\arraystretch{1.25}
-\begin{array}{c c c}
+\begin{array}{c c c | c c c}
 
-k::= &                  & \text{kinds} \\
-     & *                & \text{kind type}\\
-     & k \rightarrow k  & \text{kind of a type}\atop \text{level function}\\
+k::= &                  & \text{kinds} & T::= &                  & \text{types} \\
+     & *                & \text{kind type}&     & x                & \text{atomic type}\\
+     & k \rightarrow k  & \text{kind of a type}\atop \text{level function}&     & T \rightarrow T  & \text{type of a function}\\
 
-     &                  & \\
+     &                  & &     & \lambda x:k.T    & \text{abstraction}\\
    
-t::= &                  & \text{terms} \\
-     & x                & \text{variable}\\
-     & \lambda x:T.t    & \text{abstraction}\\
-     & t t              & \text{application}\\
+t::= &                  & \text{terms} & & & \\
+     & x                & \text{variable} & & &\\
+     & \lambda x:T.t    & \text{abstraction} & & &\\
+     & t t              & \text{application} & & &\\
 
-     &                  & \\
-
-T::= &                  & \text{types} \\
-     & x                & \text{atomic type}\\
-     & T \rightarrow T  & \text{type of a function}\\
-     & \lambda x:k.T    & \text{abstraction}\\
 \end{array}

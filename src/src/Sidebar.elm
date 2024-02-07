@@ -53,5 +53,8 @@ button_side sys current systemClicked =
         , style "border-bottom-right-radius" "10px"
         , style "cursor" "pointer"
         , style "border-color" col
+        , style "display" "flex"
+        , style "align-items" "center"
+        , style "justify-content" "center"
         ]
         [ msg ]

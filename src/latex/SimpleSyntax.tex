@@ -1,14 +1,9 @@
 \def\arraystretch{1.25}
-\begin{array}{c c c}
+\begin{array}{c c c | c c c}
    
-t::= &                  & \text{terms} \\
-     & x                & \text{variable}\\
-     & \lambda x:T.t    & \text{abstraction}\\
-     & t t              & \text{application}\\
+t::= &                  & \text{terms}       & T::= &                  & \text{types}        \\
+     & x                & \text{variable}    &      & x                & \text{atomic type}  \\
+     & \lambda x:T.t    & \text{abstraction} &      & T \rightarrow T  & \text{function type}\\
+     & t t              & \text{application} &      &                  &                     \\
 
-     &                  & \\
-
-T::= &                  & \text{types} \\
-     & x                & \text{atomic type}\\
-     & T \rightarrow T  & \text{type of a function}\\
 \end{array}

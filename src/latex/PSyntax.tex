@@ -1,23 +1,15 @@
 \def\arraystretch{1.25}
-\begin{array}{c c c}
+\begin{array}{c c c | c c c}
 
-k::= &                  & \text{kinds} \\
-     & *                & \text{kind type}\\
-     & \Pi x:T.k        & \text{type operator}\\
+k::= &                  & \text{kinds}    &T::= &                  & \text{types} \\
+     & *                & \text{kind type}&     & x                & \text{atomic type}\\
+     & \Pi x:T.k        & \text{type operator}&     & p                & \text{polymorphic type}\\
 
-     &                  & \\
+     &                  & &     & \Pi x:A.B        & \text{function}\\
    
-t::= &                  & \text{terms} \\
-     & x                & \text{variable}\\
-     & \lambda x:T.t    & \text{abstraction}\\
-     & t t              & \text{application}\\
-
-     &                  & \\
-
-T::= &                  & \text{types} \\
-     & x                & \text{atomic type}\\
-     & p                & \text{polymorphic type}\\
-     & \Pi x:A.B        & \text{function}\\
-     & \Lambda x:A.B    & \text{abstraction}\\
+t::= &                  & \text{terms} &     & \Lambda x:A.B    & \text{abstraction}\\
+     & x                & \text{variable} & & &\\
+     & \lambda x:T.t    & \text{abstraction} & & &\\
+     & t t              & \text{application} & & &\\
 
 \end{array}
