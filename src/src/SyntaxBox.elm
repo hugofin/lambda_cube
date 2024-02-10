@@ -176,7 +176,7 @@ position sys =
             { height = 400
             , width = 790
             , y = -100
-            , x = 650
+            , x = 660
             }
 
         Two ->

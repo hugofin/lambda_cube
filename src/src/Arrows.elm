@@ -1,7 +1,7 @@
 module Arrows exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, div)
+import Html exposing (Html, b, div)
 import Html.Attributes
 import Html.Events exposing (onClick)
 import Property exposing (Property(..))
@@ -35,52 +35,82 @@ svg_arrow systemClicked system property =
         col =
             Property.color property
 
-        ( top, left, turn ) =
+        ( ( top_a, left_a ), turn, ( top_t, left_t, label ) ) =
             case ( property, adding ) of
                 ( DependentTypes, False ) ->
-                    ( 340, 50, "rotate(166 10 38) translate(-53 20)" )
+                    ( ( 340, 50 )
+                    , "rotate(166 10 38) translate(-53 20)"
+                    , ( 0, 100, "Remove Dependent Types" )
+                    )
 
                 ( DependentTypes, True ) ->
-                    ( 95, 1000, "rotate(-15 10 38) translate(0 40)" )
+                    ( ( 95, 1000 )
+                    , "rotate(-15 10 38) translate(0 40)"
+                    , ( 0, -50, "Add Dependent Types" )
+                    )
 
                 ( Polymorphism, False ) ->
-                    ( 550, 562, "rotate(90 10 38) translate(-25 0)" )
+                    ( ( 550, 562 )
+                    , "rotate(90 10 38) translate(-25 0)"
+                    , ( 100, 0, "Remove Polymorphism" )
+                    )
 
                 ( Polymorphism, True ) ->
-                    ( -80, 562, "rotate(270 10 38) translate(-30 56)" )
+                    ( ( -80, 562 )
+                    , "rotate(270 10 38) translate(-30 56)"
+                    , ( 60, -15, "Add Polymorphism" )
+                    )
 
                 ( TypeOperators, False ) ->
-                    ( 535, 1100, "rotate(30 10 38) translate(0 0)" )
+                    ( ( 535, 1100 )
+                    , "rotate(30 10 38) translate(0 0)"
+                    , ( -30, -100, "Remove Type Operators" )
+                    )
 
                 ( TypeOperators, True ) ->
-                    ( 4, 205, "rotate(211 10 38) translate(-55 40)" )
+                    ( ( 4, 205 )
+                    , "rotate(211 10 38) translate(-55 40)"
+                    , ( 50, 100, "Add Type Operators" )
+                    )
     in
-    svg
-        [ onClick (systemClicked newSystem)
-        , width "80"
-        , height "80"
-        , viewBox " 0 0 80 80"
-        , Html.Attributes.style "position" "absolute"
-        , Html.Attributes.style "top" (px top)
-        , Html.Attributes.style "left" (px left)
-        , Html.Attributes.style "cursor" "pointer"
+    div
+        [ Html.Attributes.style "position" "absolute"
+        , Html.Attributes.style "top" (px top_a)
+        , Html.Attributes.style "left" (px left_a)
+        , Html.Attributes.class "arrow-container"
         ]
-        [ Svg.polygon
-            [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
-            , Svg.Attributes.style ("fill:" ++ col)
-            , Svg.Attributes.transform turn
+        [ svg
+            [ onClick (systemClicked newSystem)
+            , width "80"
+            , height "80"
+            , viewBox " 0 0 80 80"
+            , Html.Attributes.style "cursor" "pointer"
             ]
-            []
-        , if not adding then
-            Svg.polygon
-                [ Svg.Attributes.points "5,5 55,5 66,10 55,15, 5,15"
-                , Svg.Attributes.style ("fill:" ++ white)
+            [ Svg.polygon
+                [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
+                , Svg.Attributes.style ("fill:" ++ col)
                 , Svg.Attributes.transform turn
                 ]
                 []
+            , if not adding then
+                Svg.polygon
+                    [ Svg.Attributes.points "5,5 55,5 66,10 55,15, 5,15"
+                    , Svg.Attributes.style ("fill:" ++ white)
+                    , Svg.Attributes.transform turn
+                    ]
+                    []
 
-          else
-            div [] []
+              else
+                div [] []
+            ]
+        , b
+            [ Html.Attributes.class "arrow-text"
+            , Html.Attributes.style "position" "absolute"
+            , Html.Attributes.style "top" (px top_t)
+            , Html.Attributes.style "left" (px left_t)
+            , Html.Attributes.style "color" col
+            ]
+            [ text label ]
         ]
 
 

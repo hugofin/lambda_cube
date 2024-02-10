@@ -153,7 +153,7 @@ position sys =
             }
 
         P2 ->
-            { height = 190
+            { height = 100
             , width = 750
             , y = -100
             , x = 725
