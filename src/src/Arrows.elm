@@ -112,31 +112,3 @@ svg_arrow systemClicked system property =
             ]
             [ text label ]
         ]
-
-
-
-{-
-   None ->
-       div
-           [ onClick (systemClicked Simple)
-           , Html.Attributes.style "position" "absolute"
-           , Html.Attributes.style "top" (px 0)
-           , Html.Attributes.style "left" (px 730)
-           , Html.Attributes.style "display" "flex"
-           , Html.Attributes.style "flex-direction" "row"
-           ]
-           [ text "add the simple type system!"
-           , svg
-               [ width "120"
-               , height "120"
-               , viewBox " 0 0 80 80"
-               ]
-               [ Svg.polygon
-                   [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
-                   , Svg.Attributes.style "fill:#c0c0c0"
-                   , Svg.Attributes.transform "rotate(330 10 38) translate(15 10)"
-                   ]
-                   []
-               ]
-           ]
--}

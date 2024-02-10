@@ -6,7 +6,6 @@ import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import MathML.CRules
 import MathML.CSyntax
-import MathML.P2Rules
 import MathML.P2Syntax
 import MathML.PRules
 import MathML.PSyntax
