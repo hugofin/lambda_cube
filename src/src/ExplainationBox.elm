@@ -48,7 +48,7 @@ syntax sys =
             [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
 
         P ->
-            [ text "In the λP system, also named ΛΠ, types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types.  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program." ]
+            [ text "In the λP system, also named ΛΠ or the Edinburgh Logical Framework, 'LF', types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'" ]
 
         Two ->
             [ b []
@@ -118,10 +118,10 @@ position sys =
             }
 
         P ->
-            { height = 200
-            , width = 500
-            , y = 500
-            , x = 25
+            { height = 150
+            , width = 770
+            , y = -25
+            , x = 660
             }
 
         Two ->
@@ -154,9 +154,9 @@ position sys =
 
         P2 ->
             { height = 100
-            , width = 750
-            , y = -100
-            , x = 725
+            , width = 770
+            , y = 25
+            , x = 660
             }
 
         C ->

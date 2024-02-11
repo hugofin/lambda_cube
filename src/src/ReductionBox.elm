@@ -98,8 +98,8 @@ position sys =
         P ->
             { height = 0
             , width = 0
-            , y = 520
-            , x = 100
+            , y = -20
+            , x = 800
             }
 
         Two ->
@@ -119,8 +119,8 @@ position sys =
         W ->
             { height = 0
             , width = 0
-            , y = 0 --225
-            , x = 25 --825
+            , y = 0
+            , x = 25
             }
 
         PW_ ->
@@ -133,7 +133,7 @@ position sys =
         P2 ->
             { height = 10
             , width = 10
-            , y = -100
+            , y = 30
             , x = 725
             }
 

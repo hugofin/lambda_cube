@@ -174,7 +174,7 @@ position sys =
         P ->
             { height = 400
             , width = 790
-            , y = -100
+            , y = 175
             , x = 660
             }
 
@@ -207,10 +207,10 @@ position sys =
             }
 
         P2 ->
-            { height = 375
-            , width = 780
-            , y = 200
-            , x = 725
+            { height = 400
+            , width = 790
+            , y = 175
+            , x = 660
             }
 
         C ->
