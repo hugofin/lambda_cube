@@ -20,7 +20,7 @@ import Browser.Events exposing (onAnimationFrameDelta)
 import Color exposing (..)
 import Cube
 import ExplainationBox
-import GuideFooter
+import Footer
 import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
@@ -182,8 +182,13 @@ view model =
         [ div [ style "display" "flex", style "flex-direction" "row", style "align-items" "center" ]
             [ Title.view model.system ]
         , div [ style "display" "flex", style "flex-direction" "row" ]
-            [ Sidebar.view SystemClicked model.system
-            , GuideFooter.open ToggleGuide
+            [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "20px" ]
+                [ Sidebar.view SystemClicked model.system
+                , Footer.guide ToggleGuide
+
+                --, Footer.timeline ToggleGuide
+                --, Footer.settings ToggleGuide
+                ]
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
                     [ Cube.view
@@ -223,7 +228,7 @@ view model =
                     trans_buttons ++ overlays
                 ]
             , if model.guide == True then
-                GuideFooter.view ToggleGuide model.system
+                Footer.view ToggleGuide model.system
 
               else
                 div [] []

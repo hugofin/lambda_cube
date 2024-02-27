@@ -1,4 +1,4 @@
-module GuideFooter exposing (open, view)
+module Footer exposing (..)
 
 import Color exposing (..)
 import Html exposing (Html, b, br, div, text)
@@ -68,15 +68,12 @@ close buttonclicked =
         [ text "⨉" ]
 
 
-open : msg -> Html msg
-open buttonclicked =
+guide : msg -> Html msg
+guide buttonclicked =
     div
         [ onClick buttonclicked
-        , style "height" (px 80)
+        , style "height" (px 30)
         , style "width" (px 140)
-        , style "position" "absolute"
-        , style "top" (px 775)
-        , style "left" (px 0)
         , style "cursor" "pointer"
         , style "background-color" white
         , style "color" black
@@ -90,3 +87,43 @@ open buttonclicked =
         , style "justify-content" "center"
         ]
         [ text "guide" ]
+
+
+timeline : msg -> Html msg
+timeline buttonclicked =
+    div
+        [ onClick buttonclicked
+        , style "height" (px 30)
+        , style "width" (px 140)
+        , style "cursor" "pointer"
+        , style "background-color" white
+        , style "color" black
+        , style "font-size" "30px"
+        , style "border" "0px solid"
+        , style "cursor" "pointer"
+        , style "font-size" "20px"
+        , style "display" "flex"
+        , style "align-items" "center"
+        , style "justify-content" "center"
+        ]
+        [ text "timeline" ]
+
+
+settings : msg -> Html msg
+settings buttonclicked =
+    div
+        [ onClick buttonclicked
+        , style "height" (px 30)
+        , style "width" (px 140)
+        , style "cursor" "pointer"
+        , style "background-color" white
+        , style "color" black
+        , style "font-size" "30px"
+        , style "border" "0px solid"
+        , style "cursor" "pointer"
+        , style "font-size" "20px"
+        , style "display" "flex"
+        , style "align-items" "center"
+        , style "justify-content" "center"
+        ]
+        [ text "settings" ]

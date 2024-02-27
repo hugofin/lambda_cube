@@ -72,25 +72,25 @@ citation sys =
             ]
 
         P ->
-            []
+            [ div [] [ text "[1] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
 
         Two ->
-            []
+            [ div [] [ text "[1] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ] ]
 
         W_ ->
-            []
+            [ div [] [ text "[1] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
 
         W ->
-            [ text "" ]
+            [ div [] [ text "[2] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
 
         PW_ ->
             [ div [] [ text "[1] - Henk Barendregt. 1991. Introduction to generalized type systems. J. Funct. Prog. 1, 2 (April 1991), 125–154. https://doi.org/10.1017/S0956796800020025" ] ]
 
         P2 ->
-            [ text "[1] - Herman Geuvers. 2001, Induction is not derivable in seond order dependent type theory. LNCS,volume 2044" ]
+            [ b [] [ text "[1] - Herman Geuvers. 2001, Induction is not derivable in seond order dependent type theory. LNCS,volume 2044" ] ]
 
         C ->
-            []
+            [ div [] [ text "[2] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
 
 
 close : msg -> Html msg
