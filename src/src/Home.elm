@@ -56,7 +56,7 @@ init _ =
       , target = target
       , eye = eye
       , banner = False
-      , guide = False
+      , footer = 0
       , syntax = True
       , over = None
       }
@@ -91,8 +91,8 @@ update msg model =
         ToggleReference ->
             ( { model | banner = not model.banner }, Cmd.none )
 
-        ToggleGuide ->
-            ( { model | guide = not model.guide }, Cmd.none )
+        FooterClicked int ->
+            ( { model | footer = int }, Cmd.none )
 
         SetSyntax bool ->
             ( { model | syntax = bool }, Cmd.none )
@@ -152,7 +152,7 @@ type alias Model =
     , target : Vec3
     , eye : Vec3
     , banner : Bool
-    , guide : Bool
+    , footer : Int
     , syntax : Bool
     , over : System
     }
@@ -162,7 +162,7 @@ type Msg
     = Tick Float
     | SystemClicked System
     | ToggleReference
-    | ToggleGuide
+    | FooterClicked Int
     | SetSyntax Bool
     | SystemOver System
 
@@ -184,10 +184,8 @@ view model =
         , div [ style "display" "flex", style "flex-direction" "row" ]
             [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "20px" ]
                 [ Sidebar.view SystemClicked model.system
-                , Footer.guide ToggleGuide
-
-                --, Footer.timeline ToggleGuide
-                --, Footer.settings ToggleGuide
+                , Footer.guide (FooterClicked 1)
+                , Footer.settings (FooterClicked 2)
                 ]
             , div [ style "display" "block" ]
                 [ div [ style "position" "absolute", style "top" "0" ]
@@ -227,8 +225,8 @@ view model =
                     in
                     trans_buttons ++ overlays
                 ]
-            , if model.guide == True then
-                Footer.view ToggleGuide model.system
+            , if model.footer /= 0 then
+                Footer.view (FooterClicked 0) model.footer
 
               else
                 div [] []

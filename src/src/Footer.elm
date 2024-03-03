@@ -10,14 +10,10 @@ import System exposing (System(..))
 import Utils exposing (px)
 
 
-view : msg -> System -> Html msg
+view : msg -> Int -> Html msg
 view buttonclicked sys =
-    let
-        _ =
-            System.color sys
-    in
-    div []
-        [ div
+    if sys == 1 then
+        div
             [ style "width" "100%"
             , style "background-color" steel
             , style "color" white
@@ -54,7 +50,29 @@ view buttonclicked sys =
                 ]
                 [ close buttonclicked ]
             ]
-        ]
+
+    else
+        div
+            [ style "width" "100%"
+            , style "background-color" steel
+            , style "color" white
+            , style "bottom" (px 0)
+            , style "left" (px 0)
+            , style "position" "fixed"
+            , style "font-size" (px 20)
+            , style "padding" (px 10)
+            , style "padding-bottom" (px 30)
+            , style "text-align" "left"
+            , style "display" "flex"
+            , style "flex-direction" "row"
+            , style "column-gap" "5%"
+            ]
+            [ div
+                [ style "position" "fixed"
+                , style "left" "97%"
+                ]
+                [ close buttonclicked ]
+            ]
 
 
 close : msg -> Html msg
@@ -87,26 +105,6 @@ guide buttonclicked =
         , style "justify-content" "center"
         ]
         [ text "guide" ]
-
-
-timeline : msg -> Html msg
-timeline buttonclicked =
-    div
-        [ onClick buttonclicked
-        , style "height" (px 30)
-        , style "width" (px 140)
-        , style "cursor" "pointer"
-        , style "background-color" white
-        , style "color" black
-        , style "font-size" "30px"
-        , style "border" "0px solid"
-        , style "cursor" "pointer"
-        , style "font-size" "20px"
-        , style "display" "flex"
-        , style "align-items" "center"
-        , style "justify-content" "center"
-        ]
-        [ text "timeline" ]
 
 
 settings : msg -> Html msg
