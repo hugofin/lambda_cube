@@ -40,7 +40,7 @@ button_trans off sys ( x, y ) systemClicked systemOver over =
         , style "top" y
         , style "left" x
         , style "display" "flex"
-        , style "font-size" "20px"
+        , style "font-size" "25px"
         , disabled off
         , style "cursor"
             (if off then

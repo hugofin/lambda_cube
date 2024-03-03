@@ -75,7 +75,7 @@ view sys which a =
                   else
                     style "background-color" black
                 ]
-                [ text "explaination" ]
+                [ text "explanation" ]
             ]
         , div [ style "padding" "10px", style "overflow" "auto" ] (syntax sys a)
         ]
