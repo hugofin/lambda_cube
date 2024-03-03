@@ -25,6 +25,7 @@ import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import ProcessionButtons
 import ReductionBox
 import ReferenceButtons
 import ReferenceFooter
@@ -204,6 +205,7 @@ view model =
                         trans_buttons =
                             [ TransferGrid.view isGrid SystemClicked SystemOver model.over
                             , Arrows.view SystemClicked model.system
+                            , ProcessionButtons.view SystemClicked model.system
                             ]
 
                         overlays =
