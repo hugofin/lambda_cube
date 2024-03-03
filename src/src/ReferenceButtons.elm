@@ -37,7 +37,7 @@ buttons buttonclicked sys =
             []
 
         None ->
-            [ open buttonclicked 900 340 "1" white black, open buttonclicked 1360 10 "2" black white ]
+            [ open buttonclicked 902 350 "1" white black, open buttonclicked 1360 10 "2" black white ]
 
         Simple ->
             [ open buttonclicked 1300 350 "1" white black, open buttonclicked 517 406 "2" black white ]

@@ -43,40 +43,44 @@ view sys which a =
         , style "display" "flex"
         , style "flex-direction" "column"
         ]
-        [ div
-            [ style "display" "flex"
-            , style "flex-direction" "row"
-            , style "height" (px 80)
-            ]
-            [ div
-                [ onClick (which True)
-                , style "width" (px (width // 2))
-                , style "height" (px 40)
-                , style "display" "flex"
-                , style "align-items" "center"
-                , style "justify-content" "center"
-                , if a then
-                    style "background-color" black
-
-                  else
-                    style "background-color" steel
+        [ if sys /= None then
+            div
+                [ style "display" "flex"
+                , style "flex-direction" "row"
+                , style "height" (px 80)
                 ]
-                [ text "syntax" ]
-            , div
-                [ onClick (which False)
-                , style "width" (px (width // 2))
-                , style "height" (px 40)
-                , style "display" "flex"
-                , style "align-items" "center"
-                , style "justify-content" "center"
-                , if a then
-                    style "background-color" steel
+                [ div
+                    [ onClick (which True)
+                    , style "width" (px (width // 2))
+                    , style "height" (px 40)
+                    , style "display" "flex"
+                    , style "align-items" "center"
+                    , style "justify-content" "center"
+                    , if a then
+                        style "background-color" black
 
-                  else
-                    style "background-color" black
+                      else
+                        style "background-color" steel
+                    ]
+                    [ text "syntax" ]
+                , div
+                    [ onClick (which False)
+                    , style "width" (px (width // 2))
+                    , style "height" (px 40)
+                    , style "display" "flex"
+                    , style "align-items" "center"
+                    , style "justify-content" "center"
+                    , if a then
+                        style "background-color" steel
+
+                      else
+                        style "background-color" black
+                    ]
+                    [ text "explanation" ]
                 ]
-                [ text "explanation" ]
-            ]
+
+          else
+            div [] []
         , div [ style "padding" "10px", style "overflow" "auto" ] (syntax sys a)
         ]
 
