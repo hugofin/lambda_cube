@@ -11,8 +11,12 @@ import Utils exposing (px)
 view : (System -> msg) -> System -> Html msg
 view systemClicked sys =
     div []
-        [ forwards sys systemClicked
-        , if sys /= Home then
+        [ if sys /= C then
+            forwards sys systemClicked
+
+          else
+            div [] []
+        , if sys /= Home && sys /= None then
             backward sys systemClicked
 
           else

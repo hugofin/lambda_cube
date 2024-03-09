@@ -19,7 +19,7 @@ type alias Uniforms =
 view : { theta : Float, eye : Vec3, target : Vec3, system : System } -> Html msg
 view model =
     WebGL.toHtml
-        [ width 2400, height 1600, style "display" "block", style "width" "1200px", style "height" "800px" ]
+        [ width 2400, height 1800, style "display" "block", style "width" "1200px", style "height" "900px" ]
         [ WebGL.entity
             vertexShader
             fragmentShader
@@ -69,7 +69,7 @@ uniforms { theta, eye, target, system } =
                     0.01
     in
     { rotation = Mat4.makeRotate (scale * sin theta) (vec3 0.5 0.5 0.5)
-    , perspective = Mat4.makePerspective 45 1.5 0.01 10
+    , perspective = Mat4.makePerspective 50 1.3333333333333333 0.01 20
     , camera = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade = 1
     }

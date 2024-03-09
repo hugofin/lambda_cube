@@ -82,7 +82,7 @@ position sys =
             }
 
         None ->
-            { height = 600
+            { height = 605
             , width = 400
             , y = 0
             , x = 960
@@ -103,9 +103,9 @@ position sys =
             }
 
         Two ->
-            { height = 230
+            { height = 180
             , width = 490
-            , y = 500
+            , y = 550
             , x = 25
             }
 
@@ -140,6 +140,6 @@ position sys =
         C ->
             { height = 300
             , width = 490
-            , y = 425
+            , y = 450
             , x = 25
             }

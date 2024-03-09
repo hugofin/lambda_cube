@@ -164,7 +164,7 @@ position sys =
         None ->
             { height = 400
             , width = 900
-            , y = 300
+            , y = 315
             , x = 25
             }
 
@@ -183,16 +183,16 @@ position sys =
             }
 
         Two ->
-            { height = 500
-            , width = 625
+            { height = 350
+            , width = 550
             , y = 175
-            , x = 750
+            , x = 25
             }
 
         W_ ->
             { height = 400
             , width = 735
-            , y = 300
+            , y = 325
             , x = 25
             }
 

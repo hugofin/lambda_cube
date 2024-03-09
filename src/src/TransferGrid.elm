@@ -10,14 +10,14 @@ import System exposing (System(..), toString)
 view : Bool -> (System -> msg) -> (System -> msg) -> System -> Html msg
 view isGrid systemClicked systemOver over =
     div []
-        [ button_trans isGrid C ( "665px", "5px" ) systemClicked systemOver over
-        , button_trans isGrid W ( "310px", "23px" ) systemClicked systemOver over
-        , button_trans isGrid P2 ( "890px", "65px" ) systemClicked systemOver over
-        , button_trans isGrid Two ( "380px", "110px" ) systemClicked systemOver over
-        , button_trans isGrid PW_ ( "655px", "320px" ) systemClicked systemOver over
-        , button_trans isGrid W_ ( "340px", "375px" ) systemClicked systemOver over
-        , button_trans isGrid P ( "840px", "500px" ) systemClicked systemOver over
-        , button_trans isGrid Simple ( "410px", "600px" ) systemClicked systemOver over
+        [ button_trans isGrid C ( "665px", "55px" ) systemClicked systemOver over
+        , button_trans isGrid W ( "310px", "73px" ) systemClicked systemOver over
+        , button_trans isGrid P2 ( "890px", "115px" ) systemClicked systemOver over
+        , button_trans isGrid Two ( "380px", "160px" ) systemClicked systemOver over
+        , button_trans isGrid PW_ ( "655px", "370px" ) systemClicked systemOver over
+        , button_trans isGrid W_ ( "340px", "425px" ) systemClicked systemOver over
+        , button_trans isGrid P ( "840px", "550px" ) systemClicked systemOver over
+        , button_trans isGrid Simple ( "410px", "650px" ) systemClicked systemOver over
         ]
 
 

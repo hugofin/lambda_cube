@@ -41,14 +41,17 @@ syntax sys =
             [ text "Untyped Lambda calculus is a computational theory that an entire programming system can be represented using only functions."
             , br [] []
             , br [] []
-            , text " Through abstraction, application and beta reduction we are able to compute any complex series of terms and end up with a value as our answer."
+            , text "Through abstraction, application and beta reduction we are able to compute any complex series of terms and end up with a value as our answer."
+            , br [] []
+            , br [] []
+            , text "Untyped Lambda calculus is not a node on the cube, but is fundemental for understanding any of the systems in the Lambda cube."
             ]
 
         Simple ->
             [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
 
         P ->
-            [ text "In the λP system, also named ΛΠ or the Edinburgh Logical Framework, 'LF', types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'" ]
+            [ text "In the λP system, also named ΛΠ types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'.  This system is also similar to the Edinburgh Logical Framework, 'LF'." ]
 
         Two ->
             [ b []
@@ -104,7 +107,7 @@ position sys =
             }
 
         None ->
-            { height = 200
+            { height = 280
             , width = 500
             , y = 0
             , x = 25
@@ -127,8 +130,8 @@ position sys =
         Two ->
             { height = 360
             , width = 500
-            , y = 100
-            , x = 25
+            , y = 250
+            , x = 750
             }
 
         W_ ->
