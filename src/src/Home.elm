@@ -17,11 +17,10 @@ module Home exposing (main)
 import Arrows
 import Browser
 import Browser.Events exposing (onAnimationFrameDelta)
-import Color exposing (..)
 import Cube
 import ExplainationBox
 import Footer
-import Html exposing (Html, div)
+import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
@@ -30,8 +29,9 @@ import ReductionBox
 import ReferenceButtons
 import ReferenceFooter
 import Sidebar
+import String exposing (toInt)
 import SyntaxBox
-import System exposing (System(..))
+import System exposing (System(..), toString)
 import Title
 import TransferGrid
 
@@ -60,6 +60,7 @@ init _ =
       , footer = 0
       , syntax = True
       , over = None
+      , multiplier = 1
       }
     , Cmd.none
     )
@@ -100,6 +101,15 @@ update msg model =
 
         SystemOver sys ->
             ( { model | over = sys }, Cmd.none )
+
+        ToggleMultiplier ->
+            ( if model.multiplier == 0 then
+                { model | multiplier = 1 }
+
+              else
+                { model | multiplier = 0 }
+            , Cmd.none
+            )
 
 
 targetAndEyeFromSystem : System -> { target : Vec3, eye : Vec3 }
@@ -156,6 +166,7 @@ type alias Model =
     , footer : Int
     , syntax : Bool
     , over : System
+    , multiplier : Int
     }
 
 
@@ -166,14 +177,11 @@ type Msg
     | FooterClicked Int
     | SetSyntax Bool
     | SystemOver System
+    | ToggleMultiplier
 
 
 type alias Flags =
     Value
-
-
-
--- , button_escape model.system SystemClicked
 
 
 view : Model -> Html Msg
@@ -195,6 +203,7 @@ view model =
                         , eye = model.eye
                         , target = model.target
                         , system = model.system
+                        , multiplier = model.multiplier
                         }
                     ]
                 , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
@@ -228,7 +237,7 @@ view model =
                     trans_buttons ++ overlays
                 ]
             , if model.footer /= 0 then
-                Footer.view (FooterClicked 0) model.footer
+                Footer.view ToggleMultiplier (FooterClicked 0) model.footer
 
               else
                 div [] []

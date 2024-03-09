@@ -1,4 +1,4 @@
-module Color exposing (..)
+module ColorSafe exposing (..)
 
 
 white : String
@@ -8,22 +8,22 @@ white =
 
 yellow : String
 yellow =
-    "#ffee00"
+    "#ccbb44"
 
 
 green : String
 green =
-    "#6bff56"
+    "#228833"
 
 
 teal : String
 teal =
-    "#00ffab"
+    "#66ccee"
 
 
 leaf : String
 leaf =
-    "#c5e8b7"
+    "#ddcc77"
 
 
 mauve : String
@@ -33,17 +33,17 @@ mauve =
 
 sky : String
 sky =
-    "#74c0ff"
+    "#0077bb"
 
 
 purple : String
 purple =
-    "#c66cc7"
+    "#ee3377"
 
 
 red : String
 red =
-    "#ff302d"
+    "#cc3311"
 
 
 steel : String
@@ -58,4 +58,4 @@ black =
 
 orange : String
 orange =
-    "#ff8e42"
+    "#ee7733"
