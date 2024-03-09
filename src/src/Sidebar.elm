@@ -13,10 +13,10 @@ view systemClicked sys =
         [ button_side Home sys systemClicked
         , button_side None sys systemClicked
         , button_side Simple sys systemClicked
-        , button_side P sys systemClicked
         , button_side Two sys systemClicked
         , button_side W_ sys systemClicked
         , button_side W sys systemClicked
+        , button_side P sys systemClicked
         , button_side PW_ sys systemClicked
         , button_side P2 sys systemClicked
         , button_side C sys systemClicked

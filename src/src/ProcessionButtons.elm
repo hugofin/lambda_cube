@@ -12,7 +12,11 @@ view : (System -> msg) -> System -> Html msg
 view systemClicked sys =
     div []
         [ forwards sys systemClicked
-        , backward sys systemClicked
+        , if sys /= Home then
+            backward sys systemClicked
+
+          else
+            div [] []
         ]
 
 
