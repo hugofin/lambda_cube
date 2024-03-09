@@ -20,7 +20,7 @@ import Browser.Events exposing (onAnimationFrameDelta)
 import Cube
 import ExplainationBox
 import Footer
-import Html exposing (Html, div, text)
+import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
@@ -29,9 +29,8 @@ import ReductionBox
 import ReferenceButtons
 import ReferenceFooter
 import Sidebar
-import String exposing (toInt)
 import SyntaxBox
-import System exposing (System(..), toString)
+import System exposing (..)
 import Title
 import TransferGrid
 
@@ -59,7 +58,6 @@ init _ =
       , banner = False
       , footer = 0
       , syntax = True
-      , over = None
       , multiplier = 1
       }
     , Cmd.none
@@ -98,9 +96,6 @@ update msg model =
 
         SetSyntax bool ->
             ( { model | syntax = bool }, Cmd.none )
-
-        SystemOver sys ->
-            ( { model | over = sys }, Cmd.none )
 
         ToggleMultiplier ->
             ( if model.multiplier == 0 then
@@ -165,7 +160,6 @@ type alias Model =
     , banner : Bool
     , footer : Int
     , syntax : Bool
-    , over : System
     , multiplier : Int
     }
 
@@ -176,7 +170,6 @@ type Msg
     | ToggleReference
     | FooterClicked Int
     | SetSyntax Bool
-    | SystemOver System
     | ToggleMultiplier
 
 
@@ -212,7 +205,7 @@ view model =
                             model.system /= Home
 
                         trans_buttons =
-                            [ TransferGrid.view isGrid SystemClicked SystemOver model.over
+                            [ TransferGrid.view isGrid SystemClicked
                             , Arrows.view SystemClicked model.system
                             , ProcessionButtons.view SystemClicked model.system
                             ]

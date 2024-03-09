@@ -1,36 +1,35 @@
 module TransferGrid exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (disabled, style)
-import Html.Events exposing (onClick, onMouseEnter, onMouseLeave)
+import Html exposing (Html, button, div)
+import Html.Attributes exposing (class, disabled, style)
+import Html.Events exposing (onClick)
 import System exposing (System(..), toString)
 
 
-view : Bool -> (System -> msg) -> (System -> msg) -> System -> Html msg
-view isGrid systemClicked systemOver over =
+view : Bool -> (System -> msg) -> Html msg
+view isGrid systemClicked =
     div []
-        [ button_trans isGrid C ( "665px", "55px" ) systemClicked systemOver over
-        , button_trans isGrid W ( "310px", "73px" ) systemClicked systemOver over
-        , button_trans isGrid P2 ( "890px", "115px" ) systemClicked systemOver over
-        , button_trans isGrid Two ( "380px", "160px" ) systemClicked systemOver over
-        , button_trans isGrid PW_ ( "655px", "370px" ) systemClicked systemOver over
-        , button_trans isGrid W_ ( "340px", "425px" ) systemClicked systemOver over
-        , button_trans isGrid P ( "840px", "550px" ) systemClicked systemOver over
-        , button_trans isGrid Simple ( "410px", "650px" ) systemClicked systemOver over
+        [ button_trans isGrid C ( "665px", "55px" ) systemClicked
+        , button_trans isGrid W ( "310px", "73px" ) systemClicked
+        , button_trans isGrid P2 ( "890px", "115px" ) systemClicked
+        , button_trans isGrid Two ( "380px", "160px" ) systemClicked
+        , button_trans isGrid PW_ ( "655px", "370px" ) systemClicked
+        , button_trans isGrid W_ ( "340px", "425px" ) systemClicked
+        , button_trans isGrid P ( "840px", "550px" ) systemClicked
+        , button_trans isGrid Simple ( "410px", "650px" ) systemClicked
         ]
 
 
-button_trans : Bool -> System -> ( String, String ) -> (System -> msg) -> (System -> msg) -> System -> Html msg
-button_trans off sys ( x, y ) systemClicked systemOver over =
+button_trans : Bool -> System -> ( String, String ) -> (System -> msg) -> Html msg
+button_trans off sys ( x, y ) systemClicked =
     let
         col =
             System.color sys
     in
     button
-        [ onClick (systemClicked sys)
-        , onMouseEnter (systemOver sys)
-        , onMouseLeave (systemOver None)
+        [ class "grid-container"
+        , onClick (systemClicked sys)
         , style "height" "75px"
         , style "width" "75px"
         , style "background-color" "rgba(0, 0, 0, 0)"
@@ -39,7 +38,6 @@ button_trans off sys ( x, y ) systemClicked systemOver over =
         , style "position" "absolute"
         , style "top" y
         , style "left" x
-        , style "display" "flex"
         , style "font-size" "25px"
         , disabled off
         , style "cursor"
@@ -50,9 +48,9 @@ button_trans off sys ( x, y ) systemClicked systemOver over =
                 "pointer"
             )
         ]
-        [ if not off && over == sys then
-            toString sys
+        [ if not off then
+            div [ class "grid-text" ] [ toString sys ]
 
           else
-            text ""
+            div [ class "grid-text" ] []
         ]
