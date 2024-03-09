@@ -10,9 +10,9 @@ import System exposing (System(..))
 import Utils exposing (px)
 
 
-view : msg -> Int -> Html msg
-view buttonclicked sys =
-    if sys == 1 then
+view : msg -> msg -> Int -> Html msg
+view togglemult exitclicked mode =
+    if mode == 1 then
         div
             [ style "width" "100%"
             , style "background-color" steel
@@ -48,30 +48,42 @@ view buttonclicked sys =
                 [ style "position" "fixed"
                 , style "left" "97%"
                 ]
-                [ close buttonclicked ]
+                [ close exitclicked ]
             ]
 
     else
         div
             [ style "width" "100%"
+            , style "height" "200px"
             , style "background-color" steel
             , style "color" white
             , style "bottom" (px 0)
             , style "left" (px 0)
             , style "position" "fixed"
             , style "font-size" (px 20)
-            , style "padding" (px 10)
-            , style "padding-bottom" (px 30)
+            , style "padding" (px 30)
+            , style "padding-right" (px 10)
             , style "text-align" "left"
             , style "display" "flex"
             , style "flex-direction" "row"
             , style "column-gap" "5%"
             ]
             [ div
+                [ onClick togglemult
+                , style "width" "250px"
+                , style "height" "100px"
+                , style "display" "flex"
+                , style "flex-direction" "row"
+                , style "align-items" "center"
+                , style "justify-content" "center"
+                , style "border" "3px solid"
+                ]
+                [ text "toggle cube animation" ]
+            , div
                 [ style "position" "fixed"
                 , style "left" "97%"
                 ]
-                [ close buttonclicked ]
+                [ close exitclicked ]
             ]
 
 
