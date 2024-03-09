@@ -44,14 +44,14 @@ syntax sys =
             , text "Through abstraction, application and beta reduction we are able to compute any complex series of terms and end up with a value as our answer."
             , br [] []
             , br [] []
-            , text "Untyped Lambda calculus is not a node on the cube, but is fundemental for understanding any of the systems in the Lambda cube."
+            , text "Untyped Lambda calculus is not a node on the cube, but is fundamental for understanding any of the systems in the Lambda cube."
             ]
 
         Simple ->
             [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
 
         P ->
-            [ text "In the λP system, also named ΛΠ types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'.  This system is also similar to the Edinburgh Logical Framework, 'LF'." ]
+            [ text "In the λP system, also named ΛΠ types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'.  This system is similar to the Edinburgh Logical Framework, 'LF'." ]
 
         Two ->
             [ b []
@@ -66,18 +66,17 @@ syntax sys =
             ]
 
         W_ ->
-            [ text "in system F"
-            , text " (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use."
-            , text "  This system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
+            [ text "In system F (pronounced weak omega), types can now depend on other types.  This doesn't make the calculus more powerful, just nicer to use.  This system introduces 'kinds', which are types for type abstractions.  A kind is a combination of stars and arrows, and only show the structure of a type, and not it's content."
             , br [] []
-            , text "as an example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
+            , br [] []
+            , text "For example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
             ]
 
         W ->
-            [ b [] [ text "In system Fω, kinds can have an arbitrairy length. The Higher order polymorphic lambda calculus can be seen as the union of all lower order polymorphic lambda calculi.  In extending system F with type operators, we have a more computationally powerful system." ] ]
+            [ b [] [ text "In system Fω, kinds can have an arbitrary length. The Higher order polymorphic lambda calculus can be seen as the union of all lower order polymorphic lambda calculi.  In extending system F with type operators, we have a more computationally powerful system." ] ]
 
         PW_ ->
-            [ text "This system has the notion of kinds and dependant types.  This means that we can express more detailed types, as well as abstactions over them using kinds."
+            [ text "This system has the notion of kinds and dependant types.  This means that we can express more detailed types, as well as abstractions over them using kinds."
             , br [] []
             , br [] []
             , text "P"
@@ -86,7 +85,7 @@ syntax sys =
             ]
 
         P2 ->
-            [ b [] [ text "in second order dependent type theory, terms can bind types or types can bind terms.  We can use this to inductuvely define types, such as the set of all natural numbers.  The system is not often used, as it is broardly as powerful as system F while being more complex to use." ] ]
+            [ b [] [ text "in second order dependent type theory, terms can bind types or types can bind terms. We can use this to inductively define types, such as the set of all natural numbers. The system is not often used, as it is broadly as powerful as system F while being more complex to use." ] ]
 
         C ->
             [ text "In the calculus of constructions, all three types are active, so both terms and types can depend on either terms or types.  This system is strongly normalising, meaning that all valid terms will terminate, while still being powerful."
@@ -135,7 +134,7 @@ position sys =
             }
 
         W_ ->
-            { height = 210
+            { height = 230
             , width = 500
             , y = 0
             , x = 25
