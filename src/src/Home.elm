@@ -24,6 +24,7 @@ import Html exposing (Html, div)
 import Html.Attributes exposing (style)
 import Json.Decode exposing (Value)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
+import MathML.UntypedSyntax
 import ProcessionButtons
 import ReductionBox
 import ReferenceButtons
@@ -180,7 +181,7 @@ type alias Flags =
 view : Model -> Html Msg
 view model =
     div
-        [ style "font-family" "IBM Plex Sans", style "display" "flex", style "flex-direction" "column" ]
+        [ style "display" "flex", style "flex-direction" "column" ]
         [ div [ style "display" "flex", style "flex-direction" "row", style "align-items" "center" ]
             [ Title.view model.system ]
         , div [ style "display" "flex", style "flex-direction" "row" ]

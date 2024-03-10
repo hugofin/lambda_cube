@@ -12,7 +12,7 @@ view isGrid systemClicked =
     div []
         [ button_trans isGrid C ( "665px", "55px" ) systemClicked
         , button_trans isGrid W ( "310px", "73px" ) systemClicked
-        , button_trans isGrid P2 ( "890px", "115px" ) systemClicked
+        , button_trans isGrid P2 ( "890px", "100px" ) systemClicked
         , button_trans isGrid Two ( "380px", "160px" ) systemClicked
         , button_trans isGrid PW_ ( "655px", "370px" ) systemClicked
         , button_trans isGrid W_ ( "340px", "425px" ) systemClicked

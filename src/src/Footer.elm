@@ -54,7 +54,7 @@ view togglemult exitclicked mode =
     else
         div
             [ style "width" "100%"
-            , style "height" "200px"
+            , style "height" "100px"
             , style "background-color" steel
             , style "color" white
             , style "bottom" (px 0)
@@ -79,6 +79,17 @@ view togglemult exitclicked mode =
                 , style "border" "3px solid"
                 ]
                 [ text "toggle cube animation" ]
+            , div
+                [ onClick togglemult
+                , style "width" "250px"
+                , style "height" "100px"
+                , style "display" "flex"
+                , style "flex-direction" "row"
+                , style "align-items" "center"
+                , style "justify-content" "center"
+                , style "border" "3px solid"
+                ]
+                [ text "toggle colour blind mode" ]
             , div
                 [ style "position" "fixed"
                 , style "left" "97%"

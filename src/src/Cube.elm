@@ -235,63 +235,73 @@ hex2vec : String -> Vec3
 hex2vec input_string =
     let
         r =
-            toFloat ((string2num (slice 1 2 input_string) * 16) + string2num (slice 2 3 input_string))
+            toFloat (string2num (slice 1 3 input_string))
 
         g =
-            toFloat ((string2num (slice 3 4 input_string) * 16) + string2num (slice 4 5 input_string))
+            toFloat (string2num (slice 3 5 input_string))
 
         b =
-            toFloat ((string2num (slice 5 6 input_string) * 16) + string2num (slice 6 7 input_string))
+            toFloat (string2num (slice 5 7 input_string))
     in
     vec3 r g b
 
 
 string2num : String -> Int
-string2num a =
+string2num string_input =
+    case String.toList string_input of
+        [ a, b ] ->
+            (16 * char2num a) + char2num b
+
+        _ ->
+            0
+
+
+char2num : Char -> Int
+char2num a =
     case a of
-        "1" ->
+        '1' ->
             1
 
-        "2" ->
+        '2' ->
             2
 
-        "3" ->
+        '3' ->
             3
 
-        "4" ->
+        '4' ->
             4
 
-        "5" ->
+        '5' ->
             5
 
-        "6" ->
+        '6' ->
             6
 
-        "7" ->
+        '7' ->
             7
 
-        "8" ->
+        '8' ->
             8
 
-        "9" ->
+        '9' ->
             9
 
-        "a" ->
+        'a' ->
             10
 
-        "b" ->
+        'b' ->
             11
 
-        "c" ->
+        'c' ->
             12
 
-        "d" ->
+        'd' ->
             13
 
-        "e" ->
+        'e' ->
             14
 
-        "f" ->
+        'f' ->
             15
 
         _ ->
