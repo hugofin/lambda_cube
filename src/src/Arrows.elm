@@ -1,14 +1,19 @@
 module Arrows exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, div)
-import Html.Attributes
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, b, div, html, text, withContext)
+import Html.WithContext.Attributes as HtmlAttributes
 import Property exposing (Property(..))
-import Svg exposing (..)
-import Svg.Attributes exposing (..)
+import Svg
+import Svg.Attributes
+import Svg.Events
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : (System -> msg) -> System -> Html msg
@@ -76,42 +81,46 @@ svg_arrow systemClicked system property =
                     , ( 50, 100, "Add Type Operators" )
                     )
     in
-    div
-        [ Html.Attributes.style "position" "absolute"
-        , Html.Attributes.style "top" (px top_a)
-        , Html.Attributes.style "left" (px left_a)
-        , Html.Attributes.class "arrow-container"
-        ]
-        [ svg
-            [ onClick (systemClicked newSystem)
-            , width "80"
-            , height "80"
-            , viewBox " 0 0 80 80"
-            , Html.Attributes.style "cursor" "pointer"
-            ]
-            [ Svg.polygon
-                [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
-                , Svg.Attributes.style ("fill:" ++ col)
-                , Svg.Attributes.transform turn
+    withContext
+        (\context ->
+            div
+                [ HtmlAttributes.style "position" "absolute"
+                , HtmlAttributes.style "top" (px top_a)
+                , HtmlAttributes.style "left" (px left_a)
+                , HtmlAttributes.class "arrow-container"
                 ]
-                []
-            , if not adding then
-                Svg.polygon
-                    [ Svg.Attributes.points "5,5 55,5 66,10 55,15, 5,15"
-                    , Svg.Attributes.style ("fill:" ++ white)
-                    , Svg.Attributes.transform turn
-                    ]
-                    []
+                [ html <|
+                    Svg.svg
+                        [ Svg.Events.onClick (systemClicked newSystem)
+                        , Svg.Attributes.width "80"
+                        , Svg.Attributes.height "80"
+                        , Svg.Attributes.viewBox " 0 0 80 80"
+                        , Svg.Attributes.cursor "pointer"
+                        ]
+                        [ Svg.polygon
+                            [ Svg.Attributes.points "0,0 55,0 76,10 55,20, 0,20"
+                            , Svg.Attributes.fill (Color.colorForTheme context.theme col)
+                            , Svg.Attributes.transform turn
+                            ]
+                            []
+                        , if not adding then
+                            Svg.polygon
+                                [ Svg.Attributes.points "5,5 55,5 66,10 55,15, 5,15"
+                                , Svg.Attributes.fill "white"
+                                , Svg.Attributes.transform turn
+                                ]
+                                []
 
-              else
-                div [] []
-            ]
-        , b
-            [ Html.Attributes.class "arrow-text"
-            , Html.Attributes.style "position" "absolute"
-            , Html.Attributes.style "top" (px top_t)
-            , Html.Attributes.style "left" (px left_t)
-            , Html.Attributes.style "color" col
-            ]
-            [ text label ]
-        ]
+                          else
+                            Svg.polygon [] []
+                        ]
+                , b
+                    [ HtmlAttributes.class "arrow-text"
+                    , HtmlAttributes.style "position" "absolute"
+                    , HtmlAttributes.style "top" (px top_t)
+                    , HtmlAttributes.style "left" (px left_t)
+                    , Color.textColor col
+                    ]
+                    [ text label ]
+                ]
+        )

@@ -1,23 +1,29 @@
 module TransferGrid exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div)
-import Html.Attributes exposing (class, disabled, style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, button, div)
+import Html.WithContext.Attributes exposing (class, disabled, style)
+import Html.WithContext.Events exposing (onClick)
 import System exposing (System(..), toString)
+import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : Bool -> (System -> msg) -> Html msg
 view isGrid systemClicked =
     div []
-        [ button_trans isGrid C ( "665px", "55px" ) systemClicked
-        , button_trans isGrid W ( "310px", "73px" ) systemClicked
-        , button_trans isGrid P2 ( "890px", "100px" ) systemClicked
-        , button_trans isGrid Two ( "380px", "160px" ) systemClicked
-        , button_trans isGrid PW_ ( "655px", "370px" ) systemClicked
-        , button_trans isGrid W_ ( "340px", "425px" ) systemClicked
-        , button_trans isGrid P ( "840px", "550px" ) systemClicked
-        , button_trans isGrid Simple ( "410px", "650px" ) systemClicked
+        [ button_trans isGrid C ( px 665, px 55 ) systemClicked
+        , button_trans isGrid W ( px 310, px 73 ) systemClicked
+        , button_trans isGrid P2 ( px 890, px 100 ) systemClicked
+        , button_trans isGrid Two ( px 380, px 160 ) systemClicked
+        , button_trans isGrid PW_ ( px 655, px 370 ) systemClicked
+        , button_trans isGrid W_ ( px 340, px 425 ) systemClicked
+        , button_trans isGrid P ( px 840, px 550 ) systemClicked
+        , button_trans isGrid Simple ( px 410, px 650 ) systemClicked
         ]
 
 
@@ -30,15 +36,15 @@ button_trans off sys ( x, y ) systemClicked =
     button
         [ class "grid-container"
         , onClick (systemClicked sys)
-        , style "height" "75px"
-        , style "width" "75px"
-        , style "background-color" "rgba(0, 0, 0, 0)"
-        , style "color" col
-        , style "border" "0px"
+        , style "height" (px 75)
+        , style "width" (px 75)
+        , style "background-color" "transparent"
+        , Color.textColor col
+        , style "border" (px 0)
         , style "position" "absolute"
         , style "top" y
         , style "left" x
-        , style "font-size" "25px"
+        , style "font-size" (px 25)
         , disabled off
         , style "cursor"
             (if off then

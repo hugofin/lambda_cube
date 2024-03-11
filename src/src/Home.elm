@@ -1,4 +1,4 @@
-module Home exposing (main)
+port module Home exposing (main)
 
 {-
    Bored? Rotate a cube in your mind :3
@@ -17,14 +17,13 @@ module Home exposing (main)
 import Arrows
 import Browser
 import Browser.Events exposing (onAnimationFrameDelta)
+import Context exposing (Theme(..), string2theme)
 import Cube
 import ExplainationBox
-import Footer
-import Html exposing (Html, div)
-import Html.Attributes exposing (style)
-import Json.Decode exposing (Value)
+import Footer exposing (Footer)
+import Html.WithContext as Html exposing (div)
+import Html.WithContext.Attributes exposing (style)
 import Math.Vector3 exposing (Vec3, add, getX, getY, getZ, vec3)
-import MathML.UntypedSyntax
 import ProcessionButtons
 import ReductionBox
 import ReferenceButtons
@@ -34,6 +33,13 @@ import SyntaxBox
 import System exposing (..)
 import Title
 import TransferGrid
+import Utils exposing (px)
+
+
+port setReducedMotion : Bool -> Cmd msg
+
+
+port setTheme : String -> Cmd msg
 
 
 main : Program Flags Model Msg
@@ -47,7 +53,7 @@ main =
 
 
 init : Flags -> ( Model, Cmd Msg )
-init _ =
+init { reducedMotion, theme } =
     let
         { target, eye } =
             targetAndEyeFromSystem Home
@@ -57,9 +63,10 @@ init _ =
       , target = target
       , eye = eye
       , banner = False
-      , footer = 0
+      , footer = Footer.Closed
       , syntax = True
-      , multiplier = 1
+      , reducedMotion = reducedMotion
+      , theme = string2theme theme
       }
     , Cmd.none
     )
@@ -92,19 +99,29 @@ update msg model =
         ToggleReference ->
             ( { model | banner = not model.banner }, Cmd.none )
 
-        FooterClicked int ->
-            ( { model | footer = int }, Cmd.none )
+        FooterClicked option ->
+            ( { model | footer = option }, Cmd.none )
 
         SetSyntax bool ->
             ( { model | syntax = bool }, Cmd.none )
 
-        ToggleMultiplier ->
-            ( if model.multiplier == 0 then
-                { model | multiplier = 1 }
+        ToggleReducedMotion ->
+            ( { model | reducedMotion = not model.reducedMotion }, setReducedMotion (not model.reducedMotion) )
 
-              else
-                { model | multiplier = 0 }
-            , Cmd.none
+        ToggleTheme ->
+            let
+                newtheme =
+                    if model.theme == Normal then
+                        Colorblind
+
+                    else
+                        Normal
+            in
+            ( { model
+                | theme = newtheme
+              }
+            , setTheme
+                (Context.theme2string newtheme)
             )
 
 
@@ -159,9 +176,10 @@ type alias Model =
     , target : Vec3
     , eye : Vec3
     , banner : Bool
-    , footer : Int
+    , footer : Footer
     , syntax : Bool
-    , multiplier : Int
+    , reducedMotion : Bool
+    , theme : Theme
     }
 
 
@@ -169,74 +187,78 @@ type Msg
     = Tick Float
     | SystemClicked System
     | ToggleReference
-    | FooterClicked Int
+    | FooterClicked Footer
     | SetSyntax Bool
-    | ToggleMultiplier
+    | ToggleReducedMotion
+    | ToggleTheme
 
 
 type alias Flags =
-    Value
+    { reducedMotion : Bool
+    , theme : String
+    }
 
 
-view : Model -> Html Msg
 view model =
-    div
-        [ style "display" "flex", style "flex-direction" "column" ]
-        [ div [ style "display" "flex", style "flex-direction" "row", style "align-items" "center" ]
-            [ Title.view model.system ]
-        , div [ style "display" "flex", style "flex-direction" "row" ]
-            [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "20px" ]
-                [ Sidebar.view SystemClicked model.system
-                , Footer.guide (FooterClicked 1)
-                , Footer.settings (FooterClicked 2)
-                ]
-            , div [ style "display" "block" ]
-                [ div [ style "position" "absolute", style "top" "0" ]
-                    [ Cube.view
-                        { theta = model.theta
-                        , eye = model.eye
-                        , target = model.target
-                        , system = model.system
-                        , multiplier = model.multiplier
-                        }
+    Html.toHtml { theme = model.theme }
+        (div
+            [ style "display" "flex", style "flex-direction" "column" ]
+            [ div [ style "display" "flex", style "flex-direction" "row", style "align-items" "center" ]
+                [ Title.view model.system ]
+            , div [ style "display" "flex", style "flex-direction" "row" ]
+                [ div [ style "display" "flex", style "flex-direction" "column", style "row-gap" (px 20) ]
+                    [ Sidebar.view SystemClicked model.system
+                    , Footer.guide (FooterClicked Footer.Guide)
+                    , Footer.settings (FooterClicked Footer.Settings)
                     ]
-                , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
-                    let
-                        isGrid =
-                            model.system /= Home
+                , div [ style "display" "block" ]
+                    [ div [ style "position" "absolute", style "top" "0" ]
+                        [ Cube.view
+                            { theta = model.theta
+                            , eye = model.eye
+                            , target = model.target
+                            , system = model.system
+                            , reducedMotion = model.reducedMotion
+                            }
+                        ]
+                    , div [ style "display" "flex", style "flex-direction" "row", style "position" "absolute" ] <|
+                        let
+                            isGrid =
+                                model.system /= Home
 
-                        trans_buttons =
-                            [ TransferGrid.view isGrid SystemClicked
-                            , Arrows.view SystemClicked model.system
-                            , ProcessionButtons.view SystemClicked model.system
-                            ]
+                            trans_buttons =
+                                [ TransferGrid.view isGrid SystemClicked
+                                , Arrows.view SystemClicked model.system
+                                , ProcessionButtons.view SystemClicked model.system
+                                ]
 
-                        overlays =
-                            case model.system of
-                                Home ->
-                                    []
+                            overlays =
+                                case model.system of
+                                    Home ->
+                                        []
 
-                                sys ->
-                                    [ SyntaxBox.view sys SetSyntax model.syntax
-                                    , ReductionBox.view sys
-                                    , ExplainationBox.view sys
-                                    , ReferenceButtons.view ToggleReference sys
-                                    , if model.banner == True then
-                                        ReferenceFooter.view ToggleReference sys
+                                    sys ->
+                                        [ SyntaxBox.view sys SetSyntax model.syntax
+                                        , ReductionBox.view sys
+                                        , ExplainationBox.view sys
+                                        , ReferenceButtons.view ToggleReference sys
+                                        , if model.banner == True then
+                                            ReferenceFooter.view ToggleReference sys
 
-                                      else
-                                        div [] []
-                                    ]
-                    in
-                    trans_buttons ++ overlays
+                                          else
+                                            div [] []
+                                        ]
+                        in
+                        trans_buttons ++ overlays
+                    ]
+                , if model.footer /= Footer.Closed then
+                    Footer.view ToggleReducedMotion ToggleTheme (FooterClicked Footer.Closed) model.footer model.reducedMotion model.theme
+
+                  else
+                    div [] []
                 ]
-            , if model.footer /= 0 then
-                Footer.view ToggleMultiplier (FooterClicked 0) model.footer
-
-              else
-                div [] []
             ]
-        ]
+        )
 
 
 vec3lerp : Vec3 -> Vec3 -> Vec3

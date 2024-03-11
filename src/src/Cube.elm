@@ -1,13 +1,19 @@
 module Cube exposing (view)
 
 import Color
-import Html exposing (Html)
+import Context exposing (Context)
 import Html.Attributes exposing (height, style, width)
+import Html.WithContext exposing (Html, html, withContext)
 import Math.Matrix4 as Mat4 exposing (Mat4)
 import Math.Vector3 as Vec3 exposing (Vec3, vec3)
 import String exposing (slice)
 import System exposing (System(..))
+import Utils exposing (px)
 import WebGL exposing (Mesh, Shader)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 type alias Uniforms =
@@ -18,25 +24,37 @@ type alias Uniforms =
     }
 
 
-view : { theta : Float, eye : Vec3, target : Vec3, system : System, multiplier : Int } -> Html msg
+view : { theta : Float, eye : Vec3, target : Vec3, system : System, reducedMotion : Bool } -> Html msg
 view model =
-    WebGL.toHtml
-        [ width 2400, height 1800, style "display" "block", style "width" "1200px", style "height" "900px" ]
-        [ WebGL.entity
-            vertexShader
-            fragmentShader
-            linesMesh
-            (uniforms model)
-        , WebGL.entity
-            vertexShader
-            fragmentShader
-            pointsMesh
-            (uniforms model)
-        ]
+    withContext
+        (\context ->
+            let
+                sides =
+                    WebGL.entity
+                        vertexShader
+                        fragmentShader
+                        linesMesh
+                        (uniforms model)
+
+                corners =
+                    WebGL.entity
+                        vertexShader
+                        fragmentShader
+                        (pointsMesh context)
+                        (uniforms model)
+            in
+            html
+                (WebGL.toHtml
+                    [ width 2400, height 1800, style "display" "block", style "width" (px 1200), style "height" (px 900) ]
+                    [ sides
+                    , corners
+                    ]
+                )
+        )
 
 
-uniforms : { theta : Float, eye : Vec3, target : Vec3, system : System, multiplier : Int } -> Uniforms
-uniforms { theta, eye, target, system, multiplier } =
+uniforms : { theta : Float, eye : Vec3, target : Vec3, system : System, reducedMotion : Bool } -> Uniforms
+uniforms { theta, eye, target, system, reducedMotion } =
     let
         scale =
             case system of
@@ -70,7 +88,18 @@ uniforms { theta, eye, target, system, multiplier } =
                 C ->
                     0.01
     in
-    { rotation = Mat4.makeRotate (toFloat multiplier * scale * sin theta) (vec3 0.5 0.5 0.5)
+    { rotation =
+        Mat4.makeRotate
+            ((if reducedMotion then
+                0
+
+              else
+                1
+             )
+                * scale
+                * sin theta
+            )
+            (vec3 0.5 0.5 0.5)
     , perspective = Mat4.makePerspective 50 1.3333333333333333 0.01 20
     , camera = Mat4.makeLookAt eye target (vec3 0 1 0)
     , shade = 1
@@ -131,8 +160,8 @@ linesMesh =
         |> WebGL.lines
 
 
-pointsMesh : Mesh Vertex
-pointsMesh =
+pointsMesh : Context -> Mesh Vertex
+pointsMesh context =
     -- coordinates are [ left, up, towards ]
     let
         zero =
@@ -162,15 +191,15 @@ pointsMesh =
         eight =
             vec3 1 1 0
     in
-    [ point (hex2vec Color.leaf) zero
-    , point (hex2vec Color.mauve) one
-    , point (hex2vec Color.red) two
-    , point (hex2vec Color.sky) three
-    , point (hex2vec Color.purple) four
-    , point (hex2vec Color.green) five
-    , point (hex2vec Color.yellow) six
-    , point (hex2vec Color.teal) seven
-    , point (hex2vec Color.steel) eight
+    [ point (hex2vec (Color.colorForTheme context.theme Color.leaf)) zero
+    , point (hex2vec (Color.colorForTheme context.theme Color.mauve)) one
+    , point (hex2vec (Color.colorForTheme context.theme Color.red)) two
+    , point (hex2vec (Color.colorForTheme context.theme Color.sky)) three
+    , point (hex2vec (Color.colorForTheme context.theme Color.purple)) four
+    , point (hex2vec (Color.colorForTheme context.theme Color.green)) five
+    , point (hex2vec (Color.colorForTheme context.theme Color.yellow)) six
+    , point (hex2vec (Color.colorForTheme context.theme Color.teal)) seven
+    , point (hex2vec (Color.colorForTheme context.theme Color.steel)) eight
     ]
         |> WebGL.points
 

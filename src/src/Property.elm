@@ -9,7 +9,7 @@ type Property
     | TypeOperators
 
 
-color : Property -> String
+color : Property -> Color
 color prop =
     case prop of
         DependentTypes ->

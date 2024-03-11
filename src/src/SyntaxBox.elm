@@ -1,9 +1,10 @@
 module SyntaxBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, div, text)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import MathML.CRules
 import MathML.CSyntax
 import MathML.P2Syntax
@@ -23,6 +24,10 @@ import System exposing (System(..))
 import Utils exposing (px)
 
 
+type alias Html msg =
+    Html.WithContext.Html Context msg
+
+
 view : System -> (Bool -> msg) -> Bool -> Html msg
 view sys which a =
     let
@@ -30,15 +35,15 @@ view sys which a =
             position sys
     in
     div
-        [ style "background-color" black
+        [ Color.backgroundColor black
         , style "width" (px width)
         , style "height" (px height)
-        , style "color" white
+        , Color.textColor white
         , style "top" (px y)
         , style "left" (px x)
         , style "position" "absolute"
-        , style "font-size" "20px"
-        , style "border" "0px"
+        , style "font-size" (px 20)
+        , style "border" (px 0)
         , style "text-align" "center"
         , style "display" "flex"
         , style "flex-direction" "column"
@@ -57,10 +62,10 @@ view sys which a =
                     , style "align-items" "center"
                     , style "justify-content" "center"
                     , if a then
-                        style "background-color" black
+                        Color.backgroundColor black
 
                       else
-                        style "background-color" steel
+                        Color.backgroundColor steel
                     ]
                     [ text "syntax" ]
                 , div
@@ -71,17 +76,17 @@ view sys which a =
                     , style "align-items" "center"
                     , style "justify-content" "center"
                     , if a then
-                        style "background-color" steel
+                        Color.backgroundColor steel
 
                       else
-                        style "background-color" black
+                        Color.backgroundColor black
                     ]
                     [ text "explanation" ]
                 ]
 
           else
             div [] []
-        , div [ style "padding" "10px", style "overflow" "auto" ] (syntax sys a)
+        , div [ style "padding" (px 10), style "overflow" "auto" ] (syntax sys a)
         ]
 
 

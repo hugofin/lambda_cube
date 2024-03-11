@@ -1,15 +1,21 @@
 module Sidebar exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, button, div)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import System exposing (System(..))
+import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : (System -> msg) -> System -> Html msg
 view systemClicked sys =
-    div [ style "display" "flex", style "flex-direction" "column", style "row-gap" "10px", style "align-items" "center" ]
+    div [ style "display" "flex", style "flex-direction" "column", style "row-gap" (px 10), style "align-items" "center" ]
         [ button_side Home sys systemClicked
         , button_side None sys systemClicked
         , button_side Simple sys systemClicked
@@ -34,25 +40,26 @@ button_side sys current systemClicked =
     in
     button
         [ onClick (systemClicked sys)
-        , style "height" "50px"
-        , style "width" "140px"
+        , style "height" (px 50)
+        , style "width" (px 140)
         , if sys == current then
-            style "background-color" white
+            Color.backgroundColor white
 
           else
-            style "background-color" col
+            Color.backgroundColor col
         , if sys == current then
-            style "color" col
+            Color.textColor col
 
           else
-            style "color" white
-        , style "font-size" "30px"
-        , style "border" "5px solid"
-        , style "border-left" "0px solid"
-        , style "border-top-right-radius" "10px"
-        , style "border-bottom-right-radius" "10px"
+            Color.textColor white
+        , style "font-size" (px 30)
+        , style "border" "solid"
+        , style "border-width" (px 5)
+        , style "border-left-width" (px 0)
+        , style "border-top-right-radius" (px 10)
+        , style "border-bottom-right-radius" (px 10)
         , style "cursor" "pointer"
-        , style "border-color" col
+        , Color.borderColor col
         , style "display" "flex"
         , style "align-items" "center"
         , style "justify-content" "center"

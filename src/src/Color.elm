@@ -1,61 +1,113 @@
 module Color exposing (..)
 
+import Context exposing (Context, Theme(..))
+import Html.WithContext
+import Html.WithContext.Attributes as Attributes
 
-white : String
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
+
+
+type alias Attribute msg =
+    Html.WithContext.Attribute Context msg
+
+
+type alias Color =
+    { normal : String
+    , safe : String
+    }
+
+
+colorForTheme : Theme -> Color -> String
+colorForTheme theme color =
+    case theme of
+        Normal ->
+            color.normal
+
+        Colorblind ->
+            color.safe
+
+
+backgroundColor : Color -> Attribute msg
+backgroundColor color =
+    Html.WithContext.withContextAttribute
+        (\{ theme } ->
+            Attributes.style "background-color" (colorForTheme theme color)
+        )
+
+
+textColor : Color -> Attribute msg
+textColor color =
+    Html.WithContext.withContextAttribute
+        (\{ theme } ->
+            Attributes.style "color" (colorForTheme theme color)
+        )
+
+
+borderColor : Color -> Attribute msg
+borderColor color =
+    Html.WithContext.withContextAttribute
+        (\{ theme } ->
+            Attributes.style "border-color" (colorForTheme theme color)
+        )
+
+
+white : Color
 white =
-    "#ffffff"
+    { normal = "#ffffff", safe = "#ffffff" }
 
 
-yellow : String
+yellow : Color
 yellow =
-    "#ffee00"
+    { normal = "#ffee00", safe = "#ccbb44" }
 
 
-green : String
+green : Color
 green =
-    "#6bff56"
+    { normal = "#6bff56", safe = "#228833" }
 
 
-teal : String
+teal : Color
 teal =
-    "#00ffab"
+    { normal = "#00ffab", safe = "#66ccee" }
 
 
-leaf : String
+leaf : Color
 leaf =
-    "#c5e8b7"
+    { normal = "#c5e8b7", safe = "#ddcc77" }
 
 
-mauve : String
+mauve : Color
 mauve =
-    "#c0c0c0"
+    { normal = "#c0c0c0", safe = "#c0c0c0" }
 
 
-sky : String
+sky : Color
 sky =
-    "#74c0ff"
+    { normal = "#74c0ff", safe = "#0077bb" }
 
 
-purple : String
+purple : Color
 purple =
-    "#c66cc7"
+    { normal = "#c66cc7", safe = "#ee3377" }
 
 
-red : String
+red : Color
 red =
-    "#ff302d"
+    { normal = "#ff302d", safe = "#cc3311" }
 
 
-steel : String
+steel : Color
 steel =
-    "#3c3c3c"
+    { normal = "#3c3c3c", safe = "#3c3c3c" }
 
 
-black : String
+black : Color
 black =
-    "#0f0f0f"
+    { normal = "#0f0f0f", safe = "#0f0f0f" }
 
 
-orange : String
+orange : Color
 orange =
-    "#ff8e42"
+    { normal = "#ff8e42", safe = "#ee7733" }

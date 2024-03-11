@@ -1,11 +1,16 @@
 module ReferenceFooter exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, div, text)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, b, div, text)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : msg -> System -> Html msg
@@ -19,7 +24,7 @@ view buttonclicked sys =
             [ onClick buttonclicked
             , style "height" "100%"
             , style "width" "100%"
-            , style "background-color" steel
+            , Color.backgroundColor steel
             , style "opacity" "70%"
             , style "top" (px 0)
             , style "left" (px 0)
@@ -28,8 +33,8 @@ view buttonclicked sys =
             []
         , div
             [ style "width" "100%"
-            , style "background-color" color
-            , style "color" white
+            , Color.backgroundColor color
+            , Color.textColor white
             , style "bottom" (px 0)
             , style "left" (px 0)
             , style "position" "fixed"

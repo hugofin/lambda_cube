@@ -1,8 +1,13 @@
 module System exposing (System(..), color, hasProperty, toString, toggleProperty)
 
 import Color exposing (..)
-import Html exposing (Html, b, text, u)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, b, text, u)
 import Property exposing (..)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 type System
@@ -18,7 +23,7 @@ type System
     | C
 
 
-color : System -> String
+color : System -> Color
 color sys =
     case sys of
         None ->

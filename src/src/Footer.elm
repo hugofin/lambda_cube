@@ -1,22 +1,33 @@
 module Footer exposing (..)
 
 import Color exposing (..)
-import Html exposing (Html, b, br, div, text)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context, Theme(..))
+import Html.WithContext exposing (Html, b, br, div, text)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import MathML.Glossary
 import MathML.Guide
 import System exposing (System(..))
 import Utils exposing (px)
 
 
-view : msg -> msg -> Int -> Html msg
-view togglemult exitclicked mode =
-    if mode == 1 then
+type alias Html msg =
+    Html.WithContext.Html Context msg
+
+
+type Footer
+    = Closed
+    | Settings
+    | Guide
+
+
+view : msg -> msg -> msg -> Footer -> Bool -> Theme -> Html msg
+view togglemult toggletheme exitclicked mode reducedMotion theme =
+    if mode == Guide then
         div
             [ style "width" "100%"
-            , style "background-color" steel
-            , style "color" white
+            , Color.backgroundColor steel
+            , Color.textColor white
             , style "bottom" (px 0)
             , style "left" (px 0)
             , style "position" "fixed"
@@ -32,8 +43,8 @@ view togglemult exitclicked mode =
                 []
                 [ MathML.Guide.view ]
             , div
-                [ style "height" "200px"
-                , style "width" "800px"
+                [ style "height" (px 200)
+                , style "width" (px 800)
                 , style "overflow" "auto"
                 ]
                 [ MathML.Glossary.view ]
@@ -54,9 +65,9 @@ view togglemult exitclicked mode =
     else
         div
             [ style "width" "100%"
-            , style "height" "100px"
-            , style "background-color" steel
-            , style "color" white
+            , style "height" (px 100)
+            , Color.backgroundColor steel
+            , Color.textColor white
             , style "bottom" (px 0)
             , style "left" (px 0)
             , style "position" "fixed"
@@ -70,26 +81,68 @@ view togglemult exitclicked mode =
             ]
             [ div
                 [ onClick togglemult
-                , style "width" "250px"
-                , style "height" "100px"
+                , Color.backgroundColor
+                    (if reducedMotion then
+                        white
+
+                     else
+                        steel
+                    )
+                , Color.textColor
+                    (if reducedMotion then
+                        steel
+
+                     else
+                        white
+                    )
+                , style "width" (px 250)
+                , style "height" (px 100)
                 , style "display" "flex"
                 , style "flex-direction" "row"
                 , style "align-items" "center"
                 , style "justify-content" "center"
-                , style "border" "3px solid"
+                , style "border-style" "solid"
+                , style "cursor" "pointer"
+                , style "border-width" (px 3)
                 ]
-                [ text "toggle cube animation" ]
+                [ if reducedMotion then
+                    text "turn off reduced motion"
+
+                  else
+                    text "turn on reduced motion"
+                ]
             , div
-                [ onClick togglemult
-                , style "width" "250px"
-                , style "height" "100px"
+                [ onClick toggletheme
+                , Color.backgroundColor
+                    (if theme == Normal then
+                        steel
+
+                     else
+                        white
+                    )
+                , Color.textColor
+                    (if theme == Normal then
+                        white
+
+                     else
+                        steel
+                    )
+                , style "width" (px 250)
+                , style "height" (px 100)
                 , style "display" "flex"
                 , style "flex-direction" "row"
                 , style "align-items" "center"
+                , style "cursor" "pointer"
                 , style "justify-content" "center"
-                , style "border" "3px solid"
+                , style "border-style" "solid"
+                , style "border-width" (px 3)
                 ]
-                [ text "toggle colour blind mode" ]
+                [ if theme == Normal then
+                    text "turn colour blind mode on"
+
+                  else
+                    text "turn colour blind mode off"
+                ]
             , div
                 [ style "position" "fixed"
                 , style "left" "97%"
@@ -116,13 +169,13 @@ guide buttonclicked =
         , style "height" (px 30)
         , style "width" (px 140)
         , style "cursor" "pointer"
-        , style "background-color" white
-        , style "color" black
-        , style "font-size" "30px"
-        , style "border" "0px solid"
-        , style "border-top" "2px solid"
-        , style "cursor" "pointer"
-        , style "font-size" "20px"
+        , Color.backgroundColor white
+        , Color.textColor black
+        , style "font-size" (px 30)
+        , style "border-width" (px 0)
+        , style "border-top-style" "solid"
+        , style "border-top-width" (px 2)
+        , style "font-size" (px 20)
         , style "display" "flex"
         , style "align-items" "center"
         , style "justify-content" "center"
@@ -137,12 +190,11 @@ settings buttonclicked =
         , style "height" (px 30)
         , style "width" (px 140)
         , style "cursor" "pointer"
-        , style "background-color" white
-        , style "color" black
-        , style "font-size" "30px"
-        , style "border" "0px solid"
-        , style "cursor" "pointer"
-        , style "font-size" "20px"
+        , Color.backgroundColor white
+        , Color.textColor black
+        , style "font-size" (px 30)
+        , style "border-width" (px 0)
+        , style "font-size" (px 20)
         , style "display" "flex"
         , style "align-items" "center"
         , style "justify-content" "center"

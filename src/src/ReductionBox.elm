@@ -1,13 +1,18 @@
 module ReductionBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, br, div, text)
-import Html.Attributes exposing (style)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, br, div, text)
+import Html.WithContext.Attributes exposing (style)
 import MathML.CReduction
 import MathML.SimpleReduction
 import MathML.UntypedReduction
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : System -> Html msg
@@ -22,16 +27,17 @@ view sys =
     div
         [ style "height" (px height)
         , style "width" (px width)
-        , style "background-color" white
-        , style "color" black
+        , Color.backgroundColor white
+        , Color.textColor black
         , style "top" (px y)
         , style "left" (px x)
         , style "position" "absolute"
-        , style "font-size" "20px"
-        , style "border" "5px solid"
+        , style "font-size" (px 20)
+        , style "border-width" (px 5)
+        , style "border-style" "solid"
         , style "text-align" "left"
-        , style "padding" "10px"
-        , style "border-color" color
+        , style "padding" (px 10)
+        , Color.borderColor color
         , style "overflow" "auto"
         ]
         (terms sys)

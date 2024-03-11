@@ -3,4 +3,4 @@ module Utils exposing (..)
 
 px : Int -> String
 px n =
-    String.fromInt n ++ "px"
+    String.fromFloat (toFloat n / 17) ++ "vw"

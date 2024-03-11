@@ -1,11 +1,16 @@
 module ReferenceButtons exposing (open, view)
 
 import Color exposing (..)
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, div, text)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : msg -> System -> Html msg
@@ -14,8 +19,8 @@ view buttonclicked sys =
         (buttons buttonclicked sys)
 
 
-open : msg -> Int -> Int -> String -> String -> String -> Html msg
-open buttonclicked x y a tcol mcol =
+open : msg -> Int -> Int -> String -> Color -> Color -> Html msg
+open buttonclicked x y number tcol mcol =
     div
         [ onClick buttonclicked
         , style "height" (px 20)
@@ -24,10 +29,10 @@ open buttonclicked x y a tcol mcol =
         , style "top" (px y)
         , style "left" (px x)
         , style "cursor" "pointer"
-        , style "background-color" mcol
-        , style "color" tcol
+        , Color.backgroundColor mcol
+        , Color.textColor tcol
         ]
-        [ text "[", text a, text "]" ]
+        [ text "[", text number, text "]" ]
 
 
 buttons : msg -> System -> List (Html msg)

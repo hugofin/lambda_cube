@@ -1,10 +1,15 @@
 module ExplainationBox exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, b, br, div, text, u)
-import Html.Attributes exposing (style)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, b, br, div, text, u)
+import Html.WithContext.Attributes exposing (style)
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : System -> Html msg
@@ -19,13 +24,13 @@ view sys =
     div
         [ style "height" (px height)
         , style "width" (px width)
-        , style "background-color" color
-        , style "color" white
+        , Color.backgroundColor color
+        , Color.textColor white
         , style "top" (px y)
         , style "left" (px x)
         , style "position" "absolute"
-        , style "font-size" "20px"
-        , style "padding" "10px"
+        , style "font-size" (px 20)
+        , style "padding" (px 10)
         , style "text-align" "left"
         ]
         (syntax sys)

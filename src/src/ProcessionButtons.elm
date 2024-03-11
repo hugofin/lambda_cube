@@ -1,11 +1,16 @@
 module ProcessionButtons exposing (view)
 
 import Color exposing (..)
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Context exposing (Context)
+import Html.WithContext exposing (Html, button, div, text)
+import Html.WithContext.Attributes exposing (style)
+import Html.WithContext.Events exposing (onClick)
 import System exposing (System(..))
 import Utils exposing (px)
+
+
+type alias Html msg =
+    Html.WithContext.Html Context msg
 
 
 view : (System -> msg) -> System -> Html msg
@@ -59,11 +64,12 @@ forwards sys systemClicked =
                 onClick (systemClicked C)
         , style "height" (px 75)
         , style "width" (px 75)
-        , style "background-color" white
-        , style "color" steel
-        , style "color-color" steel
-        , style "border" "5px solid"
-        , style "border-radius" "10px"
+        , Color.backgroundColor white
+        , Color.textColor steel
+        , Color.borderColor steel
+        , style "border-width" (px 5)
+        , style "border-radius" (px 10)
+        , style "border-radius" (px 10)
         , style "position" "absolute"
         , style "top" (px 700)
         , style "left" (px 1300)
@@ -111,11 +117,12 @@ backward sys systemClicked =
                 onClick (systemClicked P)
         , style "height" (px 75)
         , style "width" (px 75)
-        , style "color" steel
-        , style "background-color" white
-        , style "color-color" steel
-        , style "border" "5px solid"
-        , style "border-radius" "10px"
+        , Color.textColor steel
+        , Color.backgroundColor white
+        , Color.borderColor steel
+        , style "border-style" "solid"
+        , style "border-width" (px 5)
+        , style "border-radius" (px 10)
         , style "position" "absolute"
         , style "top" (px 700)
         , style "left" (px 1200)
