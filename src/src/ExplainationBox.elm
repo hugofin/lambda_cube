@@ -111,7 +111,7 @@ position sys =
             }
 
         None ->
-            { height = 280
+            { height = 285
             , width = 500
             , y = 0
             , x = 25
@@ -125,21 +125,21 @@ position sys =
             }
 
         P ->
-            { height = 150
+            { height = 180
             , width = 770
             , y = -25
             , x = 660
             }
 
         Two ->
-            { height = 360
+            { height = 380
             , width = 500
             , y = 250
             , x = 750
             }
 
         W_ ->
-            { height = 230
+            { height = 260
             , width = 500
             , y = 0
             , x = 25
@@ -167,7 +167,7 @@ position sys =
             }
 
         C ->
-            { height = 280
+            { height = 285
             , width = 500
             , y = 0
             , x = 25

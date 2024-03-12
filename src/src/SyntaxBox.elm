@@ -168,7 +168,7 @@ position sys =
 
         None ->
             { height = 400
-            , width = 900
+            , width = 915
             , y = 315
             , x = 25
             }
@@ -183,7 +183,7 @@ position sys =
         P ->
             { height = 400
             , width = 790
-            , y = 175
+            , y = 200
             , x = 660
             }
 
@@ -196,7 +196,7 @@ position sys =
 
         W_ ->
             { height = 400
-            , width = 735
+            , width = 750
             , y = 325
             , x = 25
             }
@@ -224,7 +224,7 @@ position sys =
 
         C ->
             { height = 500
-            , width = 815
+            , width = 830
             , y = -100
-            , x = 675
+            , x = 660
             }
