@@ -54,7 +54,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 545 215 "1" white black ]
 
         W_ ->
-            [ open buttonclicked 705 365 "1" white black ]
+            [ open buttonclicked 525 0 "1" white sky, open buttonclicked 735 415 "2" white black ]
 
         W ->
             [ open buttonclicked 495 290 "1" white black ]

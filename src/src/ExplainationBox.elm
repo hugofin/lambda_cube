@@ -75,6 +75,9 @@ syntax sys =
             , br [] []
             , br [] []
             , text "For example, a type or constructor would have kind *, and a proper constructor would have kind * -> *"
+            , br [] []
+            , br [] []
+            , text "the type of both a type and a type constructor is '□', pronounced 'sort'. We can put this as *: □ and (* -> *):□"
             ]
 
         W ->
@@ -139,7 +142,7 @@ position sys =
             }
 
         W_ ->
-            { height = 260
+            { height = 335
             , width = 500
             , y = 0
             , x = 25

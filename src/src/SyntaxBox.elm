@@ -197,7 +197,7 @@ position sys =
         W_ ->
             { height = 400
             , width = 750
-            , y = 325
+            , y = 375
             , x = 25
             }
 

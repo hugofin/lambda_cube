@@ -83,7 +83,9 @@ citation sys =
             [ div [] [ text "[1] - Benjamin C. Pierce. 2002. Types and programming languages. MIT Press, Cambridge, Mass." ] ]
 
         W_ ->
-            [ div [] [ text "[1] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
+            [ div [] [ text "[1] - Henk Barendregt. 1991. Introduction to generalized type systems. J. Funct. Prog. 1, 2 (April 1991), 125–154. https://doi.org/10.1017/S0956796800020025" ]
+            , div [] [ text "[2] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ]
+            ]
 
         W ->
             [ div [] [ text "[2] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
