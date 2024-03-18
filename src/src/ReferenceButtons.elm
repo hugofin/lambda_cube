@@ -48,7 +48,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 1300 350 "1" white black, open buttonclicked 517 406 "2" black white ]
 
         P ->
-            [ open buttonclicked 1410 215 "1" white black ]
+            [ open buttonclicked 1410 240 "1" white black ]
 
         Two ->
             [ open buttonclicked 545 215 "1" white black ]
@@ -63,7 +63,7 @@ buttons buttonclicked sys =
             [ open buttonclicked 840 490 "2" white black, open buttonclicked 1220 0 "1" white purple ]
 
         P2 ->
-            [ open buttonclicked 1410 215 "1" white black ]
+            [ open buttonclicked 1410 215 "1" white black, open buttonclicked 1410 235 "2" white black ]
 
         C ->
             [ open buttonclicked 1445 -60 "1" white black ]

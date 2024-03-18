@@ -94,7 +94,9 @@ citation sys =
             [ div [] [ text "[1] - Henk Barendregt. 1991. Introduction to generalized type systems. J. Funct. Prog. 1, 2 (April 1991), 125–154. https://doi.org/10.1017/S0956796800020025" ] ]
 
         P2 ->
-            [ b [] [ text "[1] - Herman Geuvers. 2001, Induction is not derivable in seond order dependent type theory. LNCS,volume 2044" ] ]
+            [ b [] [ text "[1] - Herman Geuvers. 2001, Induction is not derivable in seond order dependent type theory. LNCS,volume 2044" ]
+            , b [] [ text "[2] - Giuseppe Longo, Eugenio Moggi. Constructive natural deduction and its ”omega-set” interpretation. Mathematical Structures in Computer Science, 1991, 1 (2), pp.215-253. \u{FFFF}10.1017/S0960129500001298\u{FFFF}. \u{FFFF}hal-03316282\u{FFFF}" ]
+            ]
 
         C ->
             [ div [] [ text "[2] - Chris Hankin. 1994. Lambda calculi: a guide for computer scientists. Clarendon Press, Oxford." ] ]
