@@ -53,7 +53,7 @@ syntax sys =
             ]
 
         Simple ->
-            [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  Be restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
+            [ text "The Simple type system allows terms to be defined using other terms.  Types are used to specify what data is given to a function (its domain) and what it outputs (its codomain).  By restricting inputs and defining outputs with simple types, we can make more specific and robust functions" ]
 
         P ->
             [ text "In the λP system, also named ΛΠ types are allowed to depend on terms. This is as powerful as the simply typed calculus, but can express more detailed types.  The arrow types from previous systems are generalised into Π-types (pi types).  This allows you to encode properties into types, that will be enforced by the type checker, making for a safer program.  Theories from this system were used to develop the formal language 'automath'.  This system is similar to the Edinburgh Logical Framework, 'LF'." ]
