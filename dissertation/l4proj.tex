@@ -131,7 +131,9 @@ The remainder of this paper explores and evaluates how I approached these aims, 
 %==================================================================================================================================
 \chapter{Background and related work}
 
-The untyped lambda calculus was first conceptualised by Alonzo Church in 1932, and is a logical system in which all computations which can be done using a Turing machine can instead be represented by a series of function applications and abstractions.  Another fundamental concept is Beta Reduction, a process which yields a result from an application to a lambda term.  When there are no more possible beta reduction steps, a term is said to be in beta normal form.  Untyped lambda calculus is weakly normalising, which means that not every possible chain of reductions will reach beta normal form.
+The untyped lambda calculus was first conceptualised by Alonzo Church in 1932, and is a logical system in which all computations which can be done using a Turing machine can instead be represented by a series of function applications and abstractions.  Another fundamental concept is Beta Reduction, a process which yields a result from an application to a lambda term. 
+
+When there are no more possible beta reduction steps, a term is said to be in beta normal form.  Untyped lambda calculus is not a normalising system, which means there are possible valid lambda terms which have no reduction sequence that will gain beta normal form.  The other options are weakly normalising systems, where there is at least one possible sequence of reductions to get to beta normal form, and strongly normalising systems, where every possible chain of beta reductions will yield beta normal form eventually.
 
 \section{Typed Lambda Calculus}
 
@@ -139,13 +141,14 @@ The simply typed lambda calculus was introduced in 1940, and allows lambda terms
 
 Polymorphic types allow you to define terms that are agnostic to their input types, by using an asterisk or star in place of a type.  This allows terms to be generalised, and to depend on other terms, for instance the output type of a polymorphic identity function depends on the term which is input.  This corresponds to System 2/ System F.
 
-An example of a polymorphically typed identity function would be `\texttt{$\lambda \alpha$:*.$\lambda$ x:$\alpha$.x}', where the $*$ stands for any type.
+An example of a polymorphically typed identity function would be 
+`\texttt{$\Lambda  X . \lambda x : X . x$}', where the $\lambda$ stands for any type.
 
 Type operators introduce 'kinds', which are the types of type abstractions.  These let types be defined using other types, and show the structure of type abstractions, but do not contain any information about its content.  These are introduced at the node P\underline{$\omega$} and are generalised using polymorphism in the system P$\omega$.
 
 An example of a type abstraction of a function which takes one type and returns another would be \texttt{$\alpha \longrightarrow \alpha : * $}, showing that it has type kind.  The term \texttt{ $\lambda \alpha : *  . \alpha \longrightarrow \alpha$} would be denoted with \texttt{$* \longrightarrow *$}, because something of type $*$ is both taken in and output.
 
-Dependent types allow you to express types using terms.  This lets you define much more detailed types, however it still has the same computational power, as in the simply typed lambda calculus.  Properties can be encoded into types, which could then checked by a type checker at the compile time of a program, leading to a much safer and more reliable program.  An example of a type depending on the term could be inductively defining a type for all multiples of a given input number.  This type system is introduced at the Lambda-P node.
+Dependent types allow for types to include terms.  This lets you define much more detailed types, however it still has the same computational power, as in the simply typed lambda calculus.  Properties can be encoded into types, which could then checked by a type checker at the compile time of a program, leading to a much safer and more reliable program.  An example of a type depending on the term could be inductively defining a type for all multiples of a given input number.  This type system is introduced at the Lambda-P node.
 
 The three systems combined form the Calculus of Constructions, which is strongly normalising.  This system is mostly used as an aid for formal logic, because of its strong normalisation, forming the basis for the Coq proof assistant.  It can be found at the corner labeled C on the lambda cube show in figure 2.1.
 
@@ -428,7 +431,7 @@ Before starting this project, I had never used Elm or created a website on this 
 
 \section{Using Elm}
 
-The core of an Elm program is its model.  TODO DEFINE MODEL.  In the design phase I planned to have an incredibly slim model and to derive all of the state from the system variable.  However after implementing more and more features, the complexity of the model increased in size to have ten entries.  The final version of my model, including the refinements made after the user studies, is shown beneath.
+The core of an Elm program is its model.  This is essentially a record, the state of which determines the HTML generated for the website.  In the design phase I planned to have an incredibly slim model and to derive all of the state from the system variable.  However after implementing more and more features, the complexity of the model increased in size to have ten entries.  The final version of my model, including the refinements made after the user studies, is shown beneath.
 
 \begin{lstlisting}
 type alias Model =
@@ -854,9 +857,20 @@ The University also has a page on its "Digital Accessibility guidelines" \citep{
 Most of these are not relevant to my project, as they discuss the use of hyperlinks, tables and hosted images, however much of the information regarding plain text is useful.  The main points are to: 
 
 \begin{itemize}
-    \item 
+    \item Make sure the text is left-aligned
+
+    \item Use double or 1.5-line spacing
+
+    \item Use sentence case
+
+    \item Avoid underlining
+
+    \item Do not use colour alone to get across meaning
+
+    \item Avoid footnotes where possible
+
+    \item Use at least 12 point size of a sans serif font
 \end{itemize}
-Make sure the text is left-aligned, Use double or 1.5-line spacing, Use sentence case, Avoid underlining, Do not use colour alone to get across meaning, Avoid footnotes where possible and to use at least 12 point size of a sans serif font.
 
 My website complies with most of these points, however does not use 1.5 line spacing or 12 point font universally, as all of the content on the website scales with the screen width, including font size.  1.5 line spacing is also not used, as I need to make most efficient use of the limited space afforded to me.
 
@@ -964,7 +978,7 @@ I implemented these 'ProcessionButtons' using similar logic as the transfer arro
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{dissertation/images/arrows_graph.png}
-    \caption{A directed graph showing how the procession buttons moved the}
+    \caption{A directed graph showing how the procession buttons moved the camera around between nodes}
     \label{fig:enter-label}
 \end{figure}    
 
