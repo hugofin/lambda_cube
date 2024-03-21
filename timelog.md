@@ -14,12 +14,12 @@
 
 ### Wednesday 27th September 2023 
 
-* *1 hour* Resarch on Software suitable for the project
+* *1 hour* Research on Software suitable for the project
 * *1 hour* Reading about lambda calculus (proofs and types)
 
 ### Monday 2nd October 2023
 
-* *1 hour* Resarch on software
+* *1 hour* Research on software
 
 ### Tuesday 3rd October 2023
 
@@ -36,7 +36,7 @@
 
 ### Tuesday 10th October 2023
 
-* *1 hour* Resarch on what to build the web interface in
+* *1 hour* Research on what to build the web interface in
 
 ### Friday 23rd October 2023
 
@@ -86,7 +86,7 @@
 ### Tuesday 29th November 2023
 
 * *1 hour* Writing infomation at node in plaintext
-* *1 hour* Resarch on how best to display equations
+* *1 hour* Research on how best to display equations
 * *2 hour* Learning MathML
 
 ### Saturday 2nd November 2023
@@ -188,7 +188,6 @@
 * *1 hour* added and scaled the movement of the cube
 * *1 hour* added labels to the nodes on mouseover
 
-
 ### Thursday 25th January 2024
 
 * *1 hour* work on the transfer arrows
@@ -203,3 +202,128 @@
 * *1 hour* all information for PW_ node
 * *3 hour* beta reduction and uses for CoC
 * *0.5 hour* changes to the favicon and tyding up imports
+
+### Saturday 3rd February 2024
+
+* *6 hour* Updated all the syntax boxes
+
+### Monday 5th February 2024
+
+* *4 hour* Content for P2
+* *2 hour* learning to use Tailwind
+
+### Tuesday 6th February 2024
+
+* *2 hour* Started to use Tailwind
+* *1.5 hour* Wrote feedback form
+
+### Friday 9th February 2024
+
+* *2 hour* User Trials
+
+### Monday 12th February 2024
+
+* *0.5 hour* User Trial
+
+### Tuesday 13th February 2024
+
+* *3 hour* Reading past Disertations to plan mine
+
+### Wednesday 14th February 2024
+
+* *2 hour* User Trials
+* *1 hour* Redoing the guide
+
+### Tuesday 13th February 2024
+
+* *1 hour* Content fixes from the study
+
+### Monday 19th February 2024
+
+* *2 hour* User Trials
+* *1 hour* Footer fixes
+
+### Thursday 23rd February 2024
+
+* *0.5 hour* User Trial
+* *2 hour* Writing the Introduction
+
+### Sunday 25th February 2024
+
+* *5 hour* Making a trial deployment of my website
+
+### Wednesday 28rd February 2024
+
+* *3 hour* Procession buttons
+* *2 hour* Writing the Introduction
+* *0.5 hour* Writing the Background
+
+### Saturday 2nd March 2024
+
+* *3 hour* Procession buttons
+* *2 hour* Writing the Introduction
+* *0.5 hour* Writing the Background
+
+### Sunday 3rd March 2024
+
+* *2 hour* Writing the Background
+* *2 hour* Small fixes from the studies
+
+### Tuesday 5th March 2024
+
+* *3 hour* Working on the reduced motion mode
+
+### Friday 8th March 2024
+
+* *4 hour* Working on Colourblindness mode
+
+### Saturday 9th March 2024
+
+* *5 hour* Working on Colourblindness message passing
+* *2 hour* Scaling the website to different screens
+
+### Sunday 10th March 2024
+
+* *6 hour* Fixing the browser specific issues with MathML
+
+### Monday 11th March 2024
+
+* *2 hour* Tiding up code
+
+### Tuesday 12th March 2024
+
+* *4 hour* Writing for my design
+* *2 hour* Writing for my evaluation
+
+### Wednesday 13th March 2024
+
+* *6 hour* Writing all parts of my dissertation
+
+### Friday 15th March 2024
+
+* *10 hour* Writing all parts of my dissertation
+
+### Satruday 16th March 2024
+
+* *5 hour* Writing all parts of my dissertation
+
+### Sunday 17th March 2024
+
+* *5 hour* Writing all parts of my dissertation
+
+### Monday 18th March 2024
+
+* *2 hour* Finishing touches + spell check before sending off for feedback
+
+### Tuesday 19th March 2024
+
+* *5 hour* Implementing feedback
+
+### Wednesday 20th March 2024
+
+* *12 hour* Implementing feedback
+
+### Thursday 21st March 2024
+
+* *5 hour* Implementing feedback
+* *3 hour* Writing Presentation
